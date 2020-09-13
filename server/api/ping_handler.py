@@ -8,6 +8,7 @@ ping_handler = Blueprint('ping_handler', __name__)
 def ping():
     if request.method == 'POST':
         body = json.loads(request.get_data())
+        print(body['teamName'], TEAM_NAME.split(','))
         if body['teamName'] in TEAM_NAME.split(','):
             return jsonify({'response': "{} is now part of the team".format(body['teamName'])}), 200
         else:

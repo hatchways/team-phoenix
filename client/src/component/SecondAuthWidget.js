@@ -11,7 +11,6 @@ import {
 import logo from "../assets/logo.png";
 import signInBtn from "../assets/signInBtn.svg";
 import { Link as RouterLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   forPaper: {
     margin: theme.spacing(2),
@@ -28,20 +27,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SecondAuthWidget = (props) => {
   const classes = useStyles();
-  const location = useLocation();
-  const foooter = location.state.noGoogleText.split("?");
+  let greatings = JSON.parse(localStorage.getItem("greetings"));
+  console.log(greatings);
+  const foooter = greatings.noGoogleText.split("?");
+  let prompt = greatings.prompt;
+  let email = greatings.email;
   return (
     <Box className={classes.forOuterBox}>
       <img alt="logo" src={logo}></img>
       <Paper className={classes.forPaper} variant="outlined" square>
         <Box my={4}>
           <Typography align="center" variant="h6">
-            Hi {location.state.email}!
+            {greatings.headerText}! <br /> {email ? email : null}
           </Typography>
         </Box>
         <Box my={5}>
           <Typography align="center" variant="body2">
-            {location.state.prompt}
+            {prompt ? prompt : <br />}
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
@@ -53,7 +55,7 @@ const SecondAuthWidget = (props) => {
             Sign up with Google
           </Button>
         </Box>
-        <Box borderTop={1} borderColor="grey.300" height="100%" mt={7}>
+        <Box borderTop={1} borderColor="grey.300" mt={7}>
           <Box mt={2} display="flex" flexDirection="column">
             <Typography align="center" variant="body1">
               {foooter[0]}?
@@ -61,7 +63,7 @@ const SecondAuthWidget = (props) => {
             <Link
               component={RouterLink}
               color="primary"
-              to={props.route}
+              to={greatings.route}
               align="center"
             >
               {foooter[1]}

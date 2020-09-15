@@ -71,7 +71,7 @@ const AuthHeader = (props) => {
         <Box borderTop={1} borderColor="grey.300" height="100%">
           <Box mt={2}>
             <Typography align="center" variant="body1">
-              Already have an account?{" "}
+              {props.footerText + " "}
               <Link component={RouterLink} color="primary" to={props.route}>
                 {props.linkText}
               </Link>

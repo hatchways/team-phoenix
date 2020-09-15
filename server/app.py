@@ -6,5 +6,3 @@ app = Flask(__name__)
 
 app.register_blueprint(home_handler)
 app.register_blueprint(ping_handler)
-
-app.run(port=5000)

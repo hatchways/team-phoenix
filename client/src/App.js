@@ -1,10 +1,11 @@
 import React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { orange, green } from "@material-ui/core/colors";
 import SignUp from "./pages/SignUp";
-
+import history from "./history";
 import "./App.css";
+import SecondAuthWidget from "./component/SecondAuthWidget";
 
 const theme = createMuiTheme({
   palette: {
@@ -23,9 +24,12 @@ const theme = createMuiTheme({
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Route path="/" component={SignUp} />
-      </BrowserRouter>
+      <Router history={history}>
+        <Switch>
+          <Route path="/" exact component={SignUp} />
+          <Route path="/auth-with-google" exact component={SecondAuthWidget} />
+        </Switch>
+      </Router>
     </MuiThemeProvider>
   );
 }

@@ -5,13 +5,14 @@ from api.auth_handler import create_auth_blueprint
 from api.after_auth_handler import create_after_Auth_blueprint
 from flask_cors import CORS
 from config import basic_auth_configSetup
+import os
 
 app = Flask(__name__)
-app.secret_key = "Simerpreet"
+app.secret_key = os.urandom(24)
 app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 
 CORS(app, resources={
-     r"/*": {"origins": "http://localhost:3000/*"}})
+     r"/*": {"origins": "*"}})
 
 gauth, google = basic_auth_configSetup(app)
 

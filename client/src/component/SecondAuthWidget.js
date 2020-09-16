@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 const SecondAuthWidget = (props) => {
   const classes = useStyles();
   let greatings = JSON.parse(localStorage.getItem("greetings"));
-  console.log(greatings);
   const foooter = greatings.noGoogleText.split("?");
   let prompt = greatings.prompt;
   let email = greatings.email;
@@ -48,6 +47,7 @@ const SecondAuthWidget = (props) => {
         </Box>
         <Box display="flex" justifyContent="center">
           <Button
+            onClick={props.onClickHandler}
             variant="contained"
             color="primary"
             startIcon={<Avatar src={signInBtn} />}

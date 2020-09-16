@@ -30,8 +30,8 @@ instance/
 .vscode
 
 
-#.env
+# .env
 .env
 
-# virtual env
+# virtual environment 
 venv/

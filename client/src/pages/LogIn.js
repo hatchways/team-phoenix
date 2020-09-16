@@ -16,6 +16,8 @@ const LogIn = () => {
       };
       localStorage.setItem("greetings", JSON.stringify(greetings));
       history.push("/auth-with-google");
+    } else {
+      alert("Rigth now, We only support gmail. Please use gmail.");
     }
   };
   return (

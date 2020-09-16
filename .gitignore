@@ -31,7 +31,6 @@ instance/
 
 
 #.env
-
 .env
 
 # virtual env

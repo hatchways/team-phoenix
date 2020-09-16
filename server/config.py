@@ -1,6 +1,9 @@
 import os
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
+from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
+
 load_dotenv()
 TEAM_NAME = os.environ['TEAM_NAME']
 
@@ -20,10 +23,8 @@ def basic_auth_configSetup(app):
         client_kwargs={'scope': 'openid email profile'},
     )
     return oauth, google
-from pymongo import MongoClient
-from pymongo.errors import ConnectionFailure
 
-load_dotenv()
+
 TEAM_NAME = os.environ['TEAM_NAME']
 TEAM_LEAD = os.environ['TEAM_LEAD']
 TEAM_NAMES = os.environ['TEAM_NAMES']
@@ -53,7 +54,8 @@ def get_db():
         return client[DB_NAME]
     except ConnectionFailure as e:
         print(f"Server not available: {e}")
-        raise ConnectionFailure(f"Was unable to connect to the database: {MONGO_DB}")
+        raise ConnectionFailure(
+            f"Was unable to connect to the database: {MONGO_DB}")
 
 
 def is_dev_environment():

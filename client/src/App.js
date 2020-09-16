@@ -5,7 +5,6 @@ import { orange, green } from "@material-ui/core/colors";
 import SignUp from "./pages/SignUp";
 import history from "./history";
 import "./App.css";
-import SecondAuthWidget from "./component/SecondAuthWidget";
 import LogIn from "./pages/LogIn";
 import Google_Auth from "./pages/Google_Auth";
 import ScreenAfterLogin from "./pages/ScreenAfterLogin";

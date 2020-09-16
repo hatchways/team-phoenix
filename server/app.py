@@ -1,6 +1,4 @@
 from flask import Flask
-from api.ping_handler import ping_handler
-from api.home_handler import home_handler
 from api.auth_handler import create_auth_blueprint
 from api.after_auth_handler import create_after_Auth_blueprint
 from flask_cors import CORS
@@ -16,7 +14,5 @@ CORS(app, resources={
 
 gauth, google = basic_auth_configSetup(app)
 
-app.register_blueprint(home_handler)
-app.register_blueprint(ping_handler)
 app.register_blueprint(create_after_Auth_blueprint(gauth, google))
 app.register_blueprint(create_auth_blueprint(gauth, google))

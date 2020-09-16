@@ -6,6 +6,7 @@ import { theme } from "./themes/theme";
 import LandingPage from "./pages/Landing";
 
 import "./App.css";
+import NavbarComponent from "./NavbarComponent/NavbarComponent";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Route path="/" component={LandingPage} />
       </BrowserRouter>
+      
     </MuiThemeProvider>
   );
 }

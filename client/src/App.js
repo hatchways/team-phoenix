@@ -10,12 +10,16 @@ import NavbarComponent from "./NavbarComponent/NavbarComponent";
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Route path="/" component={LandingPage} />
-      </BrowserRouter>
+    // <MuiThemeProvider theme={theme}>
+    //   <BrowserRouter>
+    //     <Route path="/" component={LandingPage} />
+    //   </BrowserRouter>
       
-    </MuiThemeProvider>
+    // </MuiThemeProvider>
+<div>
+<NavbarComponent />
+  </div>
+
   );
 }
 

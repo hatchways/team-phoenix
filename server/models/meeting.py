@@ -12,7 +12,6 @@ class Meeting(BaseModel):
 
         # Local variables
         self.data = dict()
-        self.data['type'] = 'Meeting'
         self.data['user_id'] = user_id
         self.data['duration'] = duration
 

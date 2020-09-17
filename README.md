@@ -10,4 +10,4 @@
 | End point | Description |
 | -------------------- | ---------------------- |
 | /meetings/<user_id> | Allows you to view all the meetings for the given user_id |
-| /meeting/<user_id>/<int:duration> | Books a meeting of duration with the person user_id |
+| /meeting/<user_id>/ <<int:duration>> | Books a meeting of duration with the person user_id |

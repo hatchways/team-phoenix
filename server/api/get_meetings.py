@@ -19,4 +19,4 @@ def meetings(user_id):
     except Exception as e:
         # TODO: Make the Exception handling less broad
         output['error'] = f'{e}'
-    return output
+    return jsonify(output)

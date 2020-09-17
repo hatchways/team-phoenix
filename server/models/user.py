@@ -1,9 +1,12 @@
 from time import gmtime, strftime
+from models.base import BaseModel
+from models.availability import Availability
 import config
+import bson
 debug = True
 
 
-class User:
+class User(BaseModel):
     db = config.get_db()
     db_users = db.users
 
@@ -15,16 +18,16 @@ class User:
         self.availability = []
         self.unique_url = ""
 
-        if not self.user_exist(self.email):
-            user_dict = {
-                "first_name": self.first_name,
-                "last_name": self.last_name,
-                "email": self.email,
-                "time_zone": self.time_zone,
-                "availability": self.availability,
-                "unique_url": self.unique_url,
-            }
-            self.db_users.insert_one(user_dict)
+    def get_dic(self):
+        my_dic = {
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "time_zone": self.time_zone,
+            "availability": {f"{key}": value.get_dic() for (key, value) in enumerate(self.availability)},
+            "unique_url": self.unique_url
+        }
+        return my_dic
 
     def user_exist(self, email):
         return self.db_users.find_one({"email": email})

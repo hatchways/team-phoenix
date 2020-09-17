@@ -45,7 +45,7 @@ else:
 
 # Call this from wherever you need a connection to the MongoDB
 # Example:
-#   from server import config
+#   import config
 #   db = config.get_db()
 def get_db():
     try:

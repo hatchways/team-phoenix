@@ -13,8 +13,7 @@ def create_after_Auth_blueprint(gauth, google):
         resp = google.get('userinfo')
         user_info = resp.json()
         g_user = gauth.google.userinfo()
-        user.User(g_user)
-        print("dodod")
+        user.User(g_user).save("users")
         session['profile'] = user_info
         session.permanent = True
         return redirect("http://localhost:3000/after-login/")

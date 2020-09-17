@@ -1,4 +1,5 @@
 from flask import jsonify, Blueprint, redirect, url_for, session
+from models import user
 
 
 def create_after_Auth_blueprint(gauth, google):
@@ -11,8 +12,9 @@ def create_after_Auth_blueprint(gauth, google):
         token = google.authorize_access_token()
         resp = google.get('userinfo')
         user_info = resp.json()
-        user = gauth.google.userinfo()
-
+        g_user = gauth.google.userinfo()
+        user.User(g_user)
+        print("dodod")
         session['profile'] = user_info
         session.permanent = True
         return redirect("http://localhost:3000/after-login/")

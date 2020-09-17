@@ -4,6 +4,9 @@ debug = True
 
 
 class User:
+    db = config.get_db()
+    db_users = db.users
+
     def __init__(self, userObj):
         self.first_name = userObj.given_name
         self.last_name = userObj.family_name
@@ -12,15 +15,16 @@ class User:
         self.availability = []
         self.unique_url = ""
 
-        # Stored in the database
-        db = config.get_db()
-        db_users = db.users
-        user_dict = {
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "email": self.email,
-            "time_zone": self.time_zone,
-            "availability": self.availability,
-            "unique_url": self.unique_url,
-        }
-        db_users.insert_one(user_dict)
+        if not self.user_exist(self.email):
+            user_dict = {
+                "first_name": self.first_name,
+                "last_name": self.last_name,
+                "email": self.email,
+                "time_zone": self.time_zone,
+                "availability": self.availability,
+                "unique_url": self.unique_url,
+            }
+            self.db_users.insert_one(user_dict)
+
+    def user_exist(self, email):
+        return self.db_users.find_one({"email": email})

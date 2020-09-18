@@ -29,6 +29,7 @@ wrapt = "1.12.1"
 authlib = "*"
 pyjwt = "*"
 requests = "*"
+dnspython = "*"
 
 [requires]
 python_version = "3.7"

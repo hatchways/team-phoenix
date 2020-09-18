@@ -28,6 +28,7 @@ Werkzeug = "1.0.1"
 wrapt = "1.12.1"
 authlib = "*"
 pyjwt = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"

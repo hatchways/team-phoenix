@@ -17,6 +17,3 @@ class Meeting(BaseModel):
 
         if config.is_dev_environment():
             print(f'DEBUG: Created meeting for user: {self.data["user_id"]}, length: {self.data["duration"]} minutes')
-
-    def get_dic():
-        pass

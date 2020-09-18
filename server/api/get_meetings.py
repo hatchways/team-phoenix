@@ -16,7 +16,11 @@ def meetings(user_id):
             output['meetings'].append(f"{data}")
             if config.is_dev_environment():
                 print(f"DEBUG: Loading the follow from DB: {data}")
+        status = 200
+        if len(output['meetings']) == 0:
+            status = 204
     except Exception as e:
         # TODO: Make the Exception handling less broad
         output['error'] = f'{e}'
-    return jsonify(output)
+        status = 400
+    return jsonify(output), status

@@ -11,7 +11,7 @@ def meeting(user_id, duration):
     try:
         new_meeting = Meeting(user_id, duration)
         new_meeting.save()
-        output['meeting'] = {'user': new_meeting.user_id, 'duration': new_meeting.duration}
+        output['meeting'] = {'user': new_meeting['user_id'], 'duration': new_meeting['duration']}
     except ValueError as e:
         output['error'] = f'{e}'
     return jsonify(output)

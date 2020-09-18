@@ -1,7 +1,7 @@
 from flask import Blueprint, app, jsonify
 
 import config
-from models.meeting import Meeting
+from models.base import BaseModel
 
 get_meetings_blueprint = Blueprint('get_meetings', __name__)
 
@@ -10,7 +10,7 @@ get_meetings_blueprint = Blueprint('get_meetings', __name__)
 def meetings(user_id):
     output = dict()
     try:
-        loaded = Meeting.load(user_id)
+        loaded = BaseModel.load_many_by_user(user_id, "Meeting")
         output['meetings'] = []
         for data in loaded:
             output['meetings'].append(f"{data}")

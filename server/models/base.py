@@ -22,7 +22,7 @@ class BaseModel(dict):
             print(f'DEBUG: Saved meeting to DB {result.inserted_id}')
         return result
 
-    def save_multi(self, collection_name, *for_insertion):
+    def save_many(self, collection_name, *for_insertion):
         ret_result = []
         collection = self.db[collection_name]
         for obj in for_insertion:

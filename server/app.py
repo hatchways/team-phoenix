@@ -11,7 +11,8 @@ from api.get_meetings import get_meetings_blueprint
 from api.create_meeting import create_meeting_blueprint
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app_secret = os.environ['APP_SECRET']
+app.secret_key = app_secret
 app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 
 CORS(app, resources={
@@ -19,7 +20,7 @@ CORS(app, resources={
 
 gauth, google = basic_auth_configSetup(app)
 
-app.register_blueprint(create_after_Auth_blueprint(gauth, google))
+app.register_blueprint(create_after_Auth_blueprint(gauth, google, app_secret))
 app.register_blueprint(create_auth_blueprint(gauth, google))
 app.register_blueprint(create_meeting_blueprint)
 app.register_blueprint(get_meetings_blueprint)

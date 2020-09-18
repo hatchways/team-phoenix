@@ -1,7 +1,8 @@
 import config
+from models.base import BaseModel
 
 
-class Meeting:
+class Meeting(BaseModel):
 
     def __init__(self, user_id, duration):
         # Meetings that are not in the list below will be rejected
@@ -12,9 +13,13 @@ class Meeting:
         # Local variables
         self.user_id = user_id
         self.duration = duration
+        self.data = dict()
+        self.data['user_id'] = user_id
+        self.data['duration'] = duration
 
         if config.is_dev_environment():
             print(f'DEBUG: Created meeting with {user_id} for {duration} minutes')
+            print(f'DEBUG: Created meeting for user: {self.data["user_id"]}, length: {self.data["duration"]} minutes')
 
     def save(self):
         # TODO: This is temporary until base object class is sorted out

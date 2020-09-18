@@ -28,6 +28,10 @@ six = "1.15.0"
 toml = "0.10.1"
 Werkzeug = "1.0.1"
 wrapt = "1.12.1"
+authlib = "*"
+pyjwt = "*"
+requests = "*"
+dnspython = "*"
 
 [requires]
 python_version = "3.7"

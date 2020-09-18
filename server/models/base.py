@@ -5,16 +5,18 @@ import json
 
 
 class BaseModel(dict):
-
     """
         This will save the data contained in the inheriting classes 'data' dictionary
          into a MongoDB collection named after the class that we are saving.
-    """
-    db = config.get_db()
 
-    def save(self, collection_name):
+        If no collection_name is provided, it is assumed the collection is named after
+         the class (Meeting -> Meeting collection)
+    """
+    def save(self, collection_name=None):
+        if collection_name is None:
+            collection_name = self.__class__.__name__
         try:
-            collection = self.db[collection_name]
+            collection = config.get_db()[collection_name]
             if not hasattr(self, "_id"):
                 result = collection.insert_one(self)
             else:
@@ -25,7 +27,17 @@ class BaseModel(dict):
             return result
         except OperationFailure as e:
             print(f"Database operation failed: {e}")
+            return None
 
     def save_many(self, collection_name, *for_insertion):
         # TODO
         pass
+
+    """
+        This will load all entries that match the user_id for the given collection_name
+    """
+    @staticmethod
+    def load_many_by_user(user_id, collection_name):
+        db = config.get_db()[collection_name]
+        result = db.find({'user_id': user_id})
+        return result

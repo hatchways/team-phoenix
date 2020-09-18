@@ -11,9 +11,8 @@ class Meeting(BaseModel):
             raise ValueError(f"Meeting lengths must be one of: {possible_meeting_lengths}")
 
         # Local variables
-        self.data = dict()
-        self.data['user_id'] = user_id
-        self.data['duration'] = duration
+        self['user_id'] = user_id
+        self['duration'] = duration
 
         if config.is_dev_environment():
-            print(f'DEBUG: Created meeting for user: {self.data["user_id"]}, length: {self.data["duration"]} minutes')
+            print(f"DEBUG: Created meeting with {self['user_id']} for {self['duration']} minutes")

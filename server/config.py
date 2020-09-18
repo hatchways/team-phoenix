@@ -13,7 +13,7 @@ def basic_auth_configSetup(app):
     google = oauth.register(
         name='google',
         client_id=os.environ["GOOGLE_CLIENT_ID"],
-        client_secret=os.environ["GOOGLE_SCRET"],
+        client_secret=os.environ["GOOGLE_SECRET"],
         access_token_url='https://accounts.google.com/o/oauth2/token',
         access_token_params=None,
         authorize_url='https://accounts.google.com/o/oauth2/auth',
@@ -45,7 +45,7 @@ else:
 
 # Call this from wherever you need a connection to the MongoDB
 # Example:
-#   from server import config
+#   import config
 #   db = config.get_db()
 def get_db():
     try:

@@ -6,7 +6,8 @@ from config import basic_auth_configSetup
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app_secret = os.environ['APP_SECRET']
+app.secret_key = app_secret
 app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 
 CORS(app, resources={
@@ -14,5 +15,5 @@ CORS(app, resources={
 
 gauth, google = basic_auth_configSetup(app)
 
-app.register_blueprint(create_after_Auth_blueprint(gauth, google))
+app.register_blueprint(create_after_Auth_blueprint(gauth, google, app_secret))
 app.register_blueprint(create_auth_blueprint(gauth, google))

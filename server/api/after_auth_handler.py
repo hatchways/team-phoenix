@@ -1,4 +1,4 @@
-from flask import jsonify, Blueprint, redirect, url_for, session, jsonify
+from flask import jsonify, Blueprint, redirect, url_for, session, jsonify, Response
 from models import user
 import jwt
 
@@ -24,5 +24,14 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
             db_user.inserted_id, g_user.name, app_secret)
         session["token"] = jwt_token
         session.permanent = True
-        return redirect('http://localhost:3000/after-login/?token='+jwt_token)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Location': 'http://localhost:3000/after-login/',
+        }
+        resonse = Response('http://localhost:3000/after-login/',
+                           status=302, headers=headers)
+        resonse.set_cookie('token', jwt_token)
+        return resonse
     return after_auth_handler

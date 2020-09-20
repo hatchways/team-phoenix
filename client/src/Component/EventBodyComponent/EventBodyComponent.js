@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import '../EventBodyComponent/EventBodyComponent.css';
 import MeetingComponent from '../MeetingComponent/MeetingComponent';
 import { makeStyles } from '@material-ui/core/styles';
+import NavbarComponent from '../NavbarComponent/NavbarComponent';
 
 
 const useStyles = makeStyles({
@@ -59,7 +60,10 @@ export default function ScrollableTabsButtonAuto() {
   };
 
   return (
+
+   
     <div >
+       <NavbarComponent />
      < Typography className={classes.title} variant="h4" display="block" gutterBottom>
      My CalendApp
      </Typography>

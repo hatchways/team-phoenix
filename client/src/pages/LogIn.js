@@ -1,4 +1,5 @@
 import React from "react";
+// import AuthWidget from "../component/AuthWidget";
 import AuthWidget from "../component/AuthWidget";
 import history from "../history";
 

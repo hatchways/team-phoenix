@@ -8,8 +8,7 @@ import "./App.css";
 import LogIn from "./pages/LogIn";
 import Google_Auth from "./pages/Google_Auth";
 import ScreenAfterLogin from "./pages/ScreenAfterLogin";
-import NavbarComponent from "./Component/NavbarComponent/NavbarComponent";
-import EventBodyComponent from "./Component/EventBodyComponent/EventBodyComponent";
+import EventBodyComponent from "./component/EventBodyComponent/EventBodyComponent";
 const theme = createMuiTheme({
   palette: {
     primary: {

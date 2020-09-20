@@ -13,6 +13,8 @@ import {
     InputLabel,
     Select,
     Grid,
+    TextField,
+    InputAdornment,
 } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +48,12 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    url_input: {
+        '& > *': {
+          margin: theme.spacing(1),
+          width: '25ch',
+        },
+      },
 }));
 
 const ProfileWidget = (props) => {
@@ -79,9 +87,19 @@ const ProfileWidget = (props) => {
                             </Typography>
                         </Grid>
                         <Grid item sm>
-                            <Typography alight="left" variant="body1">
-                                PlaceHolder
-                            </Typography>
+                            {/* 
+                                TODO: This will need validation once the back-end has the API set up for it.
+                                See https://material-ui.com/components/text-fields/ for more details
+                            */}  
+                            <form className={classes.url_input} noValidate autoComplete="off">
+                                <TextField 
+                                    id="outlined-basic" 
+                                    variant="outlined" 
+                                    InputProps={{
+                                        startAdornment: <InputAdornment position="start">calendapp.com/</InputAdornment>,
+                                    }}
+                                />
+                            </form>
                         </Grid>
                     </Grid>
                     <Grid container alignItems="center">

@@ -30,3 +30,8 @@ class User(BaseModel):
             return super().save(collection_name)
         else:
             return user_exist
+
+    @classmethod
+    def find_url(url):
+        collection = config.get_db()["users"]
+        return collection.find_one({"unique_url": url})

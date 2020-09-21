@@ -21,12 +21,16 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         g_user = gauth.google.userinfo()
         db_user = user.User(g_user).save("users")
         session['profile'] = user_info
+        if type(db_user) is dict:
+            user_id = db_user["_id"]
+        else:
+            user_id = db_user.inserted_id
         jwt_token = create_jwt_token(
-            db_user.inserted_id, g_user.name, app_secret)
+            user_id, g_user.name, app_secret)
         session["token"] = jwt_token
         session.permanent = True
         resonse = make_response(
-            redirect("http://localhost:3000/after-login/"))
+            redirect("http://localhost:3000/after-login"))
         resonse.set_cookie("token", jwt_token)
         return resonse
     return after_auth_handler

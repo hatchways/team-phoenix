@@ -6,8 +6,6 @@ debug = True
 
 
 class User(BaseModel):
-    db = config.get_db()
-    db_users = db.users
 
     def __init__(self, userObj):
         self["first_name"] = userObj.given_name
@@ -21,6 +19,15 @@ class User(BaseModel):
     def add(self, id, val):
         self._dict[id] = val
 
-# "availability": {f"{key}": value.get_dic() for (key, value) in enumerate(self.availability)},
-#     def user_exist(self, email):
-#         return self.db_users.find_one({"email": email})
+    def user_exist(self):
+        email = self["email"]
+        collection = self.db["users"]
+        return collection.find_one({"email": email})
+
+    def save(self, collection_name):
+        print(self.user_exist(), "\n\n simer")
+        user_exist = self.user_exist()
+        if not user_exist:
+            return super().save(collection_name)
+        else:
+            return user_exist

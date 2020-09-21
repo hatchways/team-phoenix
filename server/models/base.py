@@ -29,3 +29,4 @@ class BaseModel(dict):
     def save_many(self, collection_name, *for_insertion):
         # TODO
         pass
+    

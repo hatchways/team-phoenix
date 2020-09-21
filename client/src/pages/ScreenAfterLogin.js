@@ -15,8 +15,11 @@ var getCookie = (cname) => {
   return "";
 };
 const ScreenAfterLogin = () => {
-  console.log(getCookie("token"));
-  return <h1>This comes after login</h1>;
+  return (
+    <h1>
+      This comes after login <br /> your jwt token: {getCookie("token")}
+    </h1>
+  );
 };
 
 export default ScreenAfterLogin;

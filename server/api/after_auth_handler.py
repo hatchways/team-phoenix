@@ -30,7 +30,9 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         session["token"] = jwt_token
         session.permanent = True
         resonse = make_response(
-            redirect("http://localhost:3000/after-login?token="+jwt_token))
+            redirect("http://localhost:3000/after-login?token=" +
+                     jwt_token+"&user_id="+str(user_id)))
         resonse.set_cookie("token", jwt_token)
+        resonse.set_cookie("user_id", str(user_id))
         return resonse
     return after_auth_handler

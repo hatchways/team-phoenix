@@ -25,7 +25,6 @@ class User(BaseModel):
         return collection.find_one({"email": email})
 
     def save(self, collection_name):
-        print(self.user_exist(), "\n\n simer")
         user_exist = self.user_exist()
         if not user_exist:
             return super().save(collection_name)

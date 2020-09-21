@@ -21,7 +21,7 @@ class User(BaseModel):
 
     def user_exist(self):
         email = self["email"]
-        collection = self.db["users"]
+        collection = config.get_db()["users"]
         return collection.find_one({"email": email})
 
     def save(self, collection_name):

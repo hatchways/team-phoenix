@@ -1,4 +1,4 @@
-from flask import jsonify, Blueprint, redirect, url_for, session, jsonify, request, make_response
+from flask import jsonify, Blueprint, redirect, url_for, session, request, make_response
 from models import user
 import jwt
 import json
@@ -19,8 +19,15 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         resp = google.get('userinfo')
         user_info = resp.json()
         g_user = gauth.google.userinfo()
+        """
+        If user exists in DB then db_user will be dict.
+        But if we are saving brand new user object
+        Then db_user would be object containing
+        property inserted_id
+        """
         db_user = user.User(g_user).save("users")
         session['profile'] = user_info
+        # User exists so db_user is dict
         if type(db_user) is dict:
             user_id = db_user["_id"]
         else:

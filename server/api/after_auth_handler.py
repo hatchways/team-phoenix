@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, redirect, url_for, session, request, make_response
-from models import user
+from models.user import User
 import jwt
 import json
 
@@ -25,7 +25,7 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         Then db_user would be object containing
         property inserted_id
         """
-        db_user = user.User(g_user).save("users")
+        db_user = User(g_user).save("users")
         session['profile'] = user_info
         # User exists so db_user is dict
         if type(db_user) is dict:

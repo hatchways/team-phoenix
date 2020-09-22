@@ -7,6 +7,7 @@ debug = True
 
 
 class User(BaseModel):
+    collection = config.get_db()["users"]
 
     def __init__(self, userObj):
         self["first_name"] = userObj.given_name
@@ -22,31 +23,33 @@ class User(BaseModel):
 
     def user_exist(self):
         email = self["email"]
-        collection = config.get_db()["users"]
         try:
-            return collection.find_one({"email": email})
+            return self.collection.find_one({"email": email})
         except OperationFailure as e:
             print(f"Database operation failed: {e}")
             return None
 
-    @classmethod
-    def save(self, collection_name=None, query=None, newValues=None):
-        print("\n\n SIMER SIMER")
-        print(query,newValues)
-        if not (query and newValues):
-            user_exist = self.user_exist()
-            if not user_exist:
-                return super().save(collection_name)
-            else:
-                return user_exist
+    def save(self, collection_name):
+        user_exist = self.user_exist()
+        if not user_exist:
+            return super().save(collection_name)
         else:
-            return super().save(collection_name, query, newValues)
+            return user_exist
 
     @classmethod
-    def find_url(self, url):
-        collection = config.get_db()["users"]
+    def update(cls, query, new_values):
+        result = {}
         try:
-            result = collection.find_one({"unique_url": url})
+            result = cls.collection.update_one(query, new_values)
+        except OperationFailure as e:
+            print(f"Database operation failed: {e}")
+            result = None
+        return result
+
+    @classmethod
+    def find_url(cls, url):
+        try:
+            result = cls.collection.find_one({"unique_url": url})
         except OperationFailure as e:
             print(f"Database operation failed: {e}")
             result = None

@@ -9,6 +9,11 @@ def create_jwt_token(user_id, user_name, app_secret):
 
 
 def create_after_Auth_blueprint(gauth, google, app_secret):
+    """
+    This function handles the process after authentication.
+    It gets the user info after authentication and create new
+    user if user does not exist in DB.
+    """
 
     after_auth_handler = Blueprint("after_auth_handler", __name__)
 

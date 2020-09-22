@@ -19,12 +19,14 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
 
     @after_auth_handler.route('/authorize')
     def authorize():
+        authorization_code = request.args.get('code', default="", type=str)
         google = gauth.create_client('google')
         token = google.authorize_access_token()
         resp = google.get('userinfo')
         user_info = resp.json()
         g_user = gauth.google.userinfo()
         print(g_user)
+        session["code"] = authorization_code
         """
         If user exists in DB then db_user will be dict.
         But if we are saving brand new user object

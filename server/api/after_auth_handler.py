@@ -26,6 +26,7 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         user_info = resp.json()
         g_user = gauth.google.userinfo()
         session["code"] = authorization_code
+        session["access_token"] = token["access_token"]
         """
         If user exists in DB then db_user will be dict.
         But if we are saving brand new user object

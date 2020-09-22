@@ -17,6 +17,7 @@ app_secret = os.environ['APP_SECRET']
 app.secret_key = app_secret
 app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
 
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 CORS(app, resources={
     r"/*": {"origins": "*"}})
 

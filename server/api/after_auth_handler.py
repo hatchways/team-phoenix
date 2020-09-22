@@ -1,5 +1,8 @@
 from flask import jsonify, Blueprint, redirect, url_for, session, request, make_response
 from models.user import User
+import google.oauth2.credentials
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
 import jwt
 import json
 
@@ -19,34 +22,26 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
 
     @after_auth_handler.route('/authorize')
     def authorize():
-        authorization_code = request.args.get('code', default="", type=str)
-        google = gauth.create_client('google')
-        token = google.authorize_access_token()
-        resp = google.get('userinfo')
-        user_info = resp.json()
-        g_user = gauth.google.userinfo()
-        print(g_user)
-        session["code"] = authorization_code
-        """
-        If user exists in DB then db_user will be dict.
-        But if we are saving brand new user object
-        Then db_user would be object containing
-        property inserted_id
-        """
-        db_user = User(g_user).save("users")
-        session['profile'] = user_info
-        # User exists so db_user is dict
-        if type(db_user) is dict:
-            user_id = db_user["_id"]
-        else:
-            user_id = db_user.inserted_id
-        jwt_token = create_jwt_token(
-            user_id, g_user.name, app_secret)
-        session.permanent = True
-        resonse = make_response(
-            redirect("http://localhost:3000/after-login?token=" +
-                     jwt_token+"&user_id="+str(user_id)))
-        resonse.set_cookie("token", jwt_token)
-        resonse.set_cookie("user_id", str(user_id))
-        return resonse
+        SCOPES = ["https://www.googleapis.com/auth/calendar",
+                  "https://www.googleapis.com/auth/userinfo.profile"]
+        state = session['state']
+        flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+            "/Users/simerpreetsinghjassal/Desktop/team-phoenix/server/api/client_secret.json", scopes=None, state=state)
+        flow.redirect_uri = url_for(
+            'after_auth_handler.authorize', _external=True)
+
+        authorization_response = request.url
+        flow.fetch_token(authorization_response=authorization_response)
+        credentials = flow.credentials
+        session['credentials'] = credentials
+        # session['credentials'] = {
+        #     "authorize": credentials,
+        #     'token': credentials.token,
+        #     'refresh_token': credentials.refresh_token,
+        #     'token_uri': credentials.token_uri,
+        #     'client_id': credentials.client_id,
+        #     'client_secret': credentials.client_secret,
+        #     'scopes': credentials.scopes
+        # }
+        return redirect("https://localhost:3000/after-login")
     return after_auth_handler

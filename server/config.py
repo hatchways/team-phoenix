@@ -21,7 +21,7 @@ def basic_auth_configSetup(app):
         api_base_url='https://www.googleapis.com/oauth2/v1/',
         userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',
         client_kwargs={
-            'scope': 'openid email profile https://www.googleapis.com/auth/calendar'},
+            'scope': 'openid email profile'},
     )
     return oauth, google
 

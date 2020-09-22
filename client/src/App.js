@@ -9,6 +9,10 @@ import LogIn from "./pages/LogIn";
 import Google_Auth from "./pages/Google_Auth";
 import ScreenAfterLogin from "./pages/ScreenAfterLogin";
 import EventBodyComponent from "./component/EventBodyComponent/EventBodyComponent";
+import Calendar from './component/calendar/Calendar';
+import MeetingForm from './component/meetingModel/MeetingForm';
+import NewMeeting from './component/meetingModel/NewMeeting';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -34,7 +38,8 @@ function App() {
           <Route path="/login-in" exact component={LogIn} />
           <Route path="/after-login" exact component={ScreenAfterLogin} />
           <Route path="/skeleton" exact component={EventBodyComponent}/>
-
+          <Route path="/calendar" exact component={Calendar} />
+          <Route path="/meeting" exact component={NewMeeting} /> 
         </Switch>
       </Router>
     </MuiThemeProvider>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import '../MeetingComponent/MeetingComponent.css';
 import Icon from '@material-ui/core/Icon';
@@ -31,9 +31,7 @@ const useStyles = makeStyles((theme) => ({
     
   },
   paper: {
-    // padding: theme.spacing(0),
-    // textAlign: "center",
-    // color: "red",
+  
         background: theme.palette.text.default,
         boxShadow:shadows[3],
        paddingBottom: theme.spacing(3),  
@@ -46,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Height() {
+
   const classes = useStyles();
   return (
     <ThemeProvider theme={outerTheme}>

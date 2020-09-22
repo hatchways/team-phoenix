@@ -25,7 +25,6 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         resp = google.get('userinfo')
         user_info = resp.json()
         g_user = gauth.google.userinfo()
-        print(g_user)
         session["code"] = authorization_code
         """
         If user exists in DB then db_user will be dict.

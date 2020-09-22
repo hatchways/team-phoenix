@@ -9,7 +9,7 @@ def create_auth_blueprint(gauth, google):
         """
         This function initialize oauth client (gogole)
         and create redirect url (url after authentication)
-        then redirect the chrome browser to google server for
+        then redirect the  browser to google server for
         authentication
         """
         google = gauth.create_client('google')

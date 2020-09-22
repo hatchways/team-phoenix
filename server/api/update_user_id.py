@@ -10,9 +10,9 @@ update_user_id_blueprint = Blueprint('update_user_id_blueprint', __name__)
 def update_user(user_id):
     """
     Update a user object in database.
-    This function expects user id as query parameter.
+    This function expects user id as url parameter.
     This fucntion aslo expects new values for user object 
-    in request body. So request should use POST method and 
+    in the request body. So request should use POST method and 
     It should have body.
     """
     output = dict()

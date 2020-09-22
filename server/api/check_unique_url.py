@@ -14,7 +14,7 @@ def check_url_is_unique(user_id):
 
     """
     output = dict()
-    status = 400
+    status = 422
     given_url = request.args.get('url', default="", type=str)
     if given_url == "":
         output["error"] = "Missing Unique URL"
@@ -28,5 +28,5 @@ def check_url_is_unique(user_id):
                 status = 200
         except Exception as e:
             output['error'] = f'{e}'
-            status = 400
+            status = 500
     return jsonify(output), status

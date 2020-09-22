@@ -12,18 +12,18 @@ class BaseModel(dict):
         If no collection_name is provided, it is assumed the collection is named after
          the class (Meeting -> Meeting collection)
     """
-    def save(self, collection_name=None):
+    @classmethod
+    def save(self, collection_name=None, query=None, newValues=None):
         if collection_name is None:
             collection_name = self.__class__.__name__
         try:
             collection = config.get_db()[collection_name]
-            if not hasattr(self, "_id"):
+            if not query:
                 result = collection.insert_one(self)
             else:
-                result = collection.update(
-                    {"_id": ObjectId(self._id)}, self)
+                result = collection.update_one(query, newValues)
             if config.is_dev_environment():
-                print(f'DEBUG: Saved obj to DB {result.inserted_id}')
+                print(f'DEBUG: Saved obj to DB {result}')
             return result
         except OperationFailure as e:
             print(f"Database operation failed: {e}")
@@ -41,4 +41,3 @@ class BaseModel(dict):
         db = config.get_db()[collection_name]
         result = db.find({'user_id': user_id})
         return result
-

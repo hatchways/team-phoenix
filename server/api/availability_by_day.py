@@ -1,5 +1,6 @@
 from flask import Blueprint, app, jsonify, request, session
 from googleapiclient.discovery import build
+from oauth2client import file, client
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2 import service_account
 import config
@@ -17,7 +18,11 @@ def availability_by_day():
         output["error"] = "Missing day"
     else:
         try:
-            service = build("calendar", "v3", credentials=session["credentials"])
+
+            credentials = client.AccessTokenCredentials(
+                'ACCESS_TOKEN', 'USER_AGENT')
+            service = build(
+                'calendar', 'v3', credentials=credentials)
         except Exception as e:
             output['error'] = f'{e}'
             status = 500

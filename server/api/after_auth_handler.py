@@ -32,16 +32,17 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
 
         authorization_response = request.url
         flow.fetch_token(authorization_response=authorization_response)
+        print(session.get('https://www.googleapis.com/userinfo/v2/me').json(), "\n\n")
         credentials = flow.credentials
-        session['credentials'] = credentials
-        # session['credentials'] = {
-        #     "authorize": credentials,
-        #     'token': credentials.token,
-        #     'refresh_token': credentials.refresh_token,
-        #     'token_uri': credentials.token_uri,
-        #     'client_id': credentials.client_id,
-        #     'client_secret': credentials.client_secret,
-        #     'scopes': credentials.scopes
-        # }
+        #session['credentials'] = credentials
+        session['credentials'] = {
+            "authorize": credentials,
+            'token': credentials.token,
+            'refresh_token': credentials.refresh_token,
+            'token_uri': credentials.token_uri,
+            'client_id': credentials.client_id,
+            'client_secret': credentials.client_secret,
+            'scopes': credentials.scopes
+        }
         return redirect("https://localhost:3000/after-login")
     return after_auth_handler

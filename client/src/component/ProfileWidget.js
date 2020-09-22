@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ProgressBar from "./ProgressBar"
 import logo from "../assets/logo.png";
 import {
     Paper,
@@ -17,6 +16,9 @@ import {
     InputAdornment,
 } from "@material-ui/core/";
 
+import ProfileHeader from "./profile/Header"
+import ProfileFooter from "./profile/Footer"
+
 const useStyles = makeStyles((theme) => ({
     forPaper: {
       margin: theme.spacing(2),
@@ -29,17 +31,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-    },
-    forContinueButton: {
-        fontWeight: "bold",
-        textTransform: "none",
-        fontFamily: "Verdana, Arial, Helvetica, sans-serif",
-        color: "#fffbfb",
-        backgroundImage: "linear-gradient(to right, #fe6b00, #fe8b00);"
-    },
-    forSetupLater: {
-        textTransform: "none",
-        color: "#a8b1c7"
     },
     formControl: {
         margin: theme.spacing(1),
@@ -54,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
           width: '25ch',
         },
       },
+    url_prefix: {
+        color: "#a8b1c7",
+    },
+    divider: {
+        height: 28,
+        margin: 4,
+    },
 }));
 
 const ProfileWidget = (props) => {
@@ -61,32 +59,23 @@ const ProfileWidget = (props) => {
     const [timezone, setTimezone] = React.useState(0, '');
     const handleChange = (event) => {
         setTimezone(event.target.value);
-  };
+    };
     return (
         <Box className={classes.forOuterBox}>
             <img alt="logo" src={logo}></img>
             <Paper className={classes.forPaper}  elevation={3}>
                 <Box m={3}>
-                    <Grid container alignItems="center" justify="space-evenly" spacing={4}>
-                        <Grid item xs>
-                            <Typography align="left" variant="h6">
-                                {props.heading}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs>
-                            <ProgressBar value={20} />
-                        </Grid>
-                    </Grid>
+                    <ProfileHeader percent={33} heading={props.heading} />
                 </Box>
                 <Divider/>
                 <Box m={3}>
                     <Grid container alignItems="center">
-                        <Grid item sm>
-                            <Typography alight="left" variant="body1">
+                        <Grid item sm={5}>
+                            <Typography alight="left" variant="subtitle2">
                                 {props.url_prompt}
                             </Typography>
                         </Grid>
-                        <Grid item sm>
+                        <Grid item sm={7}>
                             {/* 
                                 TODO: This will need validation once the back-end has the API set up for it.
                                 See https://material-ui.com/components/text-fields/ for more details
@@ -95,8 +84,10 @@ const ProfileWidget = (props) => {
                                 <TextField 
                                     id="outlined-basic" 
                                     variant="outlined" 
+                                    fullWidth
                                     InputProps={{
-                                        startAdornment: <InputAdornment position="start">calendapp.com/</InputAdornment>,
+                                        startAdornment: <InputAdornment position="start" className={classes.url_prefix}>calendapp.com/ <Divider className={classes.divider} orientation="vertical" /> </InputAdornment>,
+
                                     }}
                                 />
                             </form>
@@ -104,7 +95,7 @@ const ProfileWidget = (props) => {
                     </Grid>
                     <Grid container alignItems="center">
                         <Grid item sm>
-                            <Typography alight="left" variant="body1">
+                            <Typography alight="left" variant="subtitle2">
                                 {props.timezone_prompt}
                             </Typography>
                         </Grid>
@@ -128,28 +119,7 @@ const ProfileWidget = (props) => {
                         </Grid>
                     </Grid>
 
-                    <Grid container
-                        direction="column"
-                        justify="center"
-                        alignItems="center">
-                        <Grid item sm>
-                        <Button className={classes.forContinueButton}
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            type="submit">
-                            {props.btn_txt}
-                        </Button>
-                        </Grid>
-                        <Grid item sm>
-                        <Button className={classes.forSetupLater}
-                            variant="text"
-                            size="large"
-                            type="submit">
-                            {props.btn2_txt}
-                        </Button>
-                        </Grid>
-                    </Grid>
+                    <ProfileFooter/>
                     
                 </Box>
             </Paper>

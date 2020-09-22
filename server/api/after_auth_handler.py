@@ -19,6 +19,7 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         resp = google.get('userinfo')
         user_info = resp.json()
         g_user = gauth.google.userinfo()
+        print(g_user)
         """
         If user exists in DB then db_user will be dict.
         But if we are saving brand new user object
@@ -34,7 +35,6 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
             user_id = db_user.inserted_id
         jwt_token = create_jwt_token(
             user_id, g_user.name, app_secret)
-        session["token"] = jwt_token
         session.permanent = True
         resonse = make_response(
             redirect("http://localhost:3000/after-login?token=" +

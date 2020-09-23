@@ -19,13 +19,14 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
 
     @after_auth_handler.route('/authorize')
     def authorize():
-        authorization_code = request.args.get('code', default="", type=str)
+        error = request.args.get('error', default="", type=str)
+        if error != "":
+            return make_response(redirect(f"http://localhost:3000/after-login?error={error}!"))
         google = gauth.create_client('google')
         token = google.authorize_access_token()
         resp = google.get('userinfo')
         user_info = resp.json()
         g_user = gauth.google.userinfo()
-        session["code"] = authorization_code
         session["access_token"] = token["access_token"]
         """
         If user exists in DB then db_user will be dict.

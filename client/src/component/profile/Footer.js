@@ -20,12 +20,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileFooter = (props) => {
+    const type = props.type;
+    if (type === "A") {
+        return <FooterA />;
+    }
+    return <FooterB />;
+}
+
+const FooterA = (props) => {
     const classes = useStyles();
     return (
         <Grid container
                 direction="column"
                 justify="center"
                 alignItems="center">
+            
             <Grid item sm>
                 <Button className={classes.forContinueButton}
                     variant="contained"
@@ -41,6 +50,26 @@ const ProfileFooter = (props) => {
                     size="large"
                     type="submit">
                     Set up later
+                </Button>
+            </Grid>
+        </Grid>
+    );   
+}
+
+const FooterB = (props) => {
+    const classes = useStyles();
+    return (
+        <Grid container
+                direction="column"
+                justify="center"
+                alignItems="center">
+            <Grid item sm>
+                <Button className={classes.forContinueButton}
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    type="submit">
+                    Finish
                 </Button>
             </Grid>
         </Grid>

@@ -5,7 +5,6 @@ import {
     Paper,
     Box,
     Typography,
-    Button,
     Divider,
     MenuItem,
     FormControl,
@@ -42,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
     url_input: {
         '& > *': {
           margin: theme.spacing(1),
-          width: '25ch',
         },
       },
     url_prefix: {
@@ -65,32 +63,34 @@ const ProfileWidget = (props) => {
             <img alt="logo" src={logo}></img>
             <Paper className={classes.forPaper}  elevation={3}>
                 <Box m={3}>
-                    <ProfileHeader percent={33} heading={props.heading} />
+                    <ProfileHeader percent={25} heading={props.heading} />
                 </Box>
                 <Divider/>
                 <Box m={3}>
                     <Grid container alignItems="center">
-                        <Grid item sm={5}>
+                        <Grid item sm>
                             <Typography alight="left" variant="subtitle2">
                                 {props.url_prompt}
                             </Typography>
                         </Grid>
-                        <Grid item sm={7}>
+                        <Grid item sm={8}>
                             {/* 
                                 TODO: This will need validation once the back-end has the API set up for it.
                                 See https://material-ui.com/components/text-fields/ for more details
                             */}  
-                            <form className={classes.url_input} noValidate autoComplete="off">
+                            <Box mr={3}>
+                            <FormControl className={classes.url_input} noValidate autoComplete="off" fullWidth="true">
                                 <TextField 
                                     id="outlined-basic" 
-                                    variant="outlined" 
-                                    fullWidth
+                                    variant="outlined"
+                                    fullWidth="true"
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start" className={classes.url_prefix}>calendapp.com/ <Divider className={classes.divider} orientation="vertical" /> </InputAdornment>,
-
+                                        defaultValue: "john-doe"
                                     }}
                                 />
-                            </form>
+                            </FormControl>
+                            </Box>
                         </Grid>
                     </Grid>
                     <Grid container alignItems="center">
@@ -99,27 +99,28 @@ const ProfileWidget = (props) => {
                                 {props.timezone_prompt}
                             </Typography>
                         </Grid>
-                        <Grid item sm>
+                        <Grid item sm={8}>
+                            <Box mr={3}>
                             <FormControl variant="outlined" className={classes.formControl}>
                                 <InputLabel htmlFor="tz"></InputLabel>
                                 <Select
                                     labelId="timezone-label"
                                     id="tz"
                                     value={timezone}
-                                    onChange={handleChange}
-                                    label="Time Zone">
+                                    onChange={handleChange}>
                                 <MenuItem value={0}>
-                                    <em>UTC Time</em>
+                                    <em>UTC Time (11:31)</em>
                                 </MenuItem>
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                <MenuItem value={+1}>Other</MenuItem>
+                                <MenuItem value={+2}>Other</MenuItem>
+                                <MenuItem value={+3}>Other</MenuItem>
                                 </Select>
                             </FormControl>
+                            </Box>
                         </Grid>
                     </Grid>
 
-                    <ProfileFooter/>
+                    <ProfileFooter type="A"/>
                     
                 </Box>
             </Paper>

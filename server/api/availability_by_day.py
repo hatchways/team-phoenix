@@ -5,7 +5,6 @@ from google.oauth2 import service_account
 import config
 from models.user import User
 from datetime import datetime
-from time import gmtime
 import time
 
 

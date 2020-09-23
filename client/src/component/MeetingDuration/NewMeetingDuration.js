@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import MeetingForm from './MeetingForm';
+import MeetingDurationForm from './MeetingDurationForm';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -38,7 +38,7 @@ export default function FormDialog(props) {
           <DialogContentText>
           
            
-           <MeetingForm />
+           <MeetingDurationForm />
           
           </DialogContentText>
          

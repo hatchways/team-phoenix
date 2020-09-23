@@ -1,27 +1,20 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import "./MeetingForm.css";
+
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Button from "@material-ui/core/Button";
-import Calendar from "react-calendar";
-import InputLabel from "@material-ui/core/InputLabel";
-import "react-calendar/dist/Calendar.css";
-import Grid from "@material-ui/core/Grid";
-import MeetingModel from "./MeetingModel";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 
-class MeetingForm extends Component {
+import Grid from "@material-ui/core/Grid";
+
+class MeetingDurationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       duration: 15,
-      user_id: '5f6973ae887c2f4cd0d5eb70'
+      user_id: '5f69713107ad65349c8ad946'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,22 +36,21 @@ class MeetingForm extends Component {
   async createMeeting(){
 
     try{
-      let result = await fetch('http://localhost:3000/meeting/'
-      +this.state.user_id+'/'
-      +this.state.duration,{
-        method:'GET',
+     let result = await fetch('http://localhost:3000/meeting/'+this.state.user_id+'/'+this.state.duration
+      ,{
+        method:'get',
         mode:'no-cors',
         headers: {
           'Accept': 'application/json',
           'Content-type':'application/json'
         },
-        // body:JSON.stringify({
-        //     'user_id':this.state.user_id,
-        //     'duration':this.state.duration
-        // })
+      
+        
       });
+      console.log("Worked");
     }catch(e){
       console.log(e);
+      console.log("didnt Work");
     }
   }
 
@@ -108,7 +100,7 @@ class MeetingForm extends Component {
 
                 <Grid container>
                   <Button onClick={this.createMeeting} variant="outlined" type="submit" color="primary">
-                    Create meeting
+                    Submit
                   </Button>
                 </Grid>
               </form>
@@ -120,4 +112,4 @@ class MeetingForm extends Component {
   }
 }
 
-export default MeetingForm;
+export default MeetingDurationForm;

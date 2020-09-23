@@ -14,7 +14,7 @@ class MeetingDurationForm extends Component {
     super(props);
     this.state = {
       duration: 15,
-      user_id: '5f69713107ad65349c8ad946'
+      user_id: "5f69713107ad65349c8ad946",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,22 +33,24 @@ class MeetingDurationForm extends Component {
 
   // Creating meeting api call
 
-  async createMeeting(){
-
-    try{
-     let result = await fetch('http://localhost:3000/meeting/'+this.state.user_id+'/'+this.state.duration
-      ,{
-        method:'get',
-        mode:'no-cors',
-        headers: {
-          'Accept': 'application/json',
-          'Content-type':'application/json'
-        },
-      
-        
-      });
+  async createMeeting() {
+    try {
+      let result = await fetch(
+        "http://localhost:3000/meeting/" +
+          this.state.user_id +
+          "/" +
+          this.state.duration,
+        {
+          method: "get",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+        }
+      );
       console.log("Worked");
-    }catch(e){
+    } catch (e) {
       console.log(e);
       console.log("didnt Work");
     }
@@ -59,13 +61,8 @@ class MeetingDurationForm extends Component {
       <div>
         <Grid container>
           <Grid item>
-        
-
             <Grid container>
-              <form noValidate autoComplete="off"
-              
-               
-               >
+              <form noValidate autoComplete="off">
                 <Grid container>
                   <FormControl component="fieldset">
                     <FormLabel component="legend">Duration: </FormLabel>
@@ -99,7 +96,12 @@ class MeetingDurationForm extends Component {
                 </Grid>
 
                 <Grid container>
-                  <Button onClick={this.createMeeting} variant="outlined" type="submit" color="primary">
+                  <Button
+                    onClick={this.createMeeting}
+                    variant="outlined"
+                    type="submit"
+                    color="primary"
+                  >
                     Submit
                   </Button>
                 </Grid>

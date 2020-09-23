@@ -13,6 +13,7 @@ const SignUp = () => {
             connect your calendar so you can start using CalendApp right away`,
         noGoogleText: "Prefer to create an account with a password?Click here",
         route: "sign-up",
+        email,
       };
       localStorage.setItem("greetings", JSON.stringify(greetings));
       history.push("/auth-with-google");

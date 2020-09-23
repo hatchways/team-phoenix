@@ -28,6 +28,7 @@ def update_user(user_id):
         result = User.update(query, newValues)
         if result:
             output["success"] = f"User with id {user_id} update successfully"
+            status = 200
         else:
             output["error"] = "Error occurred while updating"
         return jsonify(output), status

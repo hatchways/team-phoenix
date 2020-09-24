@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,6 +11,14 @@ import shadows from "@material-ui/core/styles/shadows";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import GettingStartedButton from "../GettingStartedButton/GettingStartedButton";
+
+
+// import classNames from 'classnames/bind';
+// import styles from './submit-button.css';
+
+
+// let cx = classNames.bind(styles);
+
 
 const outerTheme = createMuiTheme({
   palette: {
@@ -32,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: shadows[3],
     paddingBottom: theme.spacing(3),
   },
+  // tagBar:{
+  //   width: "100%",
+  //   height: "5px",
+  //   margin: "0px",
+  // },
   orange_background: {
     background: "orange",
     width: "100%",
@@ -41,16 +54,10 @@ const useStyles = makeStyles((theme) => ({
 
   blue_background: {
     background: "blue",
-    width: "100%",
-    height: "5px",
-    margin: "0px",
   },
 
   green_background: {
     background: "green",
-    width: "100%",
-    height: "5px",
-    margin: "0px",
   },
   meeting_header: {
     width: "100%",

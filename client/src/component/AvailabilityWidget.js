@@ -15,6 +15,7 @@ import {
     Checkbox,
     GridList,
     GridListTile,
+    GridListTileBar,
 } from "@material-ui/core/";
 
 import ProfileHeader from "./profile/Header"
@@ -82,13 +83,19 @@ const timeOptions = [
     '23:00', '23:30',
 ];
 
-const dayData = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"];
-
 const AvailabilityWidget = (props) => {
     const classes = useStyles();
     const [startTime, setStartTime] = React.useState(["09:00"]);
     const [endTime, setEndTime] = React.useState(["17:00"]);
-    const [daysSelected, setDays] = React.useState([false, true, true, true, true, true, false]);
+    const [daysSelected, setDays] = React.useState([
+        {day:'Sundays', value:false}, 
+        {day:'Mondays', value:true}, 
+        {day:'Tuesdays', value:true}, 
+        {day:'Wednesdays', value:true}, 
+        {day:'Thursdays', value:true}, 
+        {day:'Fridays', value:true}, 
+        {day:'Saturdays', value:false}
+    ]);
   const handleChangeStart = (event) => {
     setStartTime(event.target.value);
   };
@@ -97,7 +104,7 @@ const AvailabilityWidget = (props) => {
   };
   const handleDayToggle = (event) => {
     // TODO: Do something here to toggle the days
-    // Also make the checkboxes reflext the values in daysSelected
+    
   };
     return (
         <Box className={classes.forOuterBox}>
@@ -155,15 +162,15 @@ const AvailabilityWidget = (props) => {
                                 Available days:
                             </Typography>
                         </Grid>
-                        <GridList className={classes.gridList} cols={7}>
-                            {dayData.map((day) => (
-                                
-                            <GridListTile key={day}>
+                        <GridList cols={7} rows={1}>
+                            {daysSelected.map((dayData) => (   
+                            <GridListTile key={dayData.day}>
                                 <FormControlLabel
-                                    value={day}
+                                    value={dayData.day}
                                     control={<Checkbox color="primary" />}
-                                    label={day}
+                                    label={dayData.day}
                                     labelPlacement="bottom"
+                                    checked={dayData.value}
                                     />
                             </GridListTile>
                             ))}

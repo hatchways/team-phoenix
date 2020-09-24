@@ -62,8 +62,8 @@ const FooterB = (props) => {
         <Grid container
                 direction="column"
                 justify="center"
-                alignItems="center">
-            <Grid item sm>
+                alignItems="center"
+                >
                 <Button className={classes.forContinueButton}
                     variant="contained"
                     color="primary"
@@ -71,7 +71,6 @@ const FooterB = (props) => {
                     type="submit">
                     Finish
                 </Button>
-            </Grid>
         </Grid>
     );   
 }

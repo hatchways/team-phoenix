@@ -19,7 +19,12 @@ const useStyles = makeStyles((theme) => ({
 const ProfileFooter = (props) => {
   const type = props.type;
   if (type === "A") {
-    return <FooterA handleContinue={props.handleContinue} />;
+    return (
+      <FooterA
+        handleContinue={props.handleContinue}
+        handleSkipbtn={props.handleSkipbtn}
+      />
+    );
   }
   return <FooterB />;
 };
@@ -46,6 +51,7 @@ const FooterA = (props) => {
           variant="text"
           size="large"
           type="submit"
+          onClick={props.handleSkipbtn}
         >
           Set up later
         </Button>

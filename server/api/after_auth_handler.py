@@ -39,20 +39,17 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         # User exists so db_user is dict
         if type(db_user) is dict:
             user_id = db_user["_id"]
-            # resonse = make_response(
-            #     redirect("http://localhost:3000/after-login?token=" +
-            #              token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
+            resonse = make_response(
+                redirect("http://localhost:3000/after-login?token=" +
+                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
         else:
             user_id = db_user.inserted_id
-            # resonse = make_response(
-            #     redirect("http://localhost:3000/profile_settings?token=" +
-            #              token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
+            resonse = make_response(
+                redirect("http://localhost:3000/profile_settings?token=" +
+                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
         jwt_token = create_jwt_token(
             user_id, g_user.name, app_secret)
         session.permanent = True
-        resonse = make_response(
-            redirect("http://localhost:3000/profile_settings?token=" +
-                     token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
         resonse.set_cookie("token", jwt_token)
         resonse.set_cookie("user_id", str(user_id))
         return resonse

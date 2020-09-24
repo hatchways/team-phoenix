@@ -34,8 +34,11 @@ const ProfileSettings = () => {
   const [result_for_url, set_result_for_url] = useState("Unavailable");
   let userdata = saveUserDataInLocalStorage();
 
+  const handleSkipbtn = () => {
+    history.push("/confirm");
+  };
+
   const handleContinue = () => {
-    console.log("SSSSS");
     const save_url = async () => {
       const data = await fetch(
         `http://localhost:5000/user/${userdata.user_id}`,
@@ -90,6 +93,7 @@ const ProfileSettings = () => {
           check_for_unique_url={set_url}
           result_for_url={result_for_url}
           handleContinue={handleContinue}
+          handleSkipbtn={handleSkipbtn}
         />
       ) : (
         history.push("/")

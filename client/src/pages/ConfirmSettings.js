@@ -7,12 +7,16 @@ const ConfirmSettings = () => {
   const handleContinue = () => {
     history.push("/availability");
   };
+  const handleSkipbtn = () => {
+    history.push("/availability");
+  };
   return (
     <React.Fragment>
       <ConfirmWidget
         heading={heading}
         email={email}
         handleContinue={handleContinue}
+        handleSkipbtn={handleSkipbtn}
       />
     </React.Fragment>
   );

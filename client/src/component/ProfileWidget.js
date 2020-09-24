@@ -143,7 +143,11 @@ const ProfileWidget = (props) => {
               </Box>
             </Grid>
           </Grid>
-          <ProfileFooter type="A" handleContinue={props.handleContinue} />
+          <ProfileFooter
+            type="A"
+            handleContinue={props.handleContinue}
+            handleSkipbtn={props.handleSkipbtn}
+          />
           <Alert
             severity={
               props.result_for_url === "Unavailable" ? "error" : "success"

@@ -89,7 +89,11 @@ const ConfirmWidget = (props) => {
           </List>
 
           <Box mt={3}>
-            <ProfileFooter type="A" handleContinue={props.handleContinue} />
+            <ProfileFooter
+              type="A"
+              handleContinue={props.handleContinue}
+              handleSkipbtn={props.handleSkipbtn}
+            />
           </Box>
         </Box>
       </Paper>

@@ -13,8 +13,8 @@ import {
     Grid,
     FormControlLabel,
     Checkbox,
-    GridList,
-    GridListTile,
+    ButtonGroup,
+    Button,
 } from "@material-ui/core/";
 
 import ProfileHeader from "./profile/Header"
@@ -154,27 +154,28 @@ const AvailabilityWidget = (props) => {
                                 </FormControl>
                         </Grid>
                     </Grid>
-                    <Grid container alignItems="flex-start" direction="column">
+                    <Grid container alignItems="stretch" direction="column">
                         <Grid item sm>
                             <Typography alight="left" variant="subtitle2">
                                 Available days:
                             </Typography>
                         </Grid>
-                        <GridList cols={7} rows={1}>
-                            {Object.keys(daysSelected).map((day, item) => (   
-                            <GridListTile key={day}>
-                                <FormControlLabel
+                        <Grid item sm>
+                            <ButtonGroup size="large" color="primary">
+                                {Object.keys(daysSelected).map((day) => (  
+                                    <FormControlLabel
                                     value={day}
                                     control={<Checkbox color="primary" />}
-                                    label={day}
+                                    label={<Typography variant="body2" color="textSecondary">{day}</Typography>}
                                     labelPlacement="bottom"
                                     checked={daysSelected[day]}
                                     onChange={handleDayToggle}
                                     />
-                            </GridListTile>
-                            ))}
-                        </GridList>
+                                 ))}
+                            </ButtonGroup>
+                        </Grid>
                     </Grid>
+                    
                     <Grid container>          
                     <ProfileFooter type="B"/>
                     </Grid>

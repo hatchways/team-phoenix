@@ -79,11 +79,11 @@ const ProfileWidget = (props) => {
                                 See https://material-ui.com/components/text-fields/ for more details
                             */}  
                             <Box mr={3}>
-                            <FormControl className={classes.url_input} noValidate autoComplete="off" fullWidth="true">
+                            <FormControl className={classes.url_input} noValidate autoComplete="off" fullWidth={true}>
                                 <TextField 
                                     id="outlined-basic" 
                                     variant="outlined"
-                                    fullWidth="true"
+                                    fullWidth={true}
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start" className={classes.url_prefix}>calendapp.com/ <Divider className={classes.divider} orientation="vertical" /> </InputAdornment>,
                                         defaultValue: "john-doe"
@@ -108,6 +108,9 @@ const ProfileWidget = (props) => {
                                     id="tz"
                                     value={timezone}
                                     onChange={handleChange}>
+                                {/* 
+                                TODO: This needs timezones as options. Probably just "UTC-12:00" to "UTC+14:00"
+                                */}  
                                 <MenuItem value={0}>
                                     <em>UTC Time (11:31)</em>
                                 </MenuItem>

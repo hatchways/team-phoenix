@@ -56,8 +56,10 @@ const ConfirmWidget = (props) => {
             <Box m={3}>
                 <Typography variant="body1">
                     <span className={classes.bold}>{string1}</span>
-                    <List component="ol">
-                        <Divider/>
+                </Typography>
+                <List component="ol">
+                    <Divider/>
+                    <Box ml={2}>
                         <Box mt={1} mb={1}>
                             <ListItem>
                                 <ListItemText>1. We will check "<span className={classes.bold}>{props.email}</span>" for conflicts</ListItemText>
@@ -72,8 +74,9 @@ const ConfirmWidget = (props) => {
                             </ListItem>
                         </Box>
                         <Divider/>
-                    </List>
-                </Typography>
+                    </Box>
+                </List>
+                
                 <Box mt={3}>
                     <ProfileFooter type="A"/>
                 </Box>

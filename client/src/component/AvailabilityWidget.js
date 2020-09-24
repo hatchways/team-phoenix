@@ -11,6 +11,10 @@ import {
     InputLabel,
     Select,
     Grid,
+    FormControlLabel,
+    Checkbox,
+    GridList,
+    GridListTile,
 } from "@material-ui/core/";
 
 import ProfileHeader from "./profile/Header"
@@ -76,18 +80,24 @@ const timeOptions = [
     '21:00', '21:30',
     '22:00', '22:30',
     '23:00', '23:30',
-  ];
+];
+
+const dayData = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"];
 
 const AvailabilityWidget = (props) => {
     const classes = useStyles();
     const [startTime, setStartTime] = React.useState(["09:00"]);
     const [endTime, setEndTime] = React.useState(["17:00"]);
+    const [daysSelected, setDays] = React.useState([false, true, true, true, true, true, false]);
   const handleChangeStart = (event) => {
     setStartTime(event.target.value);
-    console.log(event.target.value);
   };
   const handleChangeEnd = (event) => {
     setEndTime(event.target.value);
+  };
+  const handleDayToggle = (event) => {
+    // TODO: Do something here to toggle the days
+    // Also make the checkboxes reflext the values in daysSelected
   };
     return (
         <Box className={classes.forOuterBox}>
@@ -105,10 +115,6 @@ const AvailabilityWidget = (props) => {
                             </Typography>
                         </Grid>
                         <Grid container alignItems="center">
-
-
-
-
                                 <FormControl variant="outlined" className={classes.formControl}>
                                     <Select
                                         labelId="start-time-label"
@@ -149,15 +155,23 @@ const AvailabilityWidget = (props) => {
                                 Available days:
                             </Typography>
                         </Grid>
-                        <Grid container alignItems="center">
-                            <Grid item sm>
+                        <GridList className={classes.gridList} cols={7}>
+                            {dayData.map((day) => (
                                 
-                            </Grid>
-                        </Grid>
+                            <GridListTile key={day}>
+                                <FormControlLabel
+                                    value={day}
+                                    control={<Checkbox color="primary" />}
+                                    label={day}
+                                    labelPlacement="bottom"
+                                    />
+                            </GridListTile>
+                            ))}
+                        </GridList>
                     </Grid>
-
+                    <Grid container>          
                     <ProfileFooter type="B"/>
-                    
+                    </Grid>
                 </Box>
             </Paper>
         </Box>

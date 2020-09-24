@@ -163,14 +163,21 @@ const AvailabilityWidget = (props) => {
                         <Grid item sm>
                             <ButtonGroup size="large" color="primary">
                                 {Object.keys(daysSelected).map((day) => (  
-                                    <FormControlLabel
-                                    value={day}
-                                    control={<Checkbox color="primary" />}
-                                    label={<Typography variant="body2" color="textSecondary">{day}</Typography>}
-                                    labelPlacement="bottom"
-                                    checked={daysSelected[day]}
-                                    onChange={handleDayToggle}
-                                    />
+                                    
+                                        <FormControlLabel
+                                        value={day}
+                                        control={<Checkbox color="primary" />}
+                                        label={(() => {
+                                            switch (daysSelected[day]) {
+                                            case true: return (<Typography variant="body2" color="textPrimary">{day}</Typography>);
+                                            default: return (<Typography variant="body2" color="textSecondary">{day}</Typography>);
+                                            }
+                                        })()}
+                                        labelPlacement="bottom"
+                                        checked={daysSelected[day]}
+                                        onChange={handleDayToggle}
+                                        />
+                                    
                                  ))}
                             </ButtonGroup>
                         </Grid>

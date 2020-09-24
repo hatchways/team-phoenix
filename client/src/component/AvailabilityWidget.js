@@ -182,10 +182,13 @@ const AvailabilityWidget = (props) => {
                             </ButtonGroup>
                         </Grid>
                     </Grid>
-                    
-                    <Grid container>          
+                    <Box mt={5} mb={5}>    
+                    <Grid container>
+                        
                     <ProfileFooter type="B"/>
+                    
                     </Grid>
+                    </Box>
                 </Box>
             </Paper>
         </Box>

@@ -3,27 +3,25 @@ import { withStyles } from "@material-ui/core/styles";
 import { Menu } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
-
-const styles = theme => ({
+const styles = (theme) => ({
   buttonCollapse: {
     [theme.breakpoints.up("sm")]: {
-      display: "none"
+      display: "none",
     },
     margin: "10px",
     boxShadow: "none",
-    
-  }
+  },
 });
 
 class ButtonAppBarCollapse extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      anchorEl: null
+      anchorEl: null,
     };
     this.handleMenu = this.handleMenu.bind(this);
   }
-  handleMenu = event => {
+  handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
   handleClose = () => {
@@ -36,19 +34,17 @@ class ButtonAppBarCollapse extends React.Component {
 
     return (
       <div className={classes.buttonCollapse}>
-        <Icon onClick={this.handleMenu}>
-          reorder
-        </Icon>
+        <Icon onClick={this.handleMenu}>reorder</Icon>
         <Menu
           id="menu-appbar"
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           transformOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           open={open}
           onClose={this.handleClose}

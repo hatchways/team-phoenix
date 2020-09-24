@@ -1,64 +1,69 @@
-/**
- * Code from the below medium post, only updated for latest material UI, using a
- * Menu for the popup and with breakpoints that work.
- *
- * https://medium.com/@habibmahbub/create-appbar-material-ui-responsive-like-bootstrap-1a65e8286d6f
- */
 import React from "react";
-import { Button, MenuItem } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { MenuItem } from "@material-ui/core";
 import ButtonAppBarCollapse from "./ButtonAppBarCollapse";
-import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import '../NavbarComponent/NavbarComponent.css';
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
-    right: 0
+    right: 0,
   },
   buttonBar: {
     [theme.breakpoints.down("xs")]: {
       display: "none",
-  
     },
-    // margin: "10px",
-    // paddingLeft: "16px",
-    // right: 0,
-    // position: "relative",
-    // width: "100%",
-    // background: "transparent"
-  
-  }
-});
+  },
+  main_menu: {
+    backgroundColor: "white",
+    "& a .active": {
+      color: "orange",
+    },
+    "& a": {
+      textDecoration: "none",
+      fontWeight: "bold",
+      color: "black",
+      fontSize: "12px",
+      marginTop: "15px",
+      padding: "0px 10px 0px",
+    },
+    "& a:hover": {
+      color: "orange",
+    },
+    "& .avatar": {
+      marginLeft: "60px",
+    },
+  },
+}));
 
-const AppBarCollapse = props => (
-  <div className={props.classes.root}>
+const AppBarCollapse = (props) => {
+  const classes = useStyles();
 
-    <ButtonAppBarCollapse>
-      <MenuItem>Login</MenuItem>
-      <MenuItem>Signup</MenuItem>
-    </ButtonAppBarCollapse>
-    <div className={props.classes.buttonBar} id="appbar-collapse">
-           <Grid container className="main_menu" md={12} >
-       <a href="home">Home</a>
-         <a href="intergration">integration</a>
-         <a href="upgrade" className="active">Upgrade account</a>
-      
-      {/* <Button color="inherit">Home</Button>
-      <Button color="inherit">Integration</Button>
-      <Button color="inherit">Update account</Button> */}
-     
-             <Avatar className="avatar"  alt="user 1" src="/images/user.png" />
-             <a href="home">John Doe</a>
-            
-            
-    
-     </Grid>
+  return (
+    <div className={classes.root}>
+      <ButtonAppBarCollapse>
+        <MenuItem>Login</MenuItem>
+        <MenuItem>Signup</MenuItem>
+      </ButtonAppBarCollapse>
+      <div className={classes.buttonBar} id="appbar-collapse">
+        <Grid container className={classes.main_menu} md={12}>
+          <a href="home">Home</a>
+          <a href="intergration">integration</a>
+          <a href="upgrade" className={classes.main_menu.active}>
+            Upgrade account
+          </a>
 
+          <Avatar
+            className={classes.main_menu.avatar}
+            alt="user 1"
+            src="/images/user.png"
+          />
+          <a href="home">John Doe</a>
+        </Grid>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default withStyles(styles)(AppBarCollapse);
+export default AppBarCollapse;

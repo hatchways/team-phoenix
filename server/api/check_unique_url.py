@@ -23,6 +23,7 @@ def check_url_is_unique(user_id):
             unique_url = User.find_url(given_url)
             if unique_url:
                 output["error"] = "Unavailable"
+                status = 200
             else:
                 output["success"] = "available"
                 status = 200

@@ -13,7 +13,9 @@ def meetings(user_id):
         loaded = BaseModel.load_many_by_user(user_id, "Meeting")
         output['meetings'] = []
         for data in loaded:
-            output['meetings'].append(f"{data}")
+            # output['meetings'].append(f"{data}")
+            output['meetings'].append(f"'{data}'")
+            
             if config.is_dev_environment():
                 print(f"DEBUG: Loading the follow from DB: {data}")
         status = 200

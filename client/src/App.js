@@ -9,6 +9,7 @@ import LogIn from "./pages/LogIn";
 import Google_Auth from "./pages/Google_Auth";
 import ScreenAfterLogin from "./pages/ScreenAfterLogin";
 import NewMeetingDuration from "./component/MeetingDuration/NewMeetingDuration";
+import MeetingList from "./component/MeetingDuration/MeetingList";
 
 
 const theme = createMuiTheme({
@@ -36,7 +37,7 @@ function App() {
           <Route path="/login-in" exact component={LogIn} />
           <Route path="/after-login" exact component={ScreenAfterLogin} />
           <Route path="/meeting" exact component={NewMeetingDuration} /> 
-         
+          <Route path="/meetings" exact component={MeetingList} /> 
         </Switch>
       </Router>
     </MuiThemeProvider>

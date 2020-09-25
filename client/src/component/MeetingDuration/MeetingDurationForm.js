@@ -36,10 +36,8 @@ class MeetingDurationForm extends Component {
   async createMeeting() {
     try {
       let result = await fetch(
-        "http://localhost:3000/meeting/" +
-          this.state.user_id +
-          "/" +
-          this.state.duration,
+        // "http://localhost:5000/meeting/"+this.state.user_id +"/" +this.state.duration,
+        "http://localhost:5000/meeting/5f69713107ad65349c8ad946/45",
         {
           method: "get",
           mode: "no-cors",
@@ -47,12 +45,16 @@ class MeetingDurationForm extends Component {
             Accept: "application/json",
             "Content-type": "application/json",
           },
+          // body: JSON.stringify({
+          //   user_id: '5f69713107ad65349c8ad946',
+          //   duration: '45'
+          // })
         }
       );
       console.log("Worked");
     } catch (e) {
       console.log(e);
-      console.log("didnt Work");
+      console.log("didnt Work sorry");
     }
   }
 

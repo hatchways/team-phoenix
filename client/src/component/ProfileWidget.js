@@ -114,7 +114,7 @@ const ProfileWidget = (props) => {
             </Grid>
           </Grid>
           <Grid container alignItems="center">
-            <Grid item sm>
+            <Grid item sm={4}>
               <Typography alight="left" variant="subtitle2">
                 {props.timezone_prompt}
               </Typography>

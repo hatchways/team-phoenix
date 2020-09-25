@@ -1,12 +1,15 @@
 from flask import Blueprint, app, jsonify, request
 from bson import ObjectId
-import config
 from models.user import User
+import config
+import json
 
-update_user_id_blueprint = Blueprint('update_user_id_blueprint', __name__)
+
+update_with_user_id_blueprint = Blueprint(
+    'update_with_user_id_blueprint', __name__)
 
 
-@update_user_id_blueprint.route('/user/<user_id>', methods=["POST"])
+@update_with_user_id_blueprint.route('/user/<user_id>', methods=["POST"])
 def update_user(user_id):
     """
     Update a user object in database.
@@ -17,7 +20,8 @@ def update_user(user_id):
     """
     output = dict()
     status = 422
-    data = request.json
+    data = json.loads(request.data.decode('utf-8'))
+    print(data)
     if not user_id:
         return jsonify({"error": "Missing user id"}), status
     if not data:

@@ -28,7 +28,7 @@ const ScreenAfterLogin = () => {
       fetchData();
     }
   });
-  return <h1>This comes after login</h1>;
+  return <h1>Screen after auth is done and profile is correctly setup. </h1>;
 };
 
 export default ScreenAfterLogin;

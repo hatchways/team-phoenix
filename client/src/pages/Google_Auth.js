@@ -1,4 +1,5 @@
 import React from "react";
+// import SecondAuthWidget from "../component/SecondAuthWidget";
 import SecondAuthWidget from "../component/SecondAuthWidget";
 const Google_Auth = () => {
   const onClickHandler = async () => {

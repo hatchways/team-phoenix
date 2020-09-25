@@ -12,6 +12,7 @@ import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
 
+import EventBodyComponent from "./component/EventBodyComponent/EventBodyComponent";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -39,6 +40,8 @@ function App() {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
+          <Route path="/skeleton" exact component={EventBodyComponent}/>
+
         </Switch>
       </Router>
     </MuiThemeProvider>

@@ -8,10 +8,10 @@ class BaseModel(dict):
     """
         This will save the data contained in the inheriting classes 'data' dictionary
          into a MongoDB collection named after the class that we are saving.
-
         If no collection_name is provided, it is assumed the collection is named after
          the class (Meeting -> Meeting collection)
     """
+
     def save(self, collection_name=None):
         if collection_name is None:
             collection_name = self.__class__.__name__

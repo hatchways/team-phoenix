@@ -26,7 +26,7 @@ const ProfileFooter = (props) => {
       />
     );
   }
-  return <FooterB send_to_skeleton={props.send_to_skeleton} />;
+  return <FooterB handleFinish={props.handleFinish} />;
 };
 
 const FooterA = (props) => {
@@ -70,7 +70,7 @@ const FooterB = (props) => {
         color="primary"
         size="large"
         type="submit"
-        onClick={props.send_to_skeleton}
+        onClick={props.handleFinish}
       >
         Finish
       </Button>

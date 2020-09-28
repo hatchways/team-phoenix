@@ -13,9 +13,7 @@ import {
   Grid,
   FormControlLabel,
   Checkbox,
-  GridList,
-  GridListTile,
-  GridListTileBar,
+  ButtonGroup,
 } from "@material-ui/core/";
 
 import ProfileHeader from "./profile/Header";
@@ -111,15 +109,15 @@ const AvailabilityWidget = (props) => {
   const classes = useStyles();
   const [startTime, setStartTime] = React.useState(["09:00"]);
   const [endTime, setEndTime] = React.useState(["17:00"]);
-  const [daysSelected, setDays] = React.useState([
-    { day: "Sundays", value: false },
-    { day: "Mondays", value: true },
-    { day: "Tuesdays", value: true },
-    { day: "Wednesdays", value: true },
-    { day: "Thursdays", value: true },
-    { day: "Fridays", value: true },
-    { day: "Saturdays", value: false },
-  ]);
+  const [daysSelected, setDays] = React.useState({
+    Sundays: false,
+    Mondays: true,
+    Tuesdays: true,
+    Wednesdays: true,
+    Thursdays: true,
+    Fridays: true,
+    Saturdays: false,
+  });
   const handleChangeStart = (event) => {
     setStartTime(event.target.value);
   };
@@ -127,7 +125,7 @@ const AvailabilityWidget = (props) => {
     setEndTime(event.target.value);
   };
   const handleDayToggle = (event) => {
-    // TODO: Do something here to toggle the days
+    setDays({ ...daysSelected, [event.target.value]: event.target.checked });
   };
   return (
     <Box className={classes.forOuterBox}>
@@ -179,29 +177,53 @@ const AvailabilityWidget = (props) => {
               </FormControl>
             </Grid>
           </Grid>
-          <Grid container alignItems="flex-start" direction="column">
+          <Grid container alignItems="stretch" direction="column">
             <Grid item sm>
               <Typography alight="left" variant="subtitle2">
                 Available days:
               </Typography>
             </Grid>
-            <GridList cols={7} rows={1}>
-              {daysSelected.map((dayData) => (
-                <GridListTile key={dayData.day}>
+            <Grid item sm>
+              <ButtonGroup size="large" color="primary">
+                {Object.keys(daysSelected).map((day, index) => (
                   <FormControlLabel
-                    value={dayData.day}
+                    key={index}
+                    value={day}
                     control={<Checkbox color="primary" />}
-                    label={dayData.day}
+                    label={(() => {
+                      switch (daysSelected[day]) {
+                        case true:
+                          return (
+                            <Typography variant="body2" color="textPrimary">
+                              {day}
+                            </Typography>
+                          );
+                        default:
+                          return (
+                            <Typography variant="body2" color="textSecondary">
+                              {day}
+                            </Typography>
+                          );
+                      }
+                    })()}
                     labelPlacement="bottom"
-                    checked={dayData.value}
+                    checked={daysSelected[day]}
+                    onChange={handleDayToggle}
                   />
-                </GridListTile>
-              ))}
-            </GridList>
+                ))}
+              </ButtonGroup>
+            </Grid>
           </Grid>
-          <Grid container>
-            <ProfileFooter type="B" send_to_skeleton={props.send_to_skeleton} />
-          </Grid>
+          <Box mt={5} mb={5}>
+            <Grid container>
+              <ProfileFooter
+                type="B"
+                handleFinish={() =>
+                  props.handleFinish(startTime, endTime, daysSelected)
+                }
+              />
+            </Grid>
+          </Box>
         </Box>
       </Paper>
     </Box>

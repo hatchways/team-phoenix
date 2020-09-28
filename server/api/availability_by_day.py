@@ -31,10 +31,10 @@ def availability_by_day():
     status = 422
     day = request.args.get('day', default="", type=str)
     data = json.loads(request.data.decode('utf-8'))
-    token = data["token"]
-    client_email = data["email"]
+    token = data.get("token", None)
+    client_email = data.get("email", None)
     if day == "" or not token or not client_email:
-        output["error"] = "Missing day or Access Token "
+        output["error"] = "Missing day or Access Token or Email"
     else:
         try:
             p_time = datetime.fromtimestamp(float(day))

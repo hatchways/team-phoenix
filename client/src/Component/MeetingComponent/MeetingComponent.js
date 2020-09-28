@@ -116,11 +116,7 @@ const MeetingComponent = () => {
 
         <Grid item md={6} sm={6}>
           <Grid className={classes.button}>
-            <Button
-            
-              variant="outlined"
-              color="secondary"
-            >
+            <Button variant="outlined" color="secondary">
               <Icon>add</Icon> New event type
             </Button>
           </Grid>
@@ -128,9 +124,7 @@ const MeetingComponent = () => {
       </Grid>
 
       <Grid className={classes.root} container spacing={4}>
-       
-
-        {state.meeting.map((meeting) => {
+        {state.meeting.map((meeting, index) => {
           return (
             <Grid
               item
@@ -138,9 +132,8 @@ const MeetingComponent = () => {
               sm={6}
               xs={12}
               className="meeting_box"
-              boxShadow={3}
               bgcolor="background.paper"
-           
+              key={index}
             >
               <Paper className={classes.meeting_box}>
                 <Grid className={classes.orange_background}></Grid>
@@ -162,7 +155,6 @@ const MeetingComponent = () => {
                     </Grid>
                     <Grid item>
                       <Typography variant="subtitle2">
-                        
                         {meeting.duration} min
                       </Typography>
                     </Grid>
@@ -183,9 +175,9 @@ const MeetingComponent = () => {
 
       {/* Meeting Box End */}
 
-      <Grid container  alignItems="flex-end" justify="flex-end">
+      <Grid container alignItems="flex-end" justify="flex-end">
         <Box mt={2}>
-        <GettingStartedButton />
+          <GettingStartedButton />
         </Box>
       </Grid>
     </ThemeProvider>

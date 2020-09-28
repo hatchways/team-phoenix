@@ -185,8 +185,9 @@ const AvailabilityWidget = (props) => {
             </Grid>
             <Grid item sm>
               <ButtonGroup size="large" color="primary">
-                {Object.keys(daysSelected).map((day) => (
+                {Object.keys(daysSelected).map((day, index) => (
                   <FormControlLabel
+                    key={index}
                     value={day}
                     control={<Checkbox color="primary" />}
                     label={(() => {

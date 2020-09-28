@@ -24,7 +24,7 @@ const AvailabilitySettings = () => {
         let result = await data.json();
         console.log(result);
         if (result.success) {
-          history.push("/after-login");
+          history.push("/dashboard");
         }
       }
     };

@@ -13,7 +13,6 @@ import NavbarComponent from "../NavbarComponent/NavbarComponent";
 const useStyles = makeStyles({
   title: {
     marginTop: 150,
-
     maxWidth: 900,
     margin: "auto",
   },
@@ -25,7 +24,6 @@ const useStyles = makeStyles({
     backgroundColor: "rgb(247, 247, 247)",
   },
 });
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -39,7 +37,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={2}>
-          <Typography>{children}</Typography>
+          <Typography component={"span"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -51,8 +49,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-
-const EventBodyComponent =()=> {
+const EventBodyComponent = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -60,7 +57,7 @@ const EventBodyComponent =()=> {
   };
 
   return (
-    <Grid >
+    <Grid>
       <NavbarComponent />
       <Typography
         className={classes.title}
@@ -82,16 +79,8 @@ const EventBodyComponent =()=> {
             aria-label="scrollable auto tabs example"
             centered
           >
-            <Tab
-              style={{ color: "orange" }}
-              label="EVENT TYPES"
-            
-            />
-            <Tab
-              style={{ color: "orange" }}
-              label="SCHEDULED EVENTS"
-            
-            />
+            <Tab style={{ color: "orange" }} label="EVENT TYPES" />
+            <Tab style={{ color: "orange" }} label="SCHEDULED EVENTS" />
           </Tabs>
         </AppBar>
         <TabPanel className={classes.tab_content} value={value} index={0}>
@@ -101,6 +90,6 @@ const EventBodyComponent =()=> {
       </Grid>
     </Grid>
   );
-}  
+};
 
-export default EventBodyComponent
+export default EventBodyComponent;

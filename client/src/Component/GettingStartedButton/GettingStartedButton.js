@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const GettingStartedButton =() => {
+const GettingStartedButton = () => {
   const classes = useStyles();
 
   return (
@@ -30,6 +30,6 @@ const GettingStartedButton =() => {
       Getting started guide
     </Button>
   );
-}
+};
 
-export default GettingStartedButton
+export default GettingStartedButton;

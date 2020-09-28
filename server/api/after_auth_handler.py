@@ -35,12 +35,12 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         if type(db_user) is dict:
             user_id = db_user["_id"]
             resonse = make_response(
-                redirect("http://localhost:3000/dashboard?token=" +
-                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
+                redirect("http://localhost:3000/dashboard?access_token=" +
+                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
         else:
             user_id = db_user.inserted_id
             resonse = make_response(
-                redirect("http://localhost:3000/profile_settings?token=" +
+                redirect("http://localhost:3000/profile_settings?access_token=" +
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
         session.permanent = True
         return resonse

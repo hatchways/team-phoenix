@@ -39,23 +39,9 @@ const ProfileSettings = () => {
   };
 
   const handleContinue = () => {
-    const save_url = async () => {
-      const data = await fetch(
-        `http://localhost:5000/user/${userdata.user_id}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            unique_url: `calendapp.com/${term}`,
-          }),
-        }
-      );
-      let result = await data.json();
-      if (result.success) {
-        history.push("/confirm");
-      }
-    };
     if (result_for_url === "available") {
-      save_url();
+      localStorage.setItem("unique_url", `calendapp.com/${term}`);
+      history.push("/confirm");
     }
   };
   useEffect(() => {

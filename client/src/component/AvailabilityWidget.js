@@ -14,7 +14,6 @@ import {
   FormControlLabel,
   Checkbox,
   ButtonGroup,
-  Button,
 } from "@material-ui/core/";
 
 import ProfileHeader from "./profile/Header";
@@ -216,7 +215,12 @@ const AvailabilityWidget = (props) => {
           </Grid>
           <Box mt={5} mb={5}>
             <Grid container>
-              <ProfileFooter type="B" />
+              <ProfileFooter
+                type="B"
+                handleFinish={() =>
+                  props.handleFinish(startTime, endTime, daysSelected)
+                }
+              />
             </Grid>
           </Box>
         </Box>

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -42,10 +41,6 @@ const ButtonAppBar = () => {
       </Toolbar>
     </AppBar>
   );
-};
-
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
 };
 
 export default ButtonAppBar;

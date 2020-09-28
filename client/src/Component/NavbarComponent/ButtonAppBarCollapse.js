@@ -14,13 +14,7 @@ const styles = (theme) => ({
 });
 
 class ButtonAppBarCollapse extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      anchorEl: null,
-    };
-    this.handleMenu = this.handleMenu.bind(this);
-  }
+  state = { anchorEl: null };
   handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };

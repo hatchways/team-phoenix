@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,14 +11,12 @@ import shadows from "@material-ui/core/styles/shadows";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import GettingStartedButton from "../GettingStartedButton/GettingStartedButton";
-
+import Box from "@material-ui/core/Box";
 
 // import classNames from 'classnames/bind';
 // import styles from './submit-button.css';
 
-
 // let cx = classNames.bind(styles);
-
 
 const outerTheme = createMuiTheme({
   palette: {
@@ -35,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
+  meeting_box: {
     background: theme.palette.text.default,
     boxShadow: shadows[3],
     paddingBottom: theme.spacing(3),
@@ -73,9 +71,6 @@ const useStyles = makeStyles((theme) => ({
   },
   meeting_body: {
     margin: "20px 30px 50px",
-    "& span": {
-      color: "gray",
-    },
   },
   meeting_footer: {
     width: "100%",
@@ -83,8 +78,7 @@ const useStyles = makeStyles((theme) => ({
     borderTop: "1px solid rgb(236, 230, 230)",
     fontWeight: "bold",
   },
-  meeting_button: {
-    float: "right",
+  button: {
     textAlign: "right",
   },
   profile_name: {
@@ -95,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MeetingComponent = () => {
-  const [state, setState] = useState({
+  const [state] = useState({
     meeting: [
       { duration: 15, type: "One-on-One" },
       { duration: 30, type: "One-on-One" },
@@ -107,8 +101,8 @@ const MeetingComponent = () => {
   return (
     <ThemeProvider theme={outerTheme}>
       <Grid container m={15} className={classes.profile}>
-        <Grid container md={6}>
-          <Grid item sm={1}>
+        <Grid container item md={6} sm={6}>
+          <Grid item>
             <Avatar alt="user 1" src="/images/user.png" />
           </Grid>
 
@@ -120,66 +114,79 @@ const MeetingComponent = () => {
           </Grid>
         </Grid>
 
-        <Grid className={classes.meeting_button} item md={6}>
-          <Button
-            className="footer_button"
-            variant="outlined"
-            color="secondary"
-          >
-            <Icon>add</Icon> New event type
-          </Button>
+        <Grid item md={6} sm={6}>
+          <Grid className={classes.button}>
+            <Button
+            
+              variant="outlined"
+              color="secondary"
+            >
+              <Icon>add</Icon> New event type
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
 
-      <div className={classes.root}>
-        <Grid container spacing={4}>
-          {state.meeting.map((meeting) => {})}
-          {/* Meeting Box Start */}
+      <Grid className={classes.root} container spacing={4}>
+       
 
-          {state.meeting.map((meeting) => {
-            return (
-              <Grid
-                item
-                md={4}
-                sm={6}
-                xs={12}
-                className="meeting_box"
-                boxShadow={3}
-                bgcolor="background.paper"
-                style={{ width: "20rem", height: "20rem" }}
-              >
-                <Paper className={classes.paper}>
-                  <div className={classes.orange_background}></div>
-                  <div className={classes.content}>
-                    <div className={classes.meeting_header}>
-                      <Icon color="disabled">settings</Icon>
-                    </div>
-                    <div className={classes.meeting_body}>
-                      <h3>{meeting.duration} munites meeting </h3>
-                      <span>{meeting.type} </span>
-                    </div>
-                    <div className={classes.meeting_footer}>
+        {state.meeting.map((meeting) => {
+          return (
+            <Grid
+              item
+              md={4}
+              sm={6}
+              xs={12}
+              className="meeting_box"
+              boxShadow={3}
+              bgcolor="background.paper"
+           
+            >
+              <Paper className={classes.meeting_box}>
+                <Grid className={classes.orange_background}></Grid>
+                <Grid className={classes.content}>
+                  <Grid className={classes.meeting_header}>
+                    <Icon color="disabled">settings</Icon>
+                  </Grid>
+                  <Grid className={classes.meeting_body}>
+                    <Typography variant="h6">
+                      {meeting.duration} munites meeting
+                    </Typography>
+                    <Typography variant="subtitle1" color="primary">
+                      {meeting.type}
+                    </Typography>
+                  </Grid>
+                  <Grid container className={classes.meeting_footer}>
+                    <Grid item>
                       <Icon color="disabled">alarm</Icon>
-                      <span> {meeting.duration} min </span>
-                      <Button
-                        className={classes.meeting_button}
-                        variant="outlined"
-                        color="secondary"
-                      >
-                        Copy link
-                      </Button>
-                    </div>
-                  </div>
-                </Paper>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </div>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle2">
+                        
+                        {meeting.duration} min
+                      </Typography>
+                    </Grid>
+                    <Grid item xs>
+                      <Grid className={classes.button}>
+                        <Button variant="outlined" color="secondary">
+                          Copy link
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Grid>
+          );
+        })}
+      </Grid>
+
       {/* Meeting Box End */}
 
-      <Grid container mt={2} alignItems="flex-end" justify="flex-end">
+      <Grid container  alignItems="flex-end" justify="flex-end">
+        <Box mt={2}>
         <GettingStartedButton />
+        </Box>
       </Grid>
     </ThemeProvider>
   );

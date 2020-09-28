@@ -5,7 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-
+import Grid from "@material-ui/core/Grid";
 import MeetingComponent from "../MeetingComponent/MeetingComponent";
 import { makeStyles } from "@material-ui/core/styles";
 import NavbarComponent from "../NavbarComponent/NavbarComponent";
@@ -50,13 +50,9 @@ TabPanel.propTypes = {
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`,
-  };
-}
-export default function ScrollableTabsButtonAuto() {
+
+
+const EventBodyComponent =()=> {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -64,7 +60,7 @@ export default function ScrollableTabsButtonAuto() {
   };
 
   return (
-    <div>
+    <Grid >
       <NavbarComponent />
       <Typography
         className={classes.title}
@@ -75,7 +71,7 @@ export default function ScrollableTabsButtonAuto() {
         My CalendApp
       </Typography>
 
-      <div className={classes.appbar}>
+      <Grid className={classes.appbar}>
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -89,12 +85,12 @@ export default function ScrollableTabsButtonAuto() {
             <Tab
               style={{ color: "orange" }}
               label="EVENT TYPES"
-              {...a11yProps(0)}
+            
             />
             <Tab
               style={{ color: "orange" }}
               label="SCHEDULED EVENTS"
-              {...a11yProps(1)}
+            
             />
           </Tabs>
         </AppBar>
@@ -102,7 +98,9 @@ export default function ScrollableTabsButtonAuto() {
           <MeetingComponent />
         </TabPanel>
         <TabPanel value={value} index={1}></TabPanel>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
-}
+}  
+
+export default EventBodyComponent

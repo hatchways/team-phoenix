@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ClassesNesting() {
+const GettingStartedButton =() => {
   const classes = useStyles();
 
   return (
@@ -31,3 +31,5 @@ export default function ClassesNesting() {
     </Button>
   );
 }
+
+export default GettingStartedButton

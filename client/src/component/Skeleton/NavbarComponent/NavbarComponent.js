@@ -1,35 +1,33 @@
-
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import GettingStartedButton from '../GettingStartedButton/GettingStartedButton';
 import AppBarCollapse from "./AppBarCollapse";
+import { makeStyles } from "@material-ui/core/styles";
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
   },
   navigation: {
-    background: 'white',
-    color:'black'
+    background: "white",
+    color: "black",
   },
   toggleDrawer: {},
-  appTitle: {}
-};
+  appTitle: {},
+}));
 
-function ButtonAppBar(props) {
-  const { classes } = props;
+const ButtonAppBar = (props) => {
+  const classes = useStyles();
   return (
     <AppBar position="fixed" className={classes.navigation}>
       <Toolbar>
@@ -38,24 +36,21 @@ function ButtonAppBar(props) {
           aria-label="Menu"
           className={classes.toggleDrawer}
         >
-         <img className="logo" src="/images/logo.png" alt="" />
+          <img className="logo" src="/images/logo.png" alt="" />
         </IconButton>
         <Typography
           variant="title"
           color="inherit"
           className={classes.appTitle}
-        >
-          
-        </Typography>
+        ></Typography>
         <AppBarCollapse />
-      
       </Toolbar>
     </AppBar>
   );
-}
-
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ButtonAppBar);
+ButtonAppBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default ButtonAppBar;

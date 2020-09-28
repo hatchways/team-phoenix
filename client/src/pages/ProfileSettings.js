@@ -1,34 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProfileWidget from "../component/ProfileWidget";
 import history from "../history";
-const saveUserDataInLocalStorage = () => {
-  var urlParams = new URLSearchParams(window.location.search);
-  let token,
-    email,
-    user_id,
-    jwt_token = "";
-  if (urlParams.has("token")) {
-    token = urlParams.get("token");
-  }
-  if (urlParams.has("email")) {
-    email = urlParams.get("email");
-  }
-  if (urlParams.has("user_id")) {
-    user_id = urlParams.get("user_id");
-  }
-  if (urlParams.has("jwt_token")) {
-    jwt_token = urlParams.get("jwt_token");
-  }
-  if (token && email && user_id) {
-    localStorage.setItem("access_token", token);
-    localStorage.setItem("email", email);
-    localStorage.setItem("user_id", user_id);
-    localStorage.setItem("jwt_token", jwt_token);
-    return { user_id, token, email };
-  } else {
-    return null;
-  }
-};
+import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
 const ProfileSettings = () => {
   let heading = "Welcome to CalendApp!";
   let url_prompt = "Create your CalendApp URL:";

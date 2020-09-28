@@ -35,7 +35,7 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         if type(db_user) is dict:
             user_id = db_user["_id"]
             resonse = make_response(
-                redirect("http://localhost:3000/skeleton?token=" +
+                redirect("http://localhost:3000/dashboard?token=" +
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
         else:
             user_id = db_user.inserted_id

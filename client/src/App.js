@@ -11,7 +11,6 @@ import ScreenAfterLogin from "./pages/ScreenAfterLogin";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
-import DashboardComponent from "./component/EventDialog/DashboardComponent";
 import EventType from "./component/EventDialog/EventType";
 
 const theme = createMuiTheme({

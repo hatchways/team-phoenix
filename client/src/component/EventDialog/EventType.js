@@ -7,7 +7,7 @@ import Icon from '@material-ui/core/Icon';
 import {grey, orange} from '@material-ui/core/colors';
 import { Typography, Container } from '@material-ui/core';
 import CreateEventDialog from './CreateEventDialog';
-
+import EventModel from './EventModel';
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -44,9 +44,21 @@ const theme = createMuiTheme({
   },
 });
 
-
+const setTypeOne=()=>{
+  localStorage.removeItem('type');
+  localStorage.setItem('type', 'One-on-one');
+  }
+  
+ const setTypeGroup=()=>{
+   localStorage.removeItem('type');
+    localStorage.setItem('type', 'Group');
+  }
 
 const EventType = ()=>{
+
+ 
+
+
   const classes = useStyles();
   return(
 
@@ -69,7 +81,7 @@ const EventType = ()=>{
         </Grid>
 
         {/* ---------- Create One-on-One Event ------------------*/}
-     <Grid container direction="row" alignItems="center" className={classes.options}>
+     <Grid onClick={setTypeOne} container direction="row" alignItems="center" className={classes.options}>
     <Grid item  >
       <Box mx={3} borderColor="orange" borderRadius="50%" {...defaultProps}>
       <Grid item container  className={classes.icon_grid} justify="center" alignItems="center" >
@@ -98,11 +110,11 @@ const EventType = ()=>{
 
         {/* ---------- Create Group Event ------------------*/}
 
-       <Grid container direction="row" alignItems="center" className={classes.options}>
-    <Grid item  >
+       <Grid onClick={setTypeGroup} container direction="row" alignItems="center" className={classes.options}>
+    <Grid item >
       <Box mx={3} borderColor="orange" borderRadius="50%" {...defaultProps}>
       <Grid item container  className={classes.icon_grid} justify="center" alignItems="center" >
-        <Icon fontSize="large" >person</Icon>
+        <Icon fontSize="large" >group</Icon>
        </Grid>
     </Box>
       </Grid>
@@ -125,6 +137,10 @@ const EventType = ()=>{
       </Grid>
 </Grid>
        </Grid>
+
+
+
+
       </Container>
       </ThemeProvider>
   );

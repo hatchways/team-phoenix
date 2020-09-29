@@ -6,6 +6,7 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material
 import Icon from '@material-ui/core/Icon';
 import {grey, orange} from '@material-ui/core/colors';
 import { Typography, Container } from '@material-ui/core';
+import CreateEventDialog from './CreateEventDialog';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -51,11 +52,20 @@ const EventType = ()=>{
 
     <ThemeProvider theme={theme}>
     <Container maxWidth="md">
-      <Grid container justify="center" alignItems="flex-end" className={classes.title}>
+      <Grid container direction="row">
+        <Grid item sm={4} className={classes.title}>
+          <Button variant="outlined" color="primary">
+          <Icon>arrow_back_ios</Icon> Back
+            </Button>
+          </Grid>
+      <Grid item sm={8} className={classes.title}>
 
         <Typography variant="h5" >
           Create New Event Type
           </Typography>
+          </Grid>
+
+        
         </Grid>
 
         {/* ---------- Create One-on-One Event ------------------*/}
@@ -77,9 +87,11 @@ const EventType = ()=>{
       </Grid>
       <Grid item sm>
         <Grid  container item justify="flex-end">
-    <Button variant="contained" color="primary">
+    {/* <Button variant="contained" color="primary">
     Create
-      </Button>
+      </Button> */}
+
+<CreateEventDialog type="one-on-one"/>
       </Grid>
 </Grid>
        </Grid>
@@ -104,9 +116,12 @@ const EventType = ()=>{
       </Grid>
       <Grid item sm>
         <Grid  container item justify="flex-end">
-    <Button variant="contained" color="primary">
+    {/* <Button variant="contained" color="primary">
     Create
-      </Button>
+      </Button> */}
+
+<CreateEventDialog type="group"/>
+
       </Grid>
 </Grid>
        </Grid>

@@ -41,7 +41,7 @@ function App() {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
-          <Route path="/dashboard" exact component={DashboardComponent} />
+          
           <Route path="/event" exact component={EventType} />
         </Switch>
       </Router>

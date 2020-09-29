@@ -13,7 +13,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import EventModel from './EventModel';
+
 
 const useStyles = makeStyles((theme) => ({
   
@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
   },
 }));
+
+
 export default function MaxWidthDialog(props) {
 
 const [state, setState] = useState({
@@ -71,12 +73,20 @@ const [state, setState] = useState({
   };
 
   const createEvent =(event)=>{
-    event.preventDefault();
+   
+    fetch('http://localhost:5000/meeting/5f69713107ad65349c8ad946/meeting/one-on-one/company/45/',{
+      method: 'GET',
+      headers:{'Content-type':'application/json'},
+       }).then(r=>r.json()).then(res=>{
+            if(res){
+        console.log("Not working");
+      }
+      });
+
+       event.preventDefault();
     setOpen(false);
 
-  }
-
-
+  };
 
   return (
   <div>

@@ -11,6 +11,8 @@ import ScreenAfterLogin from "./pages/ScreenAfterLogin";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
+import DashboardComponent from "./component/EventDialog/DashboardComponent";
+import EventType from "./component/EventDialog/EventType";
 
 const theme = createMuiTheme({
   palette: {
@@ -39,6 +41,8 @@ function App() {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
+          <Route path="/dashboard" exact component={DashboardComponent} />
+          <Route path="/event" exact component={EventType} />
         </Switch>
       </Router>
     </MuiThemeProvider>

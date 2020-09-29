@@ -7,10 +7,10 @@ import history from "./history";
 import "./App.css";
 import LogIn from "./pages/LogIn";
 import Google_Auth from "./pages/Google_Auth";
-import ScreenAfterLogin from "./pages/ScreenAfterLogin";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
+import DashBoard from "./pages/DashBoard";
 import SchedulerCalendar from "./pages/SchedulerCalendar";
 
 const theme = createMuiTheme({
@@ -36,7 +36,6 @@ function App() {
           <Route path="/auth-with-google" exact component={Google_Auth} />
           <Route path="/sign-up" exact component={SignUp} />
           <Route path="/login-in" exact component={LogIn} />
-          <Route path="/after-login" exact component={ScreenAfterLogin} />
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
@@ -45,6 +44,7 @@ function App() {
             exact
             component={SchedulerCalendar}
           />
+          <Route path="/dashboard" exact component={DashBoard} />
         </Switch>
       </Router>
     </MuiThemeProvider>

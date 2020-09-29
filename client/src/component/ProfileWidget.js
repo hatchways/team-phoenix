@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import logo from "../assets/logo.png";
 import {
   Paper,
@@ -13,18 +12,19 @@ import {
   Grid,
   TextField,
   InputAdornment,
+  makeStyles,
 } from "@material-ui/core/";
 import Alert from "@material-ui/lab/Alert";
 import ProfileHeader from "./profile/Header";
 import ProfileFooter from "./profile/Footer";
 
 const useStyles = makeStyles((theme) => ({
-  forPaper: {
+  paper: {
     margin: theme.spacing(2),
     width: theme.spacing(75),
     height: theme.spacing(55),
   },
-  forOuterBox: {
+  outerBox: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -62,9 +62,9 @@ const ProfileWidget = (props) => {
     props.check_for_unique_url(event.target.value);
   };
   return (
-    <Box className={classes.forOuterBox}>
+    <Box className={classes.outerBox}>
       <img alt="logo" src={logo}></img>
-      <Paper className={classes.forPaper} elevation={3}>
+      <Paper className={classes.paper} elevation={3}>
         <Box m={3}>
           <ProfileHeader percent={25} heading={props.heading} />
         </Box>

@@ -15,7 +15,7 @@ class User(BaseModel):
         self["email"] = userObj.email
         self["time_zone"] = strftime("%z", gmtime())
         self["first_name"] = userObj.given_name
-        self["availability"] = []
+        self["availability"] = dict()
         self["unique_url"] = ""
 
     def add(self, id, val):
@@ -54,3 +54,15 @@ class User(BaseModel):
             print(f"Database operation failed: {e}")
             result = None
         return result
+
+    @classmethod
+    def get_user_start_end_time(cls, email):
+        try:
+            result = cls.collection.find_one({"email": email})
+            if result:
+                return result["Availability"]["start_time"], result["Availability"]["end_time"]
+            else:
+                return None
+        except OperationFailure as e:
+            print(f"Database operation failed: {e}")
+            return None

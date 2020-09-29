@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MeetingComponent = () => {
-  let meeting = [
+  const meeting = [
     { duration: 15, type: "One-on-One" },
     { duration: 30, type: "One-on-One" },
     { duration: 45, type: "One-on-One" },

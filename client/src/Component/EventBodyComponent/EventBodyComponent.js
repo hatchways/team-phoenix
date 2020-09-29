@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   Grid,
@@ -24,9 +24,6 @@ const useStyles = makeStyles({
   },
   appbar: {
     backgroundColor: "rgb(247, 247, 247)",
-  },
-  colorForTabs: {
-    color: "primary",
   },
 });
 function TabPanel(props) {
@@ -56,7 +53,7 @@ TabPanel.propTypes = {
 
 const EventBodyComponent = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

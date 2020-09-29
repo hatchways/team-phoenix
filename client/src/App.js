@@ -11,6 +11,7 @@ import ScreenAfterLogin from "./pages/ScreenAfterLogin";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
+import SchedulerCalendar from "./pages/SchedulerCalendar";
 
 const theme = createMuiTheme({
   palette: {
@@ -39,6 +40,11 @@ function App() {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
+          <Route
+            path="/schedule-calendar"
+            exact
+            component={SchedulerCalendar}
+          />
         </Switch>
       </Router>
     </MuiThemeProvider>

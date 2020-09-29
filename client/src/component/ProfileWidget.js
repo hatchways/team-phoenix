@@ -62,7 +62,7 @@ const ProfileWidget = (props) => {
     props.check_for_unique_url(event.target.value);
   };
   const timeOptions = [];
-  for (var i = -12; i < 14; i++){
+  for (var i = -12; i <= 14; i++){
     if(i < 0) {
       timeOptions.push({'value':i, 'text':"UTC" + i + ":00"});
     } else if (i === 0) {

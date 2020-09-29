@@ -134,7 +134,7 @@ const MeetingComponent = () => {
                   </Grid>
                   <Grid className={classes.meeting_body}>
                     <Typography variant="h6">
-                      {meeting.duration} minute meeting
+                      {meeting.duration} minutes meeting
                     </Typography>
                     <Typography variant="subtitle1" color="primary">
                       {meeting.type}

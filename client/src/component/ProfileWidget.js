@@ -61,6 +61,16 @@ const ProfileWidget = (props) => {
   const handleChangeInUrl = (event) => {
     props.check_for_unique_url(event.target.value);
   };
+  const timeOptions = [];
+  for (var i = -12; i < 14; i++){
+    if(i < 0) {
+      timeOptions.push({'value':i, 'text':"UTC" + i + ":00"});
+    } else if (i === 0) {
+      timeOptions.push({'value':i, 'text':"UTC Time"});
+    } else {
+      timeOptions.push({'value':i, 'text':"UTC+" + i + ":00"});
+    }
+  }
   return (
     <Box className={classes.forOuterBox}>
       <img alt="logo" src={logo}></img>
@@ -71,7 +81,7 @@ const ProfileWidget = (props) => {
         <Divider />
         <Box m={3}>
           <Grid container alignItems="center">
-            <Grid item sm>
+            <Grid item sm={4}>
               <Typography alight="left" variant="subtitle2">
                 {props.url_prompt}
               </Typography>
@@ -129,15 +139,11 @@ const ProfileWidget = (props) => {
                     value={timezone}
                     onChange={handleChange}
                   >
-                    {/* 
-                                TODO: This needs timezones as options. Probably just "UTC-12:00" to "UTC+14:00"
-                                */}
-                    <MenuItem value={0}>
-                      <em>UTC Time (11:31)</em>
-                    </MenuItem>
-                    <MenuItem value={+1}>Other</MenuItem>
-                    <MenuItem value={+2}>Other</MenuItem>
-                    <MenuItem value={+3}>Other</MenuItem>
+                    {timeOptions.map((timeOptions) => (
+                                        <MenuItem key={timeOptions.value} value={timeOptions.value}>
+                                        {timeOptions.text}
+                                        </MenuItem>
+                                    ))}
                   </Select>
                 </FormControl>
               </Box>

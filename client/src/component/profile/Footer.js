@@ -33,7 +33,7 @@ const FooterA = (props) => {
   const classes = useStyles();
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Grid item sm>
+      <Grid item sm={12}>
         <Button
           className={classes.forContinueButton}
           variant="contained"
@@ -45,7 +45,7 @@ const FooterA = (props) => {
           Continue
         </Button>
       </Grid>
-      <Grid item sm>
+      <Grid item sm={12}>
         <Button
           className={classes.forSetupLater}
           variant="text"

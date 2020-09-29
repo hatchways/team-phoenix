@@ -14,7 +14,6 @@ import {
     FormControlLabel,
     Checkbox,
     ButtonGroup,
-    Button,
 } from "@material-ui/core/";
 
 import ProfileHeader from "./profile/Header"
@@ -155,12 +154,12 @@ const AvailabilityWidget = (props) => {
                         </Grid>
                     </Grid>
                     <Grid container alignItems="stretch" direction="column">
-                        <Grid item sm>
+                        <Grid item sm={12}>
                             <Typography alight="left" variant="subtitle2">
                                 Available days:
                             </Typography>
                         </Grid>
-                        <Grid item sm>
+                        <Grid item sm={12}>
                             <ButtonGroup size="large" color="primary">
                                 {Object.keys(daysSelected).map((day) => (  
                                     

@@ -1,5 +1,4 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import {
   Paper,
@@ -14,18 +13,18 @@ import {
   FormControlLabel,
   Checkbox,
   ButtonGroup,
+  makeStyles,
 } from "@material-ui/core/";
-
 import ProfileHeader from "./profile/Header";
 import ProfileFooter from "./profile/Footer";
 
 const useStyles = makeStyles((theme) => ({
-  forPaper: {
+  paper: {
     margin: theme.spacing(2),
     width: theme.spacing(75),
     height: theme.spacing(55),
   },
-  forOuterBox: {
+  outerbox: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -107,9 +106,9 @@ const timeOptions = [
 
 const AvailabilityWidget = (props) => {
   const classes = useStyles();
-  const [startTime, setStartTime] = React.useState(["09:00"]);
-  const [endTime, setEndTime] = React.useState(["17:00"]);
-  const [daysSelected, setDays] = React.useState({
+  const [startTime, setStartTime] = useState(["09:00"]);
+  const [endTime, setEndTime] = useState(["17:00"]);
+  const [daysSelected, setDays] = useState({
     Sundays: false,
     Mondays: true,
     Tuesdays: true,
@@ -128,9 +127,9 @@ const AvailabilityWidget = (props) => {
     setDays({ ...daysSelected, [event.target.value]: event.target.checked });
   };
   return (
-    <Box className={classes.forOuterBox}>
+    <Box className={classes.outerbox}>
       <img alt="logo" src={logo}></img>
-      <Paper className={classes.forPaper} elevation={3}>
+      <Paper className={classes.paper} elevation={3}>
         <Box m={3}>
           <ProfileHeader percent={75} heading={props.heading} />
         </Box>
@@ -168,9 +167,9 @@ const AvailabilityWidget = (props) => {
                   value={endTime}
                   onChange={handleChangeEnd}
                 >
-                  {timeOptions.map((timeOptions) => (
-                    <MenuItem key={timeOptions} value={timeOptions}>
-                      {timeOptions}
+                  {timeOptions.map((timeOption) => (
+                    <MenuItem key={timeOption} value={timeOption}>
+                      {timeOption}
                     </MenuItem>
                   ))}
                 </Select>

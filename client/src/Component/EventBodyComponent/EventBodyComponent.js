@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
+import {
+  Grid,
+  Box,
+  Typography,
+  Tab,
+  Tabs,
+  AppBar,
+  makeStyles,
+} from "@material-ui/core";
 import MeetingComponent from "../MeetingComponent/MeetingComponent";
-import { makeStyles } from "@material-ui/core/styles";
 import NavbarComponent from "../NavbarComponent/NavbarComponent";
 
 const useStyles = makeStyles({
@@ -22,6 +24,9 @@ const useStyles = makeStyles({
   },
   appbar: {
     backgroundColor: "rgb(247, 247, 247)",
+  },
+  colorForTabs: {
+    color: "primary",
   },
 });
 function TabPanel(props) {
@@ -79,8 +84,8 @@ const EventBodyComponent = () => {
             aria-label="scrollable auto tabs example"
             centered
           >
-            <Tab style={{ color: "orange" }} label="EVENT TYPES" />
-            <Tab style={{ color: "orange" }} label="SCHEDULED EVENTS" />
+            <Tab label="EVENT TYPES" />
+            <Tab label="SCHEDULED EVENTS" />
           </Tabs>
         </AppBar>
         <TabPanel className={classes.tab_content} value={value} index={0}>

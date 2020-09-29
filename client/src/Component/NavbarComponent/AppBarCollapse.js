@@ -1,12 +1,13 @@
 import React from "react";
-import { MenuItem } from "@material-ui/core";
+import {
+  MenuItem,
+  Avatar,
+  Box,
+  Link,
+  Grid,
+  makeStyles,
+} from "@material-ui/core";
 import ButtonAppBarCollapse from "./ButtonAppBarCollapse";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,34 +47,35 @@ const AppBarCollapse = () => {
   return (
     <div className={classes.root}>
       <ButtonAppBarCollapse>
-        <MenuItem >Home</MenuItem>
+        <MenuItem>Home</MenuItem>
         <MenuItem>Integration</MenuItem>
         <MenuItem>Update Account</MenuItem>
-        <MenuItem> <Avatar
+        <MenuItem>
+          {" "}
+          <Avatar
             className={classes.main_menu.avatar}
             alt="user 1"
             src="/images/user.png"
-          /> John Doe</MenuItem>
+          />{" "}
+          John Doe
+        </MenuItem>
       </ButtonAppBarCollapse>
       <Grid className={classes.buttonBar} id="appbar-collapse">
-        <Grid container className={classes.main_menu} >
-        
+        <Grid container className={classes.main_menu}>
           <Box mr={20} mt={1}>
-          <Link href="home">Home</Link>
-          <Link href="intergration">integration</Link>
-          <Link href="upgrade" className={classes.main_menu.active}>
-            Upgrade account
-          </Link>
-
+            <Link href="home">Home</Link>
+            <Link href="intergration">integration</Link>
+            <Link href="upgrade" className={classes.main_menu.active}>
+              Upgrade account
+            </Link>
           </Box>
-         <Avatar
+          <Avatar
             className={classes.main_menu.avatar}
             alt="user 1"
             src="/images/user.png"
           />
-         
+
           <a href="home">John Doe</a>
-          
         </Grid>
       </Grid>
     </div>

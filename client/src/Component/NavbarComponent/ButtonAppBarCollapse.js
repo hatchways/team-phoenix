@@ -1,7 +1,5 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Menu } from "@material-ui/core";
-import Icon from "@material-ui/core/Icon";
+import { Menu, Icon, withStyles } from "@material-ui/core";
 
 const styles = (theme) => ({
   buttonCollapse: {

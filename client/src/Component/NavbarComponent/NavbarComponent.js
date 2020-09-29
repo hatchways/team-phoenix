@@ -1,7 +1,5 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 import AppBarCollapse from "./AppBarCollapse";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -20,11 +18,9 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     color: "black",
   },
-  toggleDrawer: {},
-  appTitle: {},
 }));
 
-const ButtonAppBar = () => {
+const NavbarComponent = () => {
   const classes = useStyles();
   return (
     <AppBar position="fixed" className={classes.navigation}>
@@ -43,4 +39,4 @@ const ButtonAppBar = () => {
   );
 };
 
-export default ButtonAppBar;
+export default NavbarComponent;

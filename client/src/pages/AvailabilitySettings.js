@@ -4,15 +4,15 @@ import AvailabilityWidget from "../component/AvailabilityWidget";
 
 const AvailabilitySettings = () => {
   const handleFinish = (start, end, daysSelected) => {
-    let unique_url = localStorage.getItem("unique_url");
-    let Availability = {
+    const unique_url = localStorage.getItem("unique_url");
+    const Availability = {
       start_time: start,
       end_time: end,
       days: daysSelected,
     };
-    let token = localStorage.getItem("jwt_token");
+    const token = localStorage.getItem("jwt_token");
     const saveUserSetting = async () => {
-      let userId = localStorage.getItem("user_id");
+      const userId = localStorage.getItem("user_id");
       if (userId && unique_url) {
         const data = await fetch(`http://localhost:5000/user/${userId}`, {
           method: "POST",
@@ -21,8 +21,7 @@ const AvailabilitySettings = () => {
             token,
           }),
         });
-        let result = await data.json();
-        console.log(result);
+        const result = await data.json();
         if (result.success) {
           history.push("/dashboard");
         }
@@ -30,10 +29,12 @@ const AvailabilitySettings = () => {
     };
     saveUserSetting();
   };
-  let heading = "Set your availability";
   return (
     <React.Fragment>
-      <AvailabilityWidget heading={heading} handleFinish={handleFinish} />
+      <AvailabilityWidget
+        heading={"Set your availability"}
+        handleFinish={handleFinish}
+      />
     </React.Fragment>
   );
 };

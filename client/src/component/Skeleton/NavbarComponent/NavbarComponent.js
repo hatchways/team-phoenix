@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import AppBarCollapse from "./AppBarCollapse";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  AppBarCollapse,
+  IconButton,
+  Typography,
+  Toolbar,
+  AppBar,
+} from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     color: "black",
   },
-  toggleDrawer: {},
-  appTitle: {},
 }));
 
 const ButtonAppBar = (props) => {

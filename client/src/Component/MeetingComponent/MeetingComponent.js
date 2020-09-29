@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import Grid from "@material-ui/core/Grid";
-import Icon from "@material-ui/core/Icon";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { createMuiTheme } from "@material-ui/core/styles";
+import React from "react";
+import {
+  Button,
+  Grid,
+  Typography,
+  Avatar,
+  Paper,
+  Box,
+  Icon,
+  makeStyles,
+  ThemeProvider,
+  createMuiTheme,
+} from "@material-ui/core";
 import { grey, orange } from "@material-ui/core/colors";
-import { ThemeProvider } from "@material-ui/styles";
-import Paper from "@material-ui/core/Paper";
 import shadows from "@material-ui/core/styles/shadows";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 import GettingStartedButton from "../GettingStartedButton/GettingStartedButton";
-import Box from "@material-ui/core/Box";
-
-// import classNames from 'classnames/bind';
-// import styles from './submit-button.css';
-
-// let cx = classNames.bind(styles);
 
 const outerTheme = createMuiTheme({
   palette: {
@@ -38,11 +35,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: shadows[3],
     paddingBottom: theme.spacing(3),
   },
-  // tagBar:{
-  //   width: "100%",
-  //   height: "5px",
-  //   margin: "0px",
-  // },
+
   orange_background: {
     background: "orange",
     width: "100%",
@@ -89,13 +82,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MeetingComponent = () => {
-  const [state] = useState({
-    meeting: [
-      { duration: 15, type: "One-on-One" },
-      { duration: 30, type: "One-on-One" },
-      { duration: 45, type: "One-on-One" },
-    ],
-  });
+  let meeting = [
+    { duration: 15, type: "One-on-One" },
+    { duration: 30, type: "One-on-One" },
+    { duration: 45, type: "One-on-One" },
+  ];
 
   const classes = useStyles();
   return (
@@ -124,7 +115,7 @@ const MeetingComponent = () => {
       </Grid>
 
       <Grid className={classes.root} container spacing={4}>
-        {state.meeting.map((meeting, index) => {
+        {meeting.map((meeting, index) => {
           return (
             <Grid
               item
@@ -143,7 +134,7 @@ const MeetingComponent = () => {
                   </Grid>
                   <Grid className={classes.meeting_body}>
                     <Typography variant="h6">
-                      {meeting.duration} munites meeting
+                      {meeting.duration} minute meeting
                     </Typography>
                     <Typography variant="subtitle1" color="primary">
                       {meeting.type}

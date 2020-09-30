@@ -14,9 +14,12 @@ const SchedulerCalendar = (props) => {
         var current = moment.unix(element.start);
         var end = moment.unix(element.end);
         while (current <= end) {
-          var testDateUtc = moment.utc(current.format("YYYY-MM-DD HH:mm:ss"));
-          var localDate = moment(testDateUtc).local();
-          availableSlots.push(localDate.format("HH:mm"));
+          const testDateUtc = moment.utc(current.format("YYYY-MM-DD HH:mm:ss"));
+          const localDate = moment(testDateUtc).local();
+          const now = moment();
+          if (now < localDate) {
+            availableSlots.push(localDate.format("HH:mm"));
+          }
           current.add(meetingTime, "minutes");
         }
         if (freeSlotsArray.length > 0 && index !== freeSlotsArray.length - 1) {

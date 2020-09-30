@@ -3,7 +3,9 @@ import moment from "moment";
 import SchedulerWidget from "../component/SchedularWidget";
 const SchedulerCalendar = (props) => {
   const [freeSlots, setFreeSlots] = useState([]);
+  const [dateSelected, setDateSelected] = useState(new Date());
   const meetingTime = props.match.params.meetingTime;
+  console.log(dateSelected);
   useEffect(() => {
     let access_token = localStorage.getItem("access_token");
     let email = localStorage.getItem("email");
@@ -21,7 +23,9 @@ const SchedulerCalendar = (props) => {
     };
     const fetchData = async () => {
       const result = await fetch(
-        `http://localhost:5000/availability?day=1601460601`,
+        `http://localhost:5000/availability?day=${(
+          dateSelected.getTime() / 1000
+        ).toFixed(0)}`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -42,14 +46,19 @@ const SchedulerCalendar = (props) => {
     if (access_token && email) {
       fetchData();
     }
-  }, [meetingTime]);
+  }, [meetingTime, dateSelected]);
+  const handleOnChangeCalendar = (date) => {
+    setDateSelected(date);
+  };
   return (
     <React.Fragment>
       <SchedulerWidget
         name="John Doe"
-        meetingType={`${60} min meeting`}
-        time={`${60} min`}
+        meetingType={`${meetingTime} min meeting`}
+        time={`${meetingTime} min`}
         availableSlots={freeSlots}
+        handleOnChangeCalendar={handleOnChangeCalendar}
+        dateSelected={dateSelected}
       />
     </React.Fragment>
   );

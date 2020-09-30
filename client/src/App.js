@@ -40,7 +40,7 @@ function App() {
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
           <Route
-            path="/schedule-calendar"
+            path="/schedule-calendar/:meetingTime"
             exact
             component={SchedulerCalendar}
           />

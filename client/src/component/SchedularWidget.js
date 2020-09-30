@@ -2,28 +2,35 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Calendar, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import clock from "../assets/clock.png";
-import { Paper, Box, Typography, Button } from "@material-ui/core/";
+import { Paper, Box, Typography, Button, Icon } from "@material-ui/core/";
 const useStyles = makeStyles((theme) => ({
-  forPaper: {
+  paper: {
     width: "80%",
     height: "80%",
   },
-  forContainerBox: {
+  containerBox: {
     width: "100%",
     height: "100%",
   },
-  forInnerContainer: {
+  innerContainer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
   },
-  forName: {
+  personName: {
     color: "#9e9e9e",
   },
-  forImg: { width: "1.5rem" },
   forDatePicker: { width: "20%" },
+  freeSlots: {
+    width: "30%",
+    display: "flex",
+    justifyContent: "center",
+  },
+  scrollView: {
+    maxHeight: "70%",
+    overflow: "auto",
+  },
 }));
 const SchedularWidget = (props) => {
   const classes = useStyles();
@@ -52,9 +59,9 @@ const SchedularWidget = (props) => {
     "Saturday",
   ];
   return (
-    <Box className={classes.forContainerBox}>
-      <Box className={classes.forInnerContainer}>
-        <Paper className={classes.forPaper} elevation={3}>
+    <Box className={classes.containerBox}>
+      <Box className={classes.innerContainer}>
+        <Paper className={classes.paper} elevation={3}>
           <Box display="flex" flexDirection="row" height="100%">
             <Box
               color="grey.300"
@@ -65,7 +72,7 @@ const SchedularWidget = (props) => {
               <Box ml={3} mt={4} color="black">
                 <Typography
                   variant="body2"
-                  className={classes.forName}
+                  className={classes.personName}
                   gutterBottom
                 >
                   {props.name}
@@ -73,10 +80,11 @@ const SchedularWidget = (props) => {
                 <Typography variant="h5" gutterBottom>
                   {props.meetingType}
                 </Typography>
-                <Typography variant="h6">
-                  <img src={clock} alt="clock" className={classes.forImg} />
-                  {props.time}
-                </Typography>
+                <Box display="flex">
+                  {" "}
+                  <Icon color="disabled">alarm</Icon>
+                  <Typography variant="h6">{props.time}</Typography>
+                </Box>
               </Box>
             </Box>
             <Box ml={4}>
@@ -90,17 +98,36 @@ const SchedularWidget = (props) => {
                 </MuiPickersUtilsProvider>
               </Box>
             </Box>
-            <Box
-              mt={4}
-              ml={3}
-              width="30%"
-              display="flex"
-              justifyContent="center"
-            >
-              <Box>
-                <Typography>{`${days[value.getDay()]}, ${
-                  monthNames[value.getMonth()]
-                } ${value.getDate()}`}</Typography>
+            <Box className={classes.freeSlots} mt={4} ml={4}>
+              <Box display="flex" flexDirection="column">
+                <Box mb={2}>
+                  <Typography>{`${days[value.getDay()]}, ${
+                    monthNames[value.getMonth()]
+                  } ${value.getDate()}`}</Typography>
+                </Box>
+                <Paper className={classes.scrollView}>
+                  {props.availableSlots.map((curr, index) => {
+                    return (
+                      <Box
+                        key={index}
+                        display="flex"
+                        flexDirection="row"
+                        mt={1}
+                      >
+                        <Box mr={1}>
+                          <Button variant="outlined" color="primary">
+                            {curr}
+                          </Button>
+                        </Box>
+                        <Box>
+                          <Button variant="outlined" color="primary">
+                            Confirm
+                          </Button>
+                        </Box>
+                      </Box>
+                    );
+                  })}
+                </Paper>
               </Box>
             </Box>
           </Box>

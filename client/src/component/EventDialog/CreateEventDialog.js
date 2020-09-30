@@ -6,9 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
@@ -63,8 +61,9 @@ export default function MaxWidthDialog(props) {
   };
 
   const createEvent = (event) => {
+    console.log("SSSSS");
     fetch(
-      "http://localhost:5000/meeting/5f69713107ad65349c8ad946/meeting/one-on-one/company/45/",
+      "http://localhost:5000/meeting/5f69713107ad65349c8ad946/meeting/one-on-one/ShemaLandry/45/",
       {
         method: "GET",
         headers: { "Content-type": "application/json" },
@@ -155,7 +154,12 @@ export default function MaxWidthDialog(props) {
                 </RadioGroup>
               </FormControl>
 
-              <Button onClick={handleClose} variant="contained" color="primary">
+              <Button
+                onClick={handleClose}
+                variant="contained"
+                color="primary"
+                type="submit"
+              >
                 Create event
               </Button>
             </form>
@@ -167,8 +171,6 @@ export default function MaxWidthDialog(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
-     
     </div>
   );
 }

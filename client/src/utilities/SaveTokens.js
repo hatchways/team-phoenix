@@ -18,8 +18,6 @@ export const saveUserDataInLocalStorage = (urlParams) => {
   }
   if (token && email && user_id && jwt_token) {
     localStorage.setItem("access_token", token);
-    localStorage.setItem("email", email);
-    localStorage.setItem("user_id", user_id);
     localStorage.setItem("jwt_token", jwt_token);
     return { user_id, token, email, jwt_token };
   } else {

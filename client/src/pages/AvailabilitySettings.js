@@ -14,12 +14,12 @@ const AvailabilitySettings = () => {
       0
     );
     let hours = d.getUTCHours();
-    let mintue = d.getUTCMinutes();
+    let minute = d.getUTCMinutes();
     if (hours < 10) {
       hours = "0" + hours;
     }
-    if (mintue < 10) {
-      mintue = "0" + mintue;
+    if (minute < 10) {
+      minute = "0" + minute;
     }
     return `${hours}:${mintue}`;
   };

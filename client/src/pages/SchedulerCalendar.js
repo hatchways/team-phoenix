@@ -5,18 +5,20 @@ const SchedulerCalendar = (props) => {
   const [freeSlots, setFreeSlots] = useState([]);
   const [dateSelected, setDateSelected] = useState(new Date());
   const meetingTime = props.match.params.meetingTime;
-  console.log(dateSelected);
   useEffect(() => {
     let access_token = localStorage.getItem("access_token");
     let email = localStorage.getItem("email");
     const getAvailableSlots = (freeSlotsArray) => {
       const availableSlots = [];
-      freeSlotsArray.forEach((element) => {
-        var current = moment.unix(element.start);
-        var end = moment.unix(element.end);
+      freeSlotsArray.forEach((element, index) => {
+        var current = moment.unix(element.start).utc();
+        var end = moment.unix(element.end).utc();
         while (current <= end) {
           availableSlots.push(current.format("HH:mm"));
           current.add(meetingTime, "minutes");
+        }
+        if (freeSlotsArray.length > 0 && index !== freeSlotsArray.length - 1) {
+          availableSlots.pop();
         }
       });
       return availableSlots;

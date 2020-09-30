@@ -3,11 +3,31 @@ import history from "../history";
 import AvailabilityWidget from "../component/AvailabilityWidget";
 
 const AvailabilitySettings = () => {
+  const convertToUtc = (time) => {
+    const now = new Date();
+    let d = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      time.slice(0, 2),
+      time.slice(3),
+      0
+    );
+    let hours = d.getUTCHours();
+    let mintue = d.getUTCMinutes();
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (mintue < 10) {
+      mintue = "0" + mintue;
+    }
+    return `${hours}:${mintue}`;
+  };
   const handleFinish = (start, end, daysSelected) => {
     const unique_url = localStorage.getItem("unique_url");
     const Availability = {
-      start_time: start,
-      end_time: end,
+      start_time: convertToUtc(start),
+      end_time: convertToUtc(end),
       days: daysSelected,
     };
     const token = localStorage.getItem("jwt_token");

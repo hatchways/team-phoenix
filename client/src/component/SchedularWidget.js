@@ -96,6 +96,8 @@ const SchedularWidget = (props) => {
                   <Calendar
                     date={value}
                     onChange={props.handleOnChangeCalendar}
+                    disablePast
+                    shouldDisableDate={props.disableWeekends}
                   />
                   <Button>Coordinated Universal Time 00:00</Button>
                 </MuiPickersUtilsProvider>

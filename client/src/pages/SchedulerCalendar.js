@@ -38,7 +38,6 @@ const SchedulerCalendar = (props) => {
 
       if (obj.result) {
         setFreeSlots(getAvailableSlots(obj.result));
-        console.log("SSSS");
       } else {
         alert(obj.error);
       }
@@ -50,6 +49,9 @@ const SchedulerCalendar = (props) => {
   const handleOnChangeCalendar = (date) => {
     setDateSelected(date);
   };
+  const disableWeekends = (dateSelected) => {
+    return dateSelected.getDay() === 0 || dateSelected.getDay() === 6;
+  };
   return (
     <React.Fragment>
       <SchedulerWidget
@@ -59,6 +61,7 @@ const SchedulerCalendar = (props) => {
         availableSlots={freeSlots}
         handleOnChangeCalendar={handleOnChangeCalendar}
         dateSelected={dateSelected}
+        disableWeekends={disableWeekends}
       />
     </React.Fragment>
   );

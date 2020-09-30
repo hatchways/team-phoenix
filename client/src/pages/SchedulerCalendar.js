@@ -11,10 +11,12 @@ const SchedulerCalendar = (props) => {
     const getAvailableSlots = (freeSlotsArray) => {
       const availableSlots = [];
       freeSlotsArray.forEach((element, index) => {
-        var current = moment.unix(element.start).utc();
-        var end = moment.unix(element.end).utc();
+        var current = moment.unix(element.start);
+        var end = moment.unix(element.end);
         while (current <= end) {
-          availableSlots.push(current.format("HH:mm"));
+          var testDateUtc = moment.utc(current.format("YYYY-MM-DD HH:mm:ss"));
+          var localDate = moment(testDateUtc).local();
+          availableSlots.push(localDate.format("HH:mm"));
           current.add(meetingTime, "minutes");
         }
         if (freeSlotsArray.length > 0 && index !== freeSlotsArray.length - 1) {

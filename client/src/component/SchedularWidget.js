@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Calendar, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SchedularWidget = (props) => {
   const classes = useStyles();
-  const [value] = useState(new Date());
+  const value = props.dateSelected;
   const monthNames = [
     "January",
     "February",
@@ -93,7 +93,10 @@ const SchedularWidget = (props) => {
               </Box>
               <Box>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Calendar date={value} />
+                  <Calendar
+                    date={value}
+                    onChange={props.handleOnChangeCalendar}
+                  />
                   <Button>Coordinated Universal Time 00:00</Button>
                 </MuiPickersUtilsProvider>
               </Box>

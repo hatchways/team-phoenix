@@ -1,11 +1,6 @@
 from flask import jsonify, Blueprint, redirect, url_for, session, request, make_response
 from models.user import User
-import jwt
 import json
-
-
-def create_jwt_token(user_id, user_name, app_secret):
-    return jwt.encode({"user_id": str(user_id), 'username': user_name, "role": "regular_user"}, app_secret, algorithm='HS256').decode('utf-8')
 
 
 def create_after_Auth_blueprint(gauth, google, app_secret):
@@ -40,17 +35,13 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         if type(db_user) is dict:
             user_id = db_user["_id"]
             resonse = make_response(
-                redirect("http://localhost:3000/after-login?token=" +
-                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
+                redirect("http://localhost:3000/dashboard?access_token=" +
+                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
         else:
             user_id = db_user.inserted_id
             resonse = make_response(
-                redirect("http://localhost:3000/profile_settings?token=" +
-                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email))
-        jwt_token = create_jwt_token(
-            user_id, g_user.name, app_secret)
+                redirect("http://localhost:3000/profile_settings?access_token=" +
+                         token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
         session.permanent = True
-        resonse.set_cookie("token", jwt_token)
-        resonse.set_cookie("user_id", str(user_id))
         return resonse
     return after_auth_handler

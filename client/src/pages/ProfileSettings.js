@@ -1,29 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProfileWidget from "../component/ProfileWidget";
 import history from "../history";
-const saveUserDataInLocalStorage = () => {
-  var urlParams = new URLSearchParams(window.location.search);
-  let token = "";
-  let email = "";
-  let user_id = "";
-  if (urlParams.has("token")) {
-    token = urlParams.get("token");
-  }
-  if (urlParams.has("email")) {
-    email = urlParams.get("email");
-  }
-  if (urlParams.has("user_id")) {
-    user_id = urlParams.get("user_id");
-  }
-  if (token && email && user_id) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("email", email);
-    localStorage.setItem("user_id", user_id);
-    return { user_id, token, email };
-  } else {
-    return null;
-  }
-};
+import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
 const ProfileSettings = () => {
   let heading = "Welcome to CalendApp!";
   let url_prompt = "Create your CalendApp URL:";
@@ -39,23 +17,9 @@ const ProfileSettings = () => {
   };
 
   const handleContinue = () => {
-    const save_url = async () => {
-      const data = await fetch(
-        `http://localhost:5000/user/${userdata.user_id}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            unique_url: `calendapp.com/${term}`,
-          }),
-        }
-      );
-      let result = await data.json();
-      if (result.success) {
-        history.push("/confirm");
-      }
-    };
     if (result_for_url === "available") {
-      save_url();
+      localStorage.setItem("unique_url", `calendapp.com/${term}`);
+      history.push("/confirm");
     }
   };
   useEffect(() => {

@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Grid } from "@material-ui/core/";
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, Grid, makeStyles } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   forContinueButton: {
@@ -26,7 +25,7 @@ const ProfileFooter = (props) => {
       />
     );
   }
-  return <FooterB />;
+  return <FooterB handleFinish={props.handleFinish} />;
 };
 
 const FooterA = (props) => {
@@ -70,6 +69,7 @@ const FooterB = (props) => {
         color="primary"
         size="large"
         type="submit"
+        onClick={props.handleFinish}
       >
         Finish
       </Button>

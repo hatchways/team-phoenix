@@ -1,6 +1,4 @@
 import React from "react";
-
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Paper,
   Box,
@@ -11,6 +9,7 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
+  makeStyles,
 } from "@material-ui/core/";
 
 import logo from "../assets/logo.png";
@@ -18,12 +17,12 @@ import ProfileHeader from "./profile/Header";
 import ProfileFooter from "./profile/Footer";
 
 const useStyles = makeStyles((theme) => ({
-  forPaper: {
+  paper: {
     margin: theme.spacing(2),
     width: theme.spacing(75),
     height: theme.spacing(55),
   },
-  forOuterBox: {
+  outerBox: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -46,9 +45,9 @@ const ConfirmWidget = (props) => {
   const classes = useStyles();
   const string1 = "Here is how CalendApp will work with " + props.email + ":";
   return (
-    <Box className={classes.forOuterBox}>
+    <Box className={classes.outerBox}>
       <img alt="logo" src={logo}></img>
-      <Paper className={classes.forPaper} elevation={3}>
+      <Paper className={classes.paper} elevation={3}>
         <Box m={3}>
           <ProfileHeader percent={50} heading={props.heading} />
         </Box>

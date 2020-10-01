@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Paper,
   Box,
@@ -7,17 +6,18 @@ import {
   Link,
   Button,
   Avatar,
+  makeStyles,
 } from "@material-ui/core/";
 import logo from "../assets/logo.png";
 import signInBtn from "../assets/signInBtn.svg";
 import { Link as RouterLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
-  forPaper: {
+  paper: {
     margin: theme.spacing(2),
     width: theme.spacing(50),
     height: theme.spacing(55),
   },
-  forOuterBox: {
+  outerBox: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -32,9 +32,9 @@ const SecondAuthWidget = (props) => {
   let prompt = greatings.prompt;
   let email = greatings.email;
   return (
-    <Box className={classes.forOuterBox}>
+    <Box className={classes.outerBox}>
       <img alt="logo" src={logo}></img>
-      <Paper className={classes.forPaper} variant="outlined" square>
+      <Paper className={classes.paper} variant="outlined" square>
         <Box my={4}>
           <Typography align="center" variant="h6">
             {greatings.headerText}! <br /> {email ? email : null}

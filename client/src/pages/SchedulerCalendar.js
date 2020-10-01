@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import SchedulerWidget from "../component/SchedularWidget";
+import Context from "../contexts/CalendStore";
 const SchedulerCalendar = (props) => {
   const [freeSlots, setFreeSlots] = useState([]);
   const [dateSelected, setDateSelected] = useState(new Date());
   const meetingTime = props.match.params.meetingTime;
+  const { email } = useContext(Context);
   useEffect(() => {
     let access_token = localStorage.getItem("access_token");
-    let email = localStorage.getItem("email");
     const getAvailableSlots = (freeSlotsArray) => {
       const availableSlots = [];
       freeSlotsArray.forEach((element, index) => {
@@ -22,7 +23,7 @@ const SchedulerCalendar = (props) => {
           }
           current.add(meetingTime, "minutes");
         }
-        if (freeSlotsArray.length > 0 && index !== freeSlotsArray.length - 1) {
+        if (freeSlotsArray.length > 0) {
           availableSlots.pop();
         }
       });
@@ -52,7 +53,7 @@ const SchedulerCalendar = (props) => {
     if (access_token && email) {
       fetchData();
     }
-  }, [meetingTime, dateSelected]);
+  }, [meetingTime, dateSelected, email]);
   const handleOnChangeCalendar = (date) => {
     setDateSelected(date);
   };

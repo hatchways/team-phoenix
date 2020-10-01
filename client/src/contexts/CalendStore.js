@@ -7,6 +7,8 @@ export const CalendStore = (props) => {
   const [email, setEmail] = useState("");
   const [propsForAuthWidget, setPropsForAuthWidget] = useState({});
   const [fromSignUp, setFromSignUp] = useState(true);
+  const [uniqueUrl, setUniqueUrl] = useState("");
+  const [userId, setUserId] = useState("");
   let greetingsForSignUp = {
     headerText: `Hi ${email}`,
     prompt: `The easiest way for you to sign up is with Google.This will automatically 
@@ -29,6 +31,10 @@ export const CalendStore = (props) => {
     email,
     fromSignUp,
     setFromSignUp,
+    uniqueUrl,
+    setUniqueUrl,
+    setUserId,
+    userId,
   };
   return (
     <Context.Provider value={intialState}>{props.children}</Context.Provider>

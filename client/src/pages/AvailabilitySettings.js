@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import history from "../history";
 import AvailabilityWidget from "../component/AvailabilityWidget";
+import Context from "../contexts/CalendStore";
 
 const AvailabilitySettings = () => {
+  const { uniqueUrl, userId } = useContext(Context);
   const convertToUtc = (time) => {
     const now = new Date();
     let d = new Date(
@@ -24,7 +26,6 @@ const AvailabilitySettings = () => {
     return `${hours}:${minute}`;
   };
   const handleFinish = (start, end, daysSelected) => {
-    const unique_url = localStorage.getItem("unique_url");
     const Availability = {
       start_time: convertToUtc(start),
       end_time: convertToUtc(end),
@@ -32,12 +33,11 @@ const AvailabilitySettings = () => {
     };
     const token = localStorage.getItem("jwt_token");
     const saveUserSetting = async () => {
-      const userId = localStorage.getItem("user_id");
-      if (userId && unique_url) {
+      if (userId && uniqueUrl) {
         const data = await fetch(`http://localhost:5000/user/${userId}`, {
           method: "POST",
           body: JSON.stringify({
-            data: { Availability, unique_url },
+            data: { Availability, uniqueUrl },
             token,
           }),
         });

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ConfirmWidget from "../component/ConfirmWidget";
+import Context from "../contexts/CalendStore";
 import history from "../history";
 const ConfirmSettings = () => {
+  const { email } = useContext(Context);
   let heading = "Your google calendar is connected!";
-  let email = localStorage.getItem("email");
   const handleContinue = () => {
     history.push("/availability");
   };

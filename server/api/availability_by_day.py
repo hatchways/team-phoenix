@@ -86,7 +86,7 @@ def find_slots(busy_time_array, day_start, day_end):
                 {"start": busy_time_array[counter-1]["end"], "end": day_end})
     else:
         availabile_slots.append({"start": day_start, "end": day_end})
-
+    print(availabile_slots)
     return availabile_slots
 
 

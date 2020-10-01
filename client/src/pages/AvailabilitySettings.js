@@ -21,7 +21,7 @@ const AvailabilitySettings = () => {
     if (minute < 10) {
       minute = "0" + minute;
     }
-    return `${hours}:${mintue}`;
+    return `${hours}:${minute}`;
   };
   const handleFinish = (start, end, daysSelected) => {
     const unique_url = localStorage.getItem("unique_url");

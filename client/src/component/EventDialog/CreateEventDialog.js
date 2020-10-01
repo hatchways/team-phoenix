@@ -61,12 +61,23 @@ export default function MaxWidthDialog(props) {
   };
 
   const createEvent = (event) => {
+    
+    let eventobj = 
+      {
+        "user_id":"5f69713107ad65349c8ad946",
+        "name":state.event_name,
+        "event_type":state.type,
+        "description":state.description,
+        "duration":state.duration
+    }
+    
     console.log("SSSSS");
     fetch(
-      "http://localhost:5000/meeting/5f69713107ad65349c8ad946/meeting/one-on-one/ShemaLandry/45/",
+      "http://localhost:5000/meeting",
       {
-        method: "GET",
+        method: "POST",
         headers: { "Content-type": "application/json" },
+        body: JSON.stringify(eventobj)
       }
     )
       .then((r) => r.json())

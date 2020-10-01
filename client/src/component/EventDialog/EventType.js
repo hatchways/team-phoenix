@@ -147,6 +147,7 @@ const EventType = () => {
             <Typography variant="h6">Group</Typography>
             <Typography variant="body1" color="secondary">
               Let multiple invitees meet with you at one time.
+             user_id:--- {localStorage.getItem("email")}
             </Typography>
           </Grid>
           <Grid item sm>

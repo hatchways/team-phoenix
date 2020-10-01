@@ -1,36 +1,30 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import AuthWidget from "../component/AuthWidget";
 import history from "../history";
-
+import Context from "../contexts/CalendStore";
 const LogIn = () => {
-  let heading = "Log into your account";
-  let btnText = "Continue";
-  const handleSubmit = (e, email) => {
-    e.preventDefault();
-    if (email.includes("gmail")) {
-      let greetings = {
-        headerText: `Welcome back`,
-        email,
-        noGoogleText: "Don't have an account?Sign up",
-        route: "sign-up",
-      };
-      localStorage.setItem("greetings", JSON.stringify(greetings));
-      history.push("/auth-with-google");
-    } else {
-      alert("Right now, We only support gmail. Please use gmail.");
-    }
-  };
-  return (
-    <React.Fragment>
-      <AuthWidget
-        heading={heading}
-        btnText={btnText}
-        onSubmitHandler={handleSubmit}
-        linkText="Sign Up"
-        footerText="Don't have an account?"
-        route="sign-up"
-      />
-    </React.Fragment>
-  );
+  const { setEmail, setPropsForAuthWidget } = useContext(Context);
+  useEffect(() => {
+    const handleSubmit = (e, email) => {
+      e.preventDefault();
+      if (email.includes("gmail")) {
+        setEmail(email);
+        history.push("/auth-with-google/sign-up");
+      } else {
+        alert("Right now, We only support gmail. Please use gmail.");
+      }
+    };
+    let propsForAuthWidget = {
+      heading: "Log into your account",
+      btnText: "Continue",
+      onSubmitHandler: handleSubmit,
+      linkText: "Sign Up",
+      footerText: "Don't have an account?",
+      route: "sign-up",
+    };
+    setPropsForAuthWidget(propsForAuthWidget);
+  }, [setEmail, setPropsForAuthWidget]);
+
+  return <AuthWidget />;
 };
 export default LogIn;

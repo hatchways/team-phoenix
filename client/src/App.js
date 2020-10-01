@@ -12,7 +12,7 @@ import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
 import DashBoard from "./pages/DashBoard";
 import SchedulerCalendar from "./pages/SchedulerCalendar";
-
+import { CalendStore } from "./contexts/CalendStore";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -29,25 +29,31 @@ const theme = createMuiTheme({
 });
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/" exact component={SignUp} />
-          <Route path="/auth-with-google" exact component={Google_Auth} />
-          <Route path="/sign-up" exact component={SignUp} />
-          <Route path="/login-in" exact component={LogIn} />
-          <Route path="/profile_settings" exact component={ProfileSettings} />
-          <Route path="/availability" exact component={AvailabilitySettings} />
-          <Route path="/confirm" exact component={ConfirmSettings} />
-          <Route
-            path="/schedule-calendar/:meetingTime"
-            exact
-            component={SchedulerCalendar}
-          />
-          <Route path="/dashboard" exact component={DashBoard} />
-        </Switch>
-      </Router>
-    </MuiThemeProvider>
+    <CalendStore>
+      <MuiThemeProvider theme={theme}>
+        <Router history={history}>
+          <Switch>
+            <Route path="/" exact component={SignUp} />
+            <Route path="/auth-with-google/:id" exact component={Google_Auth} />
+            <Route path="/sign-up" exact component={SignUp} />
+            <Route path="/login-in" exact component={LogIn} />
+            <Route path="/profile_settings" exact component={ProfileSettings} />
+            <Route
+              path="/availability"
+              exact
+              component={AvailabilitySettings}
+            />
+            <Route path="/confirm" exact component={ConfirmSettings} />
+            <Route
+              path="/schedule-calendar/:meetingTime"
+              exact
+              component={SchedulerCalendar}
+            />
+            <Route path="/dashboard" exact component={DashBoard} />
+          </Switch>
+        </Router>
+      </MuiThemeProvider>
+    </CalendStore>
   );
 }
 

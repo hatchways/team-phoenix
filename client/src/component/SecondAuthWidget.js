@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Paper,
   Box,
@@ -11,6 +11,7 @@ import {
 import logo from "../assets/logo.png";
 import signInBtn from "../assets/signInBtn.svg";
 import { Link as RouterLink } from "react-router-dom";
+import Context from "../contexts/CalendStore";
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(2),
@@ -27,7 +28,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SecondAuthWidget = (props) => {
   const classes = useStyles();
-  let greatings = JSON.parse(localStorage.getItem("greetings"));
+  let greatings = {};
+  const data = useContext(Context);
+  if (data.fromSignUp) {
+    greatings = data.greetingsForSignUp;
+  } else {
+    greatings = data.greetingsForLogIn;
+  }
   const foooter = greatings.noGoogleText.split("?");
   let prompt = greatings.prompt;
   let email = greatings.email;
@@ -47,7 +54,11 @@ const SecondAuthWidget = (props) => {
         </Box>
         <Box display="flex" justifyContent="center">
           <Button
-            onClick={props.onClickHandler}
+            onClick={() =>
+              window.location.assign(
+                "http://127.0.0.1:5000/sign-in-with-google"
+              )
+            }
             variant="contained"
             color="primary"
             startIcon={<Avatar src={signInBtn} />}
@@ -63,7 +74,7 @@ const SecondAuthWidget = (props) => {
             <Link
               component={RouterLink}
               color="primary"
-              to={greatings.route}
+              to={`/${greatings.route}`}
               align="center"
             >
               {foooter[1]}

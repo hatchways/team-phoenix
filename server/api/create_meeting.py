@@ -11,10 +11,10 @@ create_meeting_blueprint = Blueprint('create_meeting', __name__)
 
 
 @create_meeting_blueprint.route('/meeting', methods=["POST"])
- """
-   This functin accepted meeting details from post request
-   and saves them in the db.
-    """
+
+#    This functin accepted meeting details from post request
+#    and saves them in the db.
+    
 def add_meeting():
    
     output = dict()

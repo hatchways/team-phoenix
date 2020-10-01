@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MaxWidthDialog(props) {
   const [state, setState] = useState({
-    user_id: "",
+    user_id: localStorage.getItem("user_id"),
     event_name: "",
     type: localStorage.getItem("type"),
     description: "",
@@ -64,7 +64,7 @@ export default function MaxWidthDialog(props) {
     
     let eventobj = 
       {
-        "user_id":"5f69713107ad65349c8ad946",
+        "user_id":state.user_id,
         "name":state.event_name,
         "event_type":state.type,
         "description":state.description,

@@ -40,9 +40,9 @@ export default function MaxWidthDialog(props) {
     setSelectedValue(event.target.value);
   };
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [fullWidth] = React.useState(true);
-  const [maxWidth] = React.useState("lg");
+  const [open, setOpen] = useState(false);
+  const [fullWidth] = useState(true);
+  const [maxWidth] = useState("lg");
 
   const handleClickOpen = () => {
     setOpen(true);

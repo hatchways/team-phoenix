@@ -11,15 +11,14 @@ create_meeting_blueprint = Blueprint('create_meeting', __name__)
 
 
 @create_meeting_blueprint.route('/meeting', methods=["POST"])
- """
-   This functin accepted meeting details from post request
-   and saves them in the db.
-    """
 def add_meeting():
-   
+    """
+    This functin accepted meeting details from post request
+    and saves them in the db.
+    """
     output = dict()
     status = 422
-   
+
     data = json.loads(request.data.decode('utf-8'))
     if not data:
         return jsonify({"error": "Missing data to save"}), status
@@ -30,7 +29,7 @@ def add_meeting():
         description = data['description']
         duration = data['duration']
 
-        newMeeting = Meeting(user_id,name,event_type,description,duration)
+        newMeeting = Meeting(user_id, name, event_type, description, duration)
         result = Meeting.save(newMeeting)
         if result:
             output["success"] = f"meeting {data} saved"

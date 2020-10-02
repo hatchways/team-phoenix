@@ -11,9 +11,9 @@ import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
 import EventType from "./components/EventDialog/EventType";
-
 import DashBoard from "./pages/DashBoard";
 import Upgrade from "./pages/Upgrade";
+import NavBar from "./components/NavbarComponent/NavbarComponent";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -29,8 +29,18 @@ const theme = createMuiTheme({
   },
 });
 function App() {
+  let location = window.location;
+  let DisplayNavBar = location.pathname !== "/" &&
+    location.pathname !== "/auth-with-google" &&
+    location.pathname !== "/sign-up" &&
+    location.pathname !== "/login-in" &&
+    location.pathname !== "/profile_settings" &&
+    location.pathname !== "/availability" &&
+    location.pathname !== "/confirm" && <NavBar />;
+
   return (
     <MuiThemeProvider theme={theme}>
+      {DisplayNavBar}
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={SignUp} />

@@ -39,25 +39,36 @@ const UpgradeWidget = (props) => {
           </Box>
         </Box>
         <Box display="flex" justifyContent="center" mt={4}>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={props.handleOnclick}
+          >
             Upgrade
           </Button>
         </Box>
-        <Box mt={10} borderTop={1}>
-          <Box display="flex">
-            <CheckIcon color="primary" />
-            <Typography variant="body1">Unlimited meetings </Typography>
-          </Box>
-          <Box display="flex">
-            <CheckIcon color="primary" />
-            <Typography variant="body1">Group meetings </Typography>
-          </Box>
-          {!bool ? (
-            <Box display="flex">
+        <Box mt={10} borderTop={1} color="grey.300">
+          <Box
+            color="black"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <Box display="flex" mt={2}>
+              <CheckIcon color="primary" />
+              <Typography variant="body1">Unlimited meetings </Typography>
+            </Box>
+            <Box display="flex" mt={2}>
               <CheckIcon color="primary" />
               <Typography variant="body1">Group meetings </Typography>
             </Box>
-          ) : null}
+            {!bool ? (
+              <Box display="flex" mt={2}>
+                <CheckIcon color="primary" />
+                <Typography variant="body1">Group meetings </Typography>
+              </Box>
+            ) : null}
+          </Box>
         </Box>
       </Paper>
     </Box>

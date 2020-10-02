@@ -1,11 +1,11 @@
 import React from "react";
-import EventBodyComponent from "../components/EventBodyComponent/EventBodyComponent";
+import HomePage from "../components/EventBodyComponent/HomePage";
 import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
 const DashBoard = () => {
   saveUserDataInLocalStorage();
   return (
     <div>
-      <EventBodyComponent />
+      <HomePage />
     </div>
   );
 };

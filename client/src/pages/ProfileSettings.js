@@ -13,8 +13,7 @@ const ProfileSettings = () => {
   const [result_for_url, set_result_for_url] = useState("Unavailable");
   const userdata = saveUserDataInLocalStorage();
   const { setUniqueUrl, setUserId, setEmail } = useContext(Context);
-  setUserId(userdata.user_id);
-  setEmail(userdata.email);
+
   const handleSkipbtn = () => {
     history.push("/confirm");
   };
@@ -26,6 +25,8 @@ const ProfileSettings = () => {
     }
   };
   useEffect(() => {
+    setUserId(userdata.user_id);
+    setEmail(userdata.email);
     const search = async () => {
       const data = await fetch(
         `http://localhost:5000/user/123/is_unique?url=calendapp.com/${term}`
@@ -47,7 +48,7 @@ const ProfileSettings = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [term]);
+  }, [term, setUserId, setEmail, userdata]);
   return (
     <React.Fragment>
       {userdata ? (

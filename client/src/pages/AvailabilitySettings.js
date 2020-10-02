@@ -26,7 +26,7 @@ const AvailabilitySettings = () => {
     return `${hours}:${minute}`;
   };
   const handleFinish = (start, end, daysSelected) => {
-    const Availability = {
+    const availability = {
       start_time: convertToUtc(start),
       end_time: convertToUtc(end),
       days: daysSelected,
@@ -37,7 +37,7 @@ const AvailabilitySettings = () => {
         const data = await fetch(`http://localhost:5000/user/${userId}`, {
           method: "POST",
           body: JSON.stringify({
-            data: { Availability, uniqueUrl },
+            data: { availability, uniqueUrl },
             token,
           }),
         });

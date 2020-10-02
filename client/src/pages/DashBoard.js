@@ -6,8 +6,10 @@ const DashBoard = () => {
   const userdata = saveUserDataInLocalStorage();
   const { setUserId, setEmail } = useContext(Context);
   useEffect(() => {
-    setUserId(userdata.user_id);
-    setEmail(userdata.email);
+    if (userdata) {
+      setUserId(userdata.user_id);
+      setEmail(userdata.email);
+    }
   });
   return (
     <div>

@@ -60,7 +60,7 @@ class User(BaseModel):
         try:
             result = cls.collection.find_one({"email": email})
             if result:
-                return result["Availability"]["start_time"], result["Availability"]["end_time"]
+                return result["availability"]["start_time"], result["availability"]["end_time"]
             else:
                 return None
         except OperationFailure as e:

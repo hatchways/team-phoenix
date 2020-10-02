@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core/";
-import UpgradeWidget from "../component/UpgradeWidget";
+import UpgradeWidget from "../components/UpgradeWidget";
 const Upgrade = () => {
   const handleOnclick = async (planType) => {
     const result = await fetch(

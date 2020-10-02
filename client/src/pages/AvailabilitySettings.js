@@ -1,6 +1,6 @@
 import React from "react";
 import history from "../history";
-import AvailabilityWidget from "../component/AvailabilityWidget";
+import AvailabilityWidget from "../components/AvailabilityWidget";
 
 const AvailabilitySettings = () => {
   const handleFinish = (start, end, daysSelected) => {

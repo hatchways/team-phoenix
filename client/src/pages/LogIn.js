@@ -1,5 +1,5 @@
 import React from "react";
-import AuthWidget from "../component/AuthWidget";
+import AuthWidget from "../components/AuthWidget";
 import history from "../history";
 
 const LogIn = () => {

@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {
   createMuiTheme,
-  withStyles,
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core/styles";
@@ -146,13 +145,12 @@ const EventType = () => {
           <Grid item className="icon_circle" sm>
             <Typography variant="h6">Group</Typography>
             <Typography variant="body1" color="secondary">
-              Let multiple invitees meet with you at one time.
-             user_id:--- {localStorage.getItem("email")}
+              Let multiple invitees meet with you at one time. user_id:---{" "}
+              {localStorage.getItem("email")}
             </Typography>
           </Grid>
           <Grid item sm>
             <Grid container item justify="flex-end">
-            
               <CreateEventDialog type="group" />
             </Grid>
           </Grid>

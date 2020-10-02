@@ -10,7 +10,7 @@ import Google_Auth from "./pages/Google_Auth";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
-import EventType from "./component/EventDialog/EventType";
+import EventType from "./components/EventDialog/EventType";
 
 import DashBoard from "./pages/DashBoard";
 const theme = createMuiTheme({
@@ -39,7 +39,7 @@ function App() {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
-          
+
           <Route path="/event" exact component={EventType} />
           <Route path="/dashboard" exact component={DashBoard} />
         </Switch>

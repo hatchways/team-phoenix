@@ -1,11 +1,10 @@
 from flask import Blueprint, app, jsonify, url_for
 import stripe
-import config
 from os import environ
 subscribe_blueprint = Blueprint('subscribe_blueprint', __name__)
 
 
-@subscribe_blueprint.route('/subscribe/<plan_type>', methods=["POST", "GET"])
+@subscribe_blueprint.route('/subscribe/<plan_type>', methods=["GET"])
 def meetings(plan_type):
     output = dict()
     status = 200

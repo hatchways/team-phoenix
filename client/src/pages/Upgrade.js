@@ -1,8 +1,11 @@
 import React from "react";
 import { Button } from "@material-ui/core/";
+import UpgradeWidget from "../component/UpgradeWidget";
 const Upgrade = () => {
   const handleOnclick = async (planType) => {
-    const result = await fetch(`http://localhost:5000/subscribe/${planType}`);
+    const result = await fetch(
+      `http://localhost:5000/subscribe/5f770e13b2952ffe5546adff/${planType}`
+    );
     const data = await result.json();
     const stripe = await window.Stripe(data.checkout_public_key);
     const stripeResult = await stripe.redirectToCheckout({
@@ -12,14 +15,7 @@ const Upgrade = () => {
   };
   return (
     <div>
-      <Button
-        onClick={() => {
-          handleOnclick("premium");
-        }}
-      >
-        premium
-      </Button>
-      <Button>professional</Button>
+      <UpgradeWidget heading="Premium" features={["Unlimited meetings"]} />
     </div>
   );
 };

@@ -13,6 +13,7 @@ import ConfirmSettings from "./pages/ConfirmSettings";
 import EventType from "./component/EventDialog/EventType";
 
 import DashBoard from "./pages/DashBoard";
+import Upgrade from "./pages/Upgrade";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -39,7 +40,7 @@ function App() {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
-          
+          <Route path="/upgrade" exact component={Upgrade} />
           <Route path="/event" exact component={EventType} />
           <Route path="/dashboard" exact component={DashBoard} />
         </Switch>

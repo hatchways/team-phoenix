@@ -4,12 +4,7 @@ from models.base import BaseModel
 
 class Meeting(BaseModel):
 
-    def __init__(self, user_id,
-                 name,
-                 event_type,
-                 description,
-                 duration
-                 ):
+    def __init__(self, user_id, name, event_type, description, duration):
         # Meetings that are not in the list below will be rejected
         possible_meeting_lengths = [15, 30, 60]
         if duration not in possible_meeting_lengths:

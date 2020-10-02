@@ -10,7 +10,7 @@ import Google_Auth from "./pages/Google_Auth";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
-import EventType from "./component/EventDialog/EventType";
+import EventType from "./components/EventDialog/EventType";
 
 import DashBoard from "./pages/DashBoard";
 import Upgrade from "./pages/Upgrade";

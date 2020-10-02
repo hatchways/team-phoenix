@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProfileWidget from "../component/ProfileWidget";
+import ProfileWidget from "../components/ProfileWidget";
 import history from "../history";
 import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
 const ProfileSettings = () => {

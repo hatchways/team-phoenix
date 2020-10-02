@@ -20,8 +20,8 @@ class User(BaseModel):
         self["first_name"] = userObj.given_name
         self["Availability"] = dict()
         self["unique_url"] = ""
-        self["Meeting"] = Meeting(
-            self["_id"], "First meeting", "one-to-one", "my meeting", 60)
+        self["Meetings"] = [Meeting(
+            self["_id"], "First meeting", "one-to-one", "my meeting", 60)]
 
     def add(self, id, val):
         self._dict[id] = val

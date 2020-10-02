@@ -33,12 +33,7 @@ export default function MaxWidthDialog(props) {
     description: "",
     duration: 15,
   });
-
-  const [selectedValue, setSelectedValue] = useState("15");
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+  
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [fullWidth] = useState(true);

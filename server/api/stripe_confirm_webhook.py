@@ -1,5 +1,9 @@
 from flask import Blueprint, app, jsonify, url_for, request, abort
+from bson import ObjectId
+from models.user import User
 import stripe
+import json
+import requests
 from os import environ
 confirm_webhook_blueprint = Blueprint('confirm_webhook_blueprint', __name__)
 
@@ -29,9 +33,12 @@ def stripe_webhook():
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        print(session)
-        line_items = stripe.checkout.Session.list_line_items(
-            session['id'], limit=1)
-        print(line_items['data'][0]['description'])
+        if session["payment_status"] == "paid":
+            user_id = session["metadata"]["user_id"]
+            data_to_update = {"subscription_id": session["subscription"],
+                              "customer_id": session["customer"]}
+            query = {"_id": ObjectId(user_id)}
+            newValues = {"$set": data_to_update}
+            User.update(query, newValues)
 
     return {}

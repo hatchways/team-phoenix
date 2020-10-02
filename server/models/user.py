@@ -17,7 +17,8 @@ class User(BaseModel):
         self["first_name"] = userObj.given_name
         self["availability"] = []
         self["unique_url"] = ""
-        self["stripe_id"] = ""
+        self["customer_id"] = ""
+        self["subscription_id"] = ""
 
     def add(self, id, val):
         self._dict[id] = val

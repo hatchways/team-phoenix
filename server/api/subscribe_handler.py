@@ -4,8 +4,8 @@ from os import environ
 subscribe_blueprint = Blueprint('subscribe_blueprint', __name__)
 
 
-@subscribe_blueprint.route('/subscribe/<plan_type>', methods=["GET"])
-def meetings(plan_type):
+@subscribe_blueprint.route('/subscribe/<user_id>/<plan_type>', methods=["GET"])
+def meetings(plan_type, user_id):
     output = dict()
     status = 200
     stripe.api_key = environ['STRIPE_SECRET_KEY']
@@ -20,7 +20,8 @@ def meetings(plan_type):
             mode='subscription',
             success_url="http://localhost:3000/" +
             '?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url="http://localhost:3000/upgrade"
+            cancel_url="http://localhost:3000/upgrade",
+            metadata={"user_id": user_id}
         )
         return {
             'checkout_session_id': session['id'],

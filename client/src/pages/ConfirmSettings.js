@@ -1,5 +1,5 @@
 import React from "react";
-import ConfirmWidget from "../component/ConfirmWidget";
+import ConfirmWidget from "../components/ConfirmWidget";
 import history from "../history";
 const ConfirmSettings = () => {
   let heading = "Your google calendar is connected!";

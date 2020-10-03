@@ -1,6 +1,7 @@
 from time import gmtime, strftime
 from models.base import BaseModel
-from models.availability import Availability
+from models.meeting import Meeting
+from bson.objectid import ObjectId
 from pymongo.errors import OperationFailure
 import config
 debug = True
@@ -10,13 +11,16 @@ class User(BaseModel):
     collection = config.get_db()["users"]
 
     def __init__(self, userObj):
+        self["_id"] = ObjectId()
         self["first_name"] = userObj.given_name
         self["last_name"] = userObj.given_name
         self["email"] = userObj.email
         self["time_zone"] = strftime("%z", gmtime())
         self["first_name"] = userObj.given_name
-        self["availability"] = dict()
+        self["Availability"] = dict()
         self["unique_url"] = ""
+        self["Meetings"] = [Meeting(
+            self["_id"], "First meeting", "one-to-one", "my meeting", 60)]
 
     def add(self, id, val):
         self._dict[id] = val

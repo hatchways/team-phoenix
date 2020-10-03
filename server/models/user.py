@@ -1,6 +1,5 @@
 from time import gmtime, strftime
 from models.base import BaseModel
-from models.availability import Availability
 from models.meeting import Meeting
 from bson.objectid import ObjectId
 from pymongo.errors import OperationFailure
@@ -59,3 +58,15 @@ class User(BaseModel):
             print(f"Database operation failed: {e}")
             result = None
         return result
+
+    @classmethod
+    def get_user_start_end_time(cls, email):
+        try:
+            result = cls.collection.find_one({"email": email})
+            if result:
+                return result["availability"]["start_time"], result["availability"]["end_time"]
+            else:
+                return None
+        except OperationFailure as e:
+            print(f"Database operation failed: {e}")
+            return None

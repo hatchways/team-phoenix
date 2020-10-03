@@ -82,9 +82,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MeetingComponent = () => {
-
-  
-
   const meeting = [
     { duration: 15, type: "One-on-One" },
     { duration: 30, type: "One-on-One" },
@@ -110,9 +107,7 @@ const MeetingComponent = () => {
 
         <Grid item md={6} sm={6}>
           <Grid className={classes.button}>
-            <Button variant="outlined" color="secondary"
-         
-            >
+            <Button variant="outlined" color="secondary">
               <Icon>add</Icon> New event type
             </Button>
           </Grid>

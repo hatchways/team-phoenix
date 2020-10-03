@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import Context from "../contexts/CalendStore";
 import {
   Paper,
   Box,
@@ -26,18 +27,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 const AuthHeader = (props) => {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
+  const { propsForAuthWidget } = useContext(Context);
   return (
     <Box className={classes.forOuterBox}>
       <img alt="logo" src={logo}></img>
       <Paper className={classes.forPaper} variant="outlined" square>
         <Box my={5}>
           <Typography align="center" variant="h6">
-            {props.heading}
+            {propsForAuthWidget.heading}
           </Typography>
         </Box>
         <Box mt={3}>
-          <form onSubmit={(e) => props.onSubmitHandler(e, email)}>
+          <form
+            onSubmit={(e) => {
+              propsForAuthWidget.onSubmitHandler(e, e.target.email.value);
+            }}
+          >
             <Box>
               <Typography align="center" variant="body1" gutterBottom>
                 Enter your e-mail to get started:
@@ -50,8 +55,7 @@ const AuthHeader = (props) => {
                 variant="standard"
                 fullWidth
                 align="center"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
                 required
               />
             </Box>
@@ -62,7 +66,7 @@ const AuthHeader = (props) => {
                 size="large"
                 type="submit"
               >
-                {props.btnText}
+                {propsForAuthWidget.btnText}
               </Button>
             </Box>
           </form>
@@ -70,10 +74,16 @@ const AuthHeader = (props) => {
         <Box borderTop={1} borderColor="grey.300" height="100%">
           <Box mt={2}>
             <Typography align="center" variant="body1">
-              {props.footerText + " "}
-              <Link component={RouterLink} color="primary" to={props.route}>
-                {props.linkText}
-              </Link>
+              {propsForAuthWidget.footerText + " "}
+              {propsForAuthWidget.route ? (
+                <Link
+                  component={RouterLink}
+                  color="primary"
+                  to={propsForAuthWidget.route}
+                >
+                  {propsForAuthWidget.linkText}
+                </Link>
+              ) : null}
             </Typography>
           </Box>
         </Box>

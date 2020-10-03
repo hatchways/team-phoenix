@@ -1,37 +1,34 @@
-import React from "react";
-import AuthWidget from "../component/AuthWidget";
+import React, { useContext, useEffect } from "react";
+import AuthWidget from "../components/AuthWidget";
 import history from "../history";
-const SignUp = () => {
-  let heading = "Sign up with CalendApp";
-  let btnText = "Get started";
-  const handleSubmit = (e, email) => {
-    e.preventDefault();
-    if (email.includes("gmail")) {
-      let greetings = {
-        headerText: `Hi ${email}`,
-        prompt: `The easiest way for you to sign up is with Google.This will automatically 
-            connect your calendar so you can start using CalendApp right away`,
-        noGoogleText: "Prefer to create an account with a password?Click here",
-        route: "sign-up",
-        email,
-      };
-      localStorage.setItem("greetings", JSON.stringify(greetings));
-      history.push("/auth-with-google");
-    } else {
-      alert("Right now, We only support gmail. Please use gmail.");
-    }
-  };
+import Context from "../contexts/CalendStore";
+const SignUp = (props) => {
+  const { setEmail, setPropsForAuthWidget } = useContext(Context);
+  useEffect(() => {
+    const handleSubmit = (e, email) => {
+      e.preventDefault();
+      if (email.includes("gmail")) {
+        setEmail(email);
+        history.push("/auth-with-google");
+      } else {
+        alert("Right now, We only support gmail. Please use gmail.");
+      }
+    };
+    let propsForAuthWidget = {
+      heading: "Sign up with CalendApp",
+      btnText: "Get started",
+      onSubmitHandler: handleSubmit,
+      linkText: "Log In",
+      footerText: "Already have an account?",
+      route: "login-in",
+    };
+    setPropsForAuthWidget(propsForAuthWidget);
+  }, [setEmail, setPropsForAuthWidget]);
+
   return (
-    <React.Fragment>
-      <AuthWidget
-        heading={heading}
-        btnText={btnText}
-        onSubmitHandler={handleSubmit}
-        linkText="Log In"
-        footerText="Already have an account?"
-        route="login-in"
-      />
-    </React.Fragment>
+    <div>
+      <AuthWidget />
+    </div>
   );
 };
 

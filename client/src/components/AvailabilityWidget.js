@@ -106,8 +106,8 @@ const timeOptions = [
 
 const AvailabilityWidget = (props) => {
   const classes = useStyles();
-  const [startTime, setStartTime] = useState(["09:00"]);
-  const [endTime, setEndTime] = useState(["17:00"]);
+  const [startTime, setStartTime] = useState("09:00");
+  const [endTime, setEndTime] = useState("17:00");
   const [daysSelected, setDays] = useState({
     Sundays: false,
     Mondays: true,

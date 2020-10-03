@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import ProfileWidget from "../component/ProfileWidget";
+import React, { useEffect, useState, useContext } from "react";
+import ProfileWidget from "../components/ProfileWidget";
 import history from "../history";
 import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
+import Context from "../contexts/CalendStore";
 const ProfileSettings = () => {
-  let heading = "Welcome to CalendApp!";
-  let url_prompt = "Create your CalendApp URL:";
-  let url_prefix = "calendapp.com/";
-  let timezone_prompt = "Select your Time zone:";
-  let timezone_default = "UTC Time";
+  const heading = "Welcome to CalendApp!";
+  const url_prompt = "Create your CalendApp URL:";
+  const url_prefix = "calendapp.com/";
+  const timezone_prompt = "Select your Time zone:";
+  const timezone_default = "UTC Time";
   const [term, set_url] = useState("");
   const [result_for_url, set_result_for_url] = useState("Unavailable");
-  let userdata = saveUserDataInLocalStorage();
+  const userdata = saveUserDataInLocalStorage();
+  const { setUniqueUrl, setUserId, setEmail } = useContext(Context);
 
   const handleSkipbtn = () => {
     history.push("/confirm");
@@ -18,11 +20,13 @@ const ProfileSettings = () => {
 
   const handleContinue = () => {
     if (result_for_url === "available") {
-      localStorage.setItem("unique_url", `calendapp.com/${term}`);
+      setUniqueUrl(`calendapp.com/${term}`);
       history.push("/confirm");
     }
   };
   useEffect(() => {
+    setUserId(userdata.user_id);
+    setEmail(userdata.email);
     const search = async () => {
       const data = await fetch(
         `http://localhost:5000/user/123/is_unique?url=calendapp.com/${term}`
@@ -44,7 +48,7 @@ const ProfileSettings = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [term]);
+  }, [term, setUserId, setEmail, userdata]);
   return (
     <React.Fragment>
       {userdata ? (

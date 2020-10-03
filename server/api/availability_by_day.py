@@ -37,11 +37,13 @@ def availability_by_day():
         output["error"] = "Missing day or Access Token or Email"
     else:
         try:
+            start_time, end_time = User.get_user_start_end_time(
+                client_email)
             p_time = datetime.fromtimestamp(float(day))
             time_min = str(datetime(
-                p_time.year, p_time.month, p_time.day, 00, 00, 00).isoformat()) + "Z"
+                p_time.year, p_time.month, p_time.day, int(start_time[0:2]), int(start_time[3:]), 00).isoformat()) + "Z"
             time_max = str(datetime(
-                p_time.year, p_time.month, p_time.day, 23, 59, 59).isoformat()) + "Z"
+                p_time.year, p_time.month, p_time.day, int(end_time[0:2]), int(end_time[3:]), 59).isoformat()) + "Z"
             credentials = client.AccessTokenCredentials(
                 token, 'my-user-agent')
             service = build('calendar', 'v3', credentials=credentials)
@@ -70,7 +72,7 @@ def find_slots(busy_time_array, day_start, day_end):
     availabile_slots = []
     counter = 0
     length = len(busy_time_array)-1
-    if length > 0:
+    if length >= 0:
         if day_start != busy_time_array[counter]["start"]:
             availabile_slots.append(
                 {"start": day_start, "end": busy_time_array[counter]["start"]})
@@ -82,6 +84,9 @@ def find_slots(busy_time_array, day_start, day_end):
         if day_end != busy_time_array[counter-1]["end"]:
             availabile_slots.append(
                 {"start": busy_time_array[counter-1]["end"], "end": day_end})
+    else:
+        availabile_slots.append({"start": day_start, "end": day_end})
+    print(availabile_slots)
     return availabile_slots
 
 

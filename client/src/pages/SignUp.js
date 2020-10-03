@@ -9,7 +9,7 @@ const SignUp = (props) => {
       e.preventDefault();
       if (email.includes("gmail")) {
         setEmail(email);
-        history.push("/auth-with-google/sign-up");
+        history.push("/auth-with-google");
       } else {
         alert("Right now, We only support gmail. Please use gmail.");
       }

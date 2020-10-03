@@ -35,7 +35,7 @@ function App() {
         <Router history={history}>
           <Switch>
             <Route path="/" exact component={SignUp} />
-            <Route path="/auth-with-google/:id" exact component={Google_Auth} />
+            <Route path="/auth-with-google" exact component={Google_Auth} />
             <Route path="/sign-up" exact component={SignUp} />
             <Route path="/login-in" exact component={LogIn} />
             <Route path="/profile_settings" exact component={ProfileSettings} />
@@ -50,7 +50,7 @@ function App() {
               exact
               component={SchedulerCalendar}
             />
-             <Route path="/event" exact component={EventType} />
+            <Route path="/event" exact component={EventType} />
             <Route path="/dashboard" exact component={DashBoard} />
           </Switch>
         </Router>

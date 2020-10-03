@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useContext } from "react";
 import ConfirmWidget from "../components/ConfirmWidget";
 import Context from "../contexts/CalendStore";

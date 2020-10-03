@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
-import SchedulerWidget from "../component/SchedularWidget";
+import SchedulerWidget from "../components/SchedularWidget";
 import Context from "../contexts/CalendStore";
 const SchedulerCalendar = (props) => {
   const [freeSlots, setFreeSlots] = useState([]);

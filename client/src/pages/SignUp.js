@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import AuthWidget from "../component/AuthWidget";
+import AuthWidget from "../components/AuthWidget";
 import history from "../history";
 import Context from "../contexts/CalendStore";
 const SignUp = (props) => {

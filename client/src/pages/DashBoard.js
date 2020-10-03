@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import EventBodyComponent from "../component/EventBodyComponent/EventBodyComponent";
+import EventBodyComponent from "../components/EventBodyComponent/EventBodyComponent";
 import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
 import Context from "../contexts/CalendStore";
 const DashBoard = () => {

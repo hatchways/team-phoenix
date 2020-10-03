@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import history from "../history";
-import AvailabilityWidget from "../component/AvailabilityWidget";
+import AvailabilityWidget from "../components/AvailabilityWidget";
 import Context from "../contexts/CalendStore";
 
 const AvailabilitySettings = () => {

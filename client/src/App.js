@@ -10,6 +10,7 @@ import Google_Auth from "./pages/Google_Auth";
 import ProfileSettings from "./pages/ProfileSettings";
 import AvailabilitySettings from "./pages/AvailabilitySettings";
 import ConfirmSettings from "./pages/ConfirmSettings";
+import EventType from "./components/EventDialog/EventType";
 import DashBoard from "./pages/DashBoard";
 import SchedulerCalendar from "./pages/SchedulerCalendar";
 import { CalendStore } from "./contexts/CalendStore";
@@ -49,6 +50,7 @@ function App() {
               exact
               component={SchedulerCalendar}
             />
+             <Route path="/event" exact component={EventType} />
             <Route path="/dashboard" exact component={DashBoard} />
           </Switch>
         </Router>

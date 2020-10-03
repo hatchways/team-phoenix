@@ -1,5 +1,5 @@
 import React from "react";
-import SecondAuthWidget from "../component/SecondAuthWidget";
+import SecondAuthWidget from "../components/SecondAuthWidget";
 const Google_Auth = () => {
   return (
     <div>

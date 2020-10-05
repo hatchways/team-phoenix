@@ -6,7 +6,7 @@ from models.base import BaseModel
 get_meetings_blueprint = Blueprint('get_meetings', __name__)
 
 
-@get_meetings_blueprint.route('/meetings/<user_id>', methods=["POST", "GET"])
+@get_meetings_blueprint.route('/meetings/<user_id>', methods=["GET"])
 def meetings(user_id):
     output = dict()
     try:

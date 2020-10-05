@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import EventBodyComponent from "../components/EventBodyComponent/EventBodyComponent";
+import HomePage from "../components/EventBodyComponent/HomePage";
 import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
 import Context from "../contexts/CalendStore";
 const DashBoard = () => {
@@ -13,7 +13,7 @@ const DashBoard = () => {
   });
   return (
     <div>
-      <EventBodyComponent />
+      <HomePage />
     </div>
   );
 };

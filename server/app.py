@@ -12,6 +12,8 @@ from api.create_meeting import create_meeting_blueprint
 from api.check_unique_url import is_unique_url_blueprint
 from api.update_with_user_id import update_with_user_id_blueprint
 from api.availability_by_day import availability_by_day_blueprint
+from api.subscribe_handler import subscribe_blueprint
+from api.stripe_confirm_webhook import confirm_webhook_blueprint
 from api.create_appointment import create_appointment_blueprint
 
 
@@ -19,6 +21,8 @@ app = Flask(__name__)
 app_secret = os.environ['APP_SECRET']
 app.secret_key = app_secret
 app.config['SESSION_COOKIE_NAME'] = 'google-login-session'
+app.config['STRIPE_PUBLIC_KEY'] = os.environ['STRIPE_PUBLIC_KEY']
+app.config['STRIPE_SECRET_KEY'] = os.environ['STRIPE_SECRET_KEY']
 
 CORS(app, resources={
     r"/*": {"origins": "*"}})
@@ -33,3 +37,5 @@ app.register_blueprint(is_unique_url_blueprint)
 app.register_blueprint(update_with_user_id_blueprint)
 app.register_blueprint(availability_by_day_blueprint)
 app.register_blueprint(create_appointment_blueprint)
+app.register_blueprint(subscribe_blueprint)
+app.register_blueprint(confirm_webhook_blueprint)

@@ -17,8 +17,10 @@ class User(BaseModel):
         self["email"] = userObj.email
         self["time_zone"] = strftime("%z", gmtime())
         self["first_name"] = userObj.given_name
-        self["Availability"] = dict()
+        self["availability"] = dict()
         self["unique_url"] = ""
+        self["customer_id"] = ""
+        self["subscription_id"] = ""
         self["Meetings"] = [Meeting(
             self["_id"], "First meeting", "one-to-one", "my meeting", 60)]
 

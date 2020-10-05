@@ -12,12 +12,12 @@ import {
 } from "@material-ui/core/";
 import logo from "../assets/logo.png";
 const useStyles = makeStyles((theme) => ({
-  forPaper: {
+  paper: {
     margin: theme.spacing(2),
     width: theme.spacing(50),
     height: theme.spacing(55),
   },
-  forOuterBox: {
+  outerBox: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -29,9 +29,9 @@ const AuthHeader = (props) => {
   const classes = useStyles();
   const { propsForAuthWidget } = useContext(Context);
   return (
-    <Box className={classes.forOuterBox}>
+    <Box className={classes.outerBox}>
       <img alt="logo" src={logo}></img>
-      <Paper className={classes.forPaper} variant="outlined" square>
+      <Paper className={classes.paper} variant="outlined" square>
         <Box my={5}>
           <Typography align="center" variant="h6">
             {propsForAuthWidget.heading}

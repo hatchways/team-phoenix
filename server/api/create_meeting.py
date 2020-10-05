@@ -20,7 +20,6 @@ def add_meeting():
     status = 422
 
     data = json.loads(request.data.decode('utf-8'))
-    print(data)
     if not data:
         return jsonify({"error": "Missing data to save"}), status
     try:

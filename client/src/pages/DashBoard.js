@@ -1,10 +1,33 @@
 import React, { useContext, useEffect } from "react";
 import HomePage from "../components/EventBodyComponent/HomePage";
-import { saveUserDataInLocalStorage } from "../utilities/SaveTokens";
+import {
+  saveUserDataInLocalStorage,
+  getOnlyUserId,
+} from "../utilities/SaveTokens";
 import Context from "../contexts/CalendStore";
-const DashBoard = () => {
+import copy from "copy-to-clipboard";
+const DashBoard = (props) => {
   const userdata = saveUserDataInLocalStorage();
-  const { setUserId, setEmail, setUser, userId, user } = useContext(Context);
+  const {
+    setUserId,
+    setEmail,
+    setUser,
+    userId,
+    user,
+    setCopiedText,
+  } = useContext(Context);
+  if (!userId) {
+    setUserId(getOnlyUserId());
+  }
+  const handleUrlCopy = (duration) => {
+    const url = `${user.unique_url}/${duration}`;
+    copy("http://localhost:3000/" + url);
+    setCopiedText(true);
+    setTimeout(() => {
+      setCopiedText(false);
+    }, 1000);
+  };
+
   useEffect(() => {
     if (userdata) {
       setUserId(userdata.user_id);
@@ -17,13 +40,13 @@ const DashBoard = () => {
         setUser(response.result);
       }
     };
-    if (!user) {
+    if (!user && userId) {
       fetchUser();
     }
   });
   return (
     <div>
-      <HomePage />
+      <HomePage handleCopy={handleUrlCopy} />
     </div>
   );
 };

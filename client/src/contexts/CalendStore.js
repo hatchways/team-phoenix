@@ -10,6 +10,7 @@ export const CalendStore = (props) => {
   const [user, setUser] = useState("");
   const [userId, setUserId] = useState("");
   const [uniqueUrl, setUniqueUrl] = useState("");
+  const [copiedText, setCopiedText] = useState(false);
   let greetingsForSignUp = {
     headerText: `Hi ${email}`,
     prompt: `The easiest way for you to sign up is with Google.This will automatically 
@@ -38,6 +39,8 @@ export const CalendStore = (props) => {
     userId,
     setUniqueUrl,
     uniqueUrl,
+    copiedText,
+    setCopiedText,
   };
   return (
     <Context.Provider value={intialState}>{props.children}</Context.Provider>

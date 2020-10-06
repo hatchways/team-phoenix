@@ -98,7 +98,7 @@ const ProfileWidget = (props) => {
                           position="start"
                           className={classes.url_prefix}
                         >
-                          calendapp.com/{" "}
+                          book-appointment/{" "}
                           <Divider
                             className={classes.divider}
                             orientation="vertical"

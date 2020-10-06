@@ -49,7 +49,7 @@ TabPanel.propTypes = {
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
-const HomePage = () => {
+const HomePage = (props) => {
   const [value, setValue] = useState(0);
   const classes = useStyles();
   const handleChange = (event, newValue) => {
@@ -83,7 +83,7 @@ const HomePage = () => {
             </Tabs>
           </AppBar>
           <TabPanel className={classes.tab_content} value={value} index={0}>
-            <MeetingComponent />
+            <MeetingComponent handleCopy={props.handleCopy} />
           </TabPanel>
           <TabPanel value={value} index={1}></TabPanel>
         </Grid>

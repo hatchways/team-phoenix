@@ -20,7 +20,7 @@ const ProfileSettings = () => {
 
   const handleContinue = () => {
     if (result_for_url === "available") {
-      setUniqueUrl(`calendapp.com/${term}`);
+      setUniqueUrl(`book-appointment/${term}`);
       history.push("/confirm");
     }
   };
@@ -29,7 +29,7 @@ const ProfileSettings = () => {
     setEmail(userdata.email);
     const search = async () => {
       const data = await fetch(
-        `http://localhost:5000/user/123/is_unique?url=calendapp.com/${term}`
+        `http://localhost:5000/user/${userdata.user_id}/is_unique?url=book-appointment/${term}`
       );
       let result = await data.json();
       if (result.success) {

@@ -38,13 +38,12 @@ const Main = withRouter(() => {
     location.pathname !== "/login-in" &&
     location.pathname !== "/profile_settings" &&
     location.pathname !== "/availability" &&
+    !location.pathname.startsWith("/book-appointment") &&
     location.pathname !== "/confirm" && <NavBar />;
-
   return (
     <CalendStore>
       <MuiThemeProvider theme={theme}>
         {DisplayNavBar}
-
         <Switch>
           <Route path="/" exact component={SignUp} />
           <Route path="/auth-with-google" exact component={Google_Auth} />
@@ -53,14 +52,10 @@ const Main = withRouter(() => {
           <Route path="/profile_settings" exact component={ProfileSettings} />
           <Route path="/availability" exact component={AvailabilitySettings} />
           <Route path="/confirm" exact component={ConfirmSettings} />
-          <Route
-            path="/schedule-calendar/:meetingTime"
-            exact
-            component={SchedulerCalendar}
-          />
           <Route path="/event" exact component={EventType} />
           <Route path="/dashboard" exact component={DashBoard} />
           <Route path="/upgrade" exact component={Upgrade} />
+          <Route component={SchedulerCalendar} />
         </Switch>
       </MuiThemeProvider>
     </CalendStore>

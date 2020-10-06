@@ -3,16 +3,17 @@ from flask import jsonify, Blueprint, request
 from models.user import User
 import json
 
-fetch_user_blueprint = Blueprint('fetch_url', __name__)
+fetch_user_by_url_blueprint = Blueprint('fetch_by_url', __name__)
 
 
-@fetch_user_blueprint.route('/fetch-user/<user_id>', methods=["GET"])
-def fetch_user(user_id):
+@fetch_user_by_url_blueprint.route('/fetch-user-by-url', methods=["GET"])
+def fetch_user_by_url():
     output = dict()
     status = 500
+    unique_url = request.args.get('unique_url', default="", type=str)
     try:
-        if user_id:
-            user = User.fetch_user(user_id)
+        if unique_url:
+            user = User.fetch_user_by_url(unique_url)
             output["result"] = user
             status = 200
         else:

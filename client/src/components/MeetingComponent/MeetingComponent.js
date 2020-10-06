@@ -15,6 +15,7 @@ import { grey, orange } from "@material-ui/core/colors";
 import shadows from "@material-ui/core/styles/shadows";
 import GettingStartedButton from "../GettingStartedButton/GettingStartedButton";
 import Context from "../../contexts/CalendStore";
+import Alert from "@material-ui/lab/Alert";
 const outerTheme = createMuiTheme({
   palette: {
     secondary: {
@@ -81,13 +82,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MeetingComponent = () => {
+const MeetingComponent = (props) => {
   const meeting = [
     { duration: 15, type: "One-on-One" },
     { duration: 30, type: "One-on-One" },
-    { duration: 45, type: "One-on-One" },
+    { duration: 60, type: "One-on-One" },
   ];
-  const { user } = useContext(Context);
+  const { user, copiedText } = useContext(Context);
   const classes = useStyles();
   return (
     <ThemeProvider theme={outerTheme}>
@@ -153,7 +154,11 @@ const MeetingComponent = () => {
                     </Grid>
                     <Grid item xs>
                       <Grid className={classes.button}>
-                        <Button variant="outlined" color="secondary">
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => props.handleCopy(meeting.duration)}
+                        >
                           Copy link
                         </Button>
                       </Grid>
@@ -164,6 +169,7 @@ const MeetingComponent = () => {
             </Grid>
           );
         })}
+        {copiedText ? <Alert>Link Copied</Alert> : null}
       </Grid>
 
       {/* Meeting Box End */}

@@ -85,3 +85,13 @@ class User(BaseModel):
             print(f"Database operation failed: {e}")
             user = None
         return user
+
+    @ classmethod
+    def fetch_user_by_url(cls, unique_url):
+        try:
+            user = cls.collection.find_one({"unique_url": unique_url})
+            user["_id"] = str(user["_id"])
+        except OperationFailure as e:
+            print(f"Database operation failed: {e}")
+            user = None
+        return user

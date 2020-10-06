@@ -43,7 +43,7 @@ const AvailabilitySettings = () => {
         });
         const result = await data.json();
         if (result.success) {
-          history.push("/dashboard");
+          history.push(`/dashboard?user_id=${userId}`);
         }
       }
     };

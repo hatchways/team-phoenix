@@ -1,5 +1,5 @@
-export const saveUserDataInLocalStorage = (urlParams) => {
-  urlParams = new URLSearchParams(window.location.search);
+export const saveUserDataInLocalStorage = () => {
+  const urlParams = new URLSearchParams(window.location.search);
   let token,
     email,
     user_id,
@@ -23,4 +23,12 @@ export const saveUserDataInLocalStorage = (urlParams) => {
   } else {
     return null;
   }
+};
+
+export const getOnlyUserId = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("user_id")) {
+    return urlParams.get("user_id");
+  }
+  return null;
 };

@@ -6,7 +6,7 @@ class Meeting(BaseModel):
 
     def __init__(self, user_id, name, event_type, description, duration):
         # Meetings that are not in the list below will be rejected
-        possible_meeting_lengths = [15, 30, 60]
+        possible_meeting_lengths = [15, 30, 45]
         if duration not in possible_meeting_lengths:
             raise ValueError(
                 f"Meeting lengths must be one of: {possible_meeting_lengths}")

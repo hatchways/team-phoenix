@@ -12,6 +12,8 @@ from api.create_meeting import create_meeting_blueprint
 from api.check_unique_url import is_unique_url_blueprint
 from api.update_with_user_id import update_with_user_id_blueprint
 from api.availability_by_day import availability_by_day_blueprint
+from api.create_appointment import create_appointment_blueprint
+
 app = Flask(__name__)
 app_secret = os.environ['APP_SECRET']
 app.secret_key = app_secret
@@ -29,3 +31,4 @@ app.register_blueprint(get_meetings_blueprint)
 app.register_blueprint(is_unique_url_blueprint)
 app.register_blueprint(update_with_user_id_blueprint)
 app.register_blueprint(availability_by_day_blueprint)
+app.register_blueprint(create_appointment_blueprint)

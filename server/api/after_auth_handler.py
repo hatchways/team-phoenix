@@ -1,5 +1,6 @@
 from flask import jsonify, Blueprint, redirect, url_for, session, request, make_response
 from models.user import User
+from models.meeting import Meeting
 import json
 
 
@@ -29,7 +30,9 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         Then db_user would be object containing
         property inserted_id
         """
-        db_user = User(g_user).save("users")
+        myUser = User(g_user)
+        print(g_user)
+        db_user = myUser.save("users")
         session['profile'] = user_info
         # User exists so db_user is dict
         if type(db_user) is dict:
@@ -39,6 +42,11 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
         else:
             user_id = db_user.inserted_id
+            meeting = Meeting(
+                user_id, "First meeting", "one-to-one", "my meeting", 60)
+            saveMeeting = meeting.save("meeting")
+            if saveMeeting.inserted_id:
+                myUser.add_meeting_id(saveMeeting.inserted_id)
             resonse = make_response(
                 redirect("http://localhost:3000/profile_settings?access_token=" +
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))

@@ -55,7 +55,6 @@ const HomePage = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log("ddd");
   return (
     <div>
       <Grid>

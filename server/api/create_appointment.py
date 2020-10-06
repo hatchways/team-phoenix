@@ -1,6 +1,5 @@
 from models.appointment import Appointment
-from flask import Blueprint, app, jsonify
-from flask import jsonify, Blueprint, redirect, url_for, request
+from flask import jsonify, Blueprint, request
 import json
 
 create_appointment_blueprint = Blueprint('create_appointment', __name__)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   MenuItem,
   Avatar,
@@ -8,7 +8,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import ButtonAppBarCollapse from "./ButtonAppBarCollapse";
-
+import Context from "../../contexts/CalendStore";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AppBarCollapse = () => {
   const classes = useStyles();
-
+  const { user } = useContext(Context);
   return (
     <div className={classes.root}>
       <ButtonAppBarCollapse>
@@ -55,9 +55,9 @@ const AppBarCollapse = () => {
           <Avatar
             className={classes.main_menu.avatar}
             alt="user 1"
-            src="/images/user.png"
+            src={user.picture}
           />{" "}
-          John Doe
+          {user.first_name + " " + user.last_name}
         </MenuItem>
       </ButtonAppBarCollapse>
       <Grid className={classes.buttonBar} id="appbar-collapse">
@@ -72,10 +72,9 @@ const AppBarCollapse = () => {
           <Avatar
             className={classes.main_menu.avatar}
             alt="user 1"
-            src="/images/user.png"
+            src={user.picture}
           />
-
-          <a href="home">John Doe</a>
+          <a href="home">{user.first_name + " " + user.last_name}</a>
         </Grid>
       </Grid>
     </div>

@@ -64,7 +64,6 @@ export default function MaxWidthDialog(props) {
       duration: state.duration,
     };
 
-    console.log("SSSSS");
     fetch("http://localhost:5000/meeting", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -149,7 +148,7 @@ export default function MaxWidthDialog(props) {
                   <FormControlLabel
                     value="45"
                     control={<Radio color="primary" />}
-                    label="45 min"
+                    label="60 min"
                     labelPlacement="bottom"
                   />
                 </RadioGroup>

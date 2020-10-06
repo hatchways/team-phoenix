@@ -15,7 +15,7 @@ from api.availability_by_day import availability_by_day_blueprint
 from api.subscribe_handler import subscribe_blueprint
 from api.stripe_confirm_webhook import confirm_webhook_blueprint
 from api.create_appointment import create_appointment_blueprint
-
+from api.fetch_user import fetch_user_blueprint
 
 app = Flask(__name__)
 app_secret = os.environ['APP_SECRET']
@@ -39,3 +39,4 @@ app.register_blueprint(availability_by_day_blueprint)
 app.register_blueprint(create_appointment_blueprint)
 app.register_blueprint(subscribe_blueprint)
 app.register_blueprint(confirm_webhook_blueprint)
+app.register_blueprint(fetch_user_blueprint)

@@ -37,7 +37,7 @@ const AvailabilitySettings = () => {
         const data = await fetch(`http://localhost:5000/user/${userId}`, {
           method: "POST",
           body: JSON.stringify({
-            data: { availability, uniqueUrl },
+            data: { availability, unique_url: uniqueUrl },
             token,
           }),
         });

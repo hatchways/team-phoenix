@@ -11,9 +11,8 @@ class User(BaseModel):
     collection = config.get_db()["users"]
 
     def __init__(self, userObj):
-        self["_id"] = ObjectId()
         self["first_name"] = userObj.given_name
-        self["last_name"] = userObj.given_name
+        self["last_name"] = userObj.family_name
         self["email"] = userObj.email
         self["time_zone"] = strftime("%z", gmtime())
         self["first_name"] = userObj.given_name
@@ -21,8 +20,8 @@ class User(BaseModel):
         self["unique_url"] = ""
         self["customer_id"] = ""
         self["subscription_id"] = ""
-        self["Meetings"] = [Meeting(
-            self["_id"], "First meeting", "one-to-one", "my meeting", 60)]
+        self["meetings"] = []
+        self["picture"] = userObj.picture
 
     def add(self, id, val):
         self._dict[id] = val
@@ -72,3 +71,17 @@ class User(BaseModel):
         except OperationFailure as e:
             print(f"Database operation failed: {e}")
             return None
+
+    def add_meeting_id(self, meetingId):
+        self["meetings"].append(str(meetingId))
+        super().save("users")
+
+    @ classmethod
+    def fetch_user(cls, user_id):
+        try:
+            user = cls.collection.find_one({"_id": ObjectId(user_id)})
+            user["_id"] = str(user["_id"])
+        except OperationFailure as e:
+            print(f"Database operation failed: {e}")
+            user = None
+        return user

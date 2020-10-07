@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import Context from "../contexts/CalendStore";
 import moment from "moment";
 import {
   Paper,
@@ -31,29 +32,57 @@ const useStyles = makeStyles((theme) => ({
 
 const BookAppointment = (props) => {
   const classes = useStyles();
+  const [formName, setFormName] = useState("");
+  const [formEmail, setSetEmail] = useState("");
+  const [textAreaContent, setTextAreaContent] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const { user } = useContext(Context);
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const dateProcess = () => {
     let time = props.time;
     let momentTime = moment(props.dateSelected);
     var splitTime = time.split(/:/);
-    console.log(time);
     momentTime
       .hours(parseInt(splitTime[0]))
       .minutes(parseInt(splitTime[1]))
       .seconds(0)
       .milliseconds(0);
-    console.log(momentTime.format("HH:mm"));
+
     return {
+      momentTime: momentTime.clone(),
       fromTime: momentTime.format("HH:mm"),
       toTime: momentTime.add(props.meetingTime, "minutes").format("HH:mm"),
       date: momentTime.format("MMMM Do YYYY"),
-      momentTime,
     };
   };
   const timeObj = dateProcess();
-  const [formName, setFormName] = useState("");
-  const [formEmail, setSetEmail] = useState("");
-  const [textAreaContent, setTextAreaContent] = useState("");
+  useEffect(() => {
+    const meetingStart = timeObj.momentTime.add(0, "minutes").format();
+    const meetingEnd = timeObj.momentTime
+      .add(props.meetingTime, "minutes")
+      .format();
+    setStartTime(meetingStart);
+    setEndTime(meetingEnd);
+  }, [setStartTime, setEndTime, props.meetingTime, timeObj.momentTime]);
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const access_token = localStorage.getItem("access_token");
+    const data = {
+      summary: user.first_name + " and " + formName,
+      description: "one to one, " + props.meetingTime + " min meeting",
+      start: { dateTime: startTime, timeZone },
+      end: { dateTime: endTime, timeZone },
+      attendees: [{ email: user.email }, { email: formEmail }],
+    };
+    const response = await fetch("http://localhost:5000/create-appointment", {
+      method: "POST",
+      body: JSON.stringify({ appointment: data, access_token }),
+    });
+    console.log(await response.json());
+  };
   return (
     <Box className={classes.containerBox}>
       <Box className={classes.innerContainer}>
@@ -77,7 +106,7 @@ const BookAppointment = (props) => {
                   {props.meetingType}
                 </Typography>
                 <Box display="flex">
-                  <Icon color="disable">alarm</Icon>
+                  <Icon>alarm</Icon>
                   <Typography variant="h6">
                     {`${props.meetingTime} min`}
                   </Typography>
@@ -97,15 +126,14 @@ const BookAppointment = (props) => {
                 </Box>
                 <Box mt={2}>
                   <Typography color="secondary" variant="body1">
-                    {"Time-Zone: " +
-                      Intl.DateTimeFormat().resolvedOptions().timeZone}
+                    {"Time-Zone: " + timeZone}
                   </Typography>
                 </Box>
               </Box>
             </Box>
             <Box ml={4}></Box>
             <Box className={classes.freeSlots} mt={4} ml={4} width="80%">
-              <form onSubmit={(e) => {}}>
+              <form onSubmit={onSubmitHandler}>
                 <Box>
                   <Typography variant="h6" gutterBottom>
                     Enter Details

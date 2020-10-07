@@ -10,14 +10,13 @@ const SchedulerCalendar = (props) => {
   let paths = window.location.pathname.split("/");
   const meetingTime = paths[3];
   const unique_url = `book-appointment/${paths[2]}`;
-  const { setUser, user } = useContext(Context);
+  const { setUser, user, setUniqueUrl } = useContext(Context);
   const [slectedTime, setSelectedTime] = useState("");
   const handleConfirm = (time) => {
     setShowForm(false);
     setSelectedTime(time);
   };
   useEffect(() => {
-    let access_token = localStorage.getItem("access_token");
     const getAvailableSlots = (freeSlotsArray) => {
       const availableSlots = [];
       freeSlotsArray.forEach((element, index) => {
@@ -46,7 +45,7 @@ const SchedulerCalendar = (props) => {
         {
           method: "POST",
           body: JSON.stringify({
-            access_token,
+            unique_url,
             email: user.email,
           }),
         }
@@ -59,10 +58,10 @@ const SchedulerCalendar = (props) => {
         alert(obj.error);
       }
     };
-    if (access_token && user.email) {
+    if (unique_url && user.email) {
       fetchData();
     }
-  }, [meetingTime, dateSelected, user]);
+  }, [meetingTime, dateSelected, user, unique_url]);
   const handleOnChangeCalendar = (date) => {
     setDateSelected(date);
   };
@@ -78,6 +77,7 @@ const SchedulerCalendar = (props) => {
       }
     };
     if (!user && unique_url) {
+      setUniqueUrl(unique_url);
       fetchUser();
     }
   });

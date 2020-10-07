@@ -1,8 +1,14 @@
 from models.appointment import Appointment
 from flask import jsonify, Blueprint, request
+from models.user import User
 from googleapiclient.discovery import build
 from oauth2client import file, client
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail, To
 import json
+import os
+import datetime
 
 create_appointment_blueprint = Blueprint('create_appointment', __name__)
 
@@ -13,22 +19,24 @@ def create_appointment():
     status = 500
     try:
         data = json.loads(request.data.decode('utf-8'))
-        print(data)
-        token = data["access_token"]
+        unique_url = data["unique_url"]
+        my_user = User.fetch_user_by_url(unique_url)
+        token = my_user["access_token"]
 
         appointment_data = data["appointment"]
         if all(key in appointment_data for key in ("summary", "description", "start", "end", "attendees")):
             appointment = Appointment(appointment_data)
             appointment.save("appointment")
-            appointment_data["recurrence"] = ['RRULE:FREQ=DAILY;COUNT=2']
+            del appointment_data["user_id"]
             appointment_data["reminders"] = {"useDefault": False, "overrides": [
                 {'method': 'email', 'minutes': 24 * 60}, {'method': 'popup', 'minutes': 10}, ]}
             credentials = client.AccessTokenCredentials(
                 token, 'my-user-agent')
             service = build('calendar', 'v3', credentials=credentials)
             event = service.events().insert(calendarId='primary',
-                                            body=appointment_data).execute()
-            print('Event created: %s' % (event.get('htmlLink')))
+                                            body=appointment_data, sendUpdates='all').execute()
+            send_email_to_organizaer(
+                appointment_data["attendees"][0]["email"], appointment_data["start"]["dateTime"], appointment_data["summary"], appointment_data["start"]["timeZone"])
             output["result"] = "Appointment successfully created."
             status = 200
         else:
@@ -37,3 +45,19 @@ def create_appointment():
     except Exception as e:
         output["error"] = f"{e}"
     return jsonify(output), status
+
+
+def send_email_to_organizaer(to_email, start, summary, timezone):
+    convert_date = datetime.datetime.strptime(start[:19], '%Y-%m-%dT%H:%M:%S')
+    month = convert_date.strftime("%B")
+    day = convert_date.day
+    year = convert_date.year
+    try:
+        message = Mail(from_email='teamphoenix1900@gmail.com', to_emails=To(to_email), subject='Calendar invite ' +
+                       summary, html_content=f'<strong>You have been scheduled an appointment on {month} {day}th, {year} {timezone} time</strong>')
+        sg = SendGridAPIClient(
+            "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")
+        response = sg.send(message)
+        print(response.status_code, response.body, response.headers)
+    except Exception as e:
+        print(e.body)

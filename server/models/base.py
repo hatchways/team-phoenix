@@ -22,6 +22,7 @@ class BaseModel(dict):
             else:
                 result = collection.update_one(
                     {"_id": ObjectId(self["_id"])}, {"$set": self}, upsert=True)
+                print(result)
             return result
         except OperationFailure as e:
             print(f"Database operation failed: {e}")

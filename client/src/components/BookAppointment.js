@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Context from "../contexts/CalendStore";
 import moment from "moment";
 import {
@@ -37,9 +37,8 @@ const BookAppointment = (props) => {
   const [textAreaContent, setTextAreaContent] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const { user } = useContext(Context);
+  const { user, uniqueUrl } = useContext(Context);
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   const dateProcess = () => {
     let time = props.time;
     let momentTime = moment(props.dateSelected);
@@ -69,8 +68,8 @@ const BookAppointment = (props) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const access_token = localStorage.getItem("access_token");
     const data = {
+      user_id: user._id,
       summary: user.first_name + " and " + formName,
       description: "one to one, " + props.meetingTime + " min meeting",
       start: { dateTime: startTime, timeZone },
@@ -79,7 +78,7 @@ const BookAppointment = (props) => {
     };
     const response = await fetch("http://localhost:5000/create-appointment", {
       method: "POST",
-      body: JSON.stringify({ appointment: data, access_token }),
+      body: JSON.stringify({ appointment: data, unique_url: uniqueUrl }),
     });
     console.log(await response.json());
   };

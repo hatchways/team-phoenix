@@ -24,7 +24,8 @@ class User(BaseModel):
         self["picture"] = userObj.picture
 
     def add(self, id, val):
-        self._dict[id] = val
+        self[id] = val
+        super().save("user")
 
     def user_exist(self):
         email = self["email"]

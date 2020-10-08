@@ -32,14 +32,17 @@ const theme = createMuiTheme({
 });
 const Main = withRouter(() => {
   let location = window.location;
-  let DisplayNavBar = location.pathname !== "/" &&
-    location.pathname !== "/auth-with-google" &&
-    location.pathname !== "/sign-up" &&
-    location.pathname !== "/login-in" &&
-    location.pathname !== "/profile_settings" &&
-    location.pathname !== "/availability" &&
-    !location.pathname.startsWith("/book-appointment") &&
-    location.pathname !== "/confirm" && <NavBar />;
+  const displayNavBarPaths = [
+    "/auth-with-google",
+    "/",
+    "/sign-up",
+    "/login-in",
+    "/profile_settings",
+    "/availability",
+    "/confirm",
+  ];
+  let DisplayNavBar = !displayNavBarPaths.includes(location.pathname) &&
+    !location.pathname.startsWith("/book-appointment") && <NavBar />;
   return (
     <CalendStore>
       <MuiThemeProvider theme={theme}>

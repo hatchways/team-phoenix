@@ -25,7 +25,7 @@ class User(BaseModel):
 
     def add(self, id, val):
         self[id] = val
-        super().save("user")
+        super().save("users")
 
     def user_exist(self):
         email = self["email"]

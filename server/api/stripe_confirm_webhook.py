@@ -10,7 +10,6 @@ confirm_webhook_blueprint = Blueprint('confirm_webhook_blueprint', __name__)
 
 @confirm_webhook_blueprint.route('/confirm_webhook', methods=["POST"])
 def stripe_webhook():
-    print('WEBHOOK CALLED')
     if request.content_length > 1024 * 1024:
         abort(400)
     payload = request.get_data()

@@ -42,24 +42,30 @@ def availability_by_day():
             start_time, end_time = User.get_user_start_end_time(
                 client_email)
             p_time = datetime.fromtimestamp(float(day))
-            time_min = str(datetime(
-                p_time.year, p_time.month, p_time.day, int(start_time[0:2]), int(start_time[3:]), 00).isoformat()) + "Z"
-            time_max = str(datetime(
-                p_time.year, p_time.month, p_time.day, int(end_time[0:2]), int(end_time[3:]), 59).isoformat()) + "Z"
-            credentials = client.AccessTokenCredentials(
-                token, 'my-user-agent')
-            service = build('calendar', 'v3', credentials=credentials)
+            requested_day = p_time.strftime("%A")
+            day_from_db = my_user["availability"]["days"][requested_day+"s"]
+            print(day_from_db)
+            if day_from_db:
+                time_min = str(datetime(
+                    p_time.year, p_time.month, p_time.day, int(start_time[0:2]), int(start_time[3:]), 00).isoformat()) + "Z"
+                time_max = str(datetime(
+                    p_time.year, p_time.month, p_time.day, int(end_time[0:2]), int(end_time[3:]), 59).isoformat()) + "Z"
+                credentials = client.AccessTokenCredentials(
+                    token, 'my-user-agent')
+                service = build('calendar', 'v3', credentials=credentials)
 
-            result = service.calendarList().list().execute()
-            calendar_id = result['items'][0]['id']
-            body = {"timeMin": (time_min),
-                    "items": [{"id": calendar_id}], "timeMax": time_max}
-            calendars_result = service.freebusy().query(body=body).execute()
-            free_slots_arr = find_slots(
-                calendars_result["calendars"].get(client_email).get("busy"), time_min, time_max)
-            free_slots_in_ts = convert_to_unix_time(free_slots_arr)
-            output["result"] = free_slots_in_ts
-            status = 200
+                result = service.calendarList().list().execute()
+                calendar_id = result['items'][0]['id']
+                body = {"timeMin": (time_min),
+                        "items": [{"id": calendar_id}], "timeMax": time_max}
+                calendars_result = service.freebusy().query(body=body).execute()
+                free_slots_arr = find_slots(
+                    calendars_result["calendars"].get(client_email).get("busy"), time_min, time_max)
+                free_slots_in_ts = convert_to_unix_time(free_slots_arr)
+                output["result"] = free_slots_in_ts
+                status = 200
+            else:
+                output["result"] = []
         except Exception as e:
             output['error'] = f'{e}'
             status = 500

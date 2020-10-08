@@ -80,7 +80,10 @@ const BookAppointment = (props) => {
       method: "POST",
       body: JSON.stringify({ appointment: data, unique_url: uniqueUrl }),
     });
-    console.log(await response.json());
+    ///console.log(await response.json());
+    const message = await response.json();
+    alert(message.result);
+    window.location.reload();
   };
   return (
     <Box className={classes.containerBox}>

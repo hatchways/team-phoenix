@@ -3,7 +3,7 @@ from flask import jsonify, Blueprint, request
 from models.user import User
 from googleapiclient.discovery import build
 from oauth2client import file, client
-
+from os import environ
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, To
 import json
@@ -55,8 +55,9 @@ def send_email_to_organizaer(to_email, start, summary, timezone):
     try:
         message = Mail(from_email='teamphoenix1900@gmail.com', to_emails=To(to_email), subject='Calendar invite ' +
                        summary, html_content=f'<strong>You have been scheduled an appointment on {month} {day}th, {year} {timezone} time</strong>')
-        sg = SendGridAPIClient(
-            "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")
+
+        key = environ['SENDGRID_API_KEY']
+        sg = SendGridAPIClient(key)
         response = sg.send(message)
         print(response.status_code, response.body, response.headers)
     except Exception as e:

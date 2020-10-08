@@ -67,7 +67,6 @@ const Upgrade = () => {
       alert("Unsubscribed successfully");
     }
   };
-  console.log(user);
   return (
     <Fragment>
       {!user.subscription_id ? (

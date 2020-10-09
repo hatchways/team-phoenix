@@ -44,7 +44,6 @@ def availability_by_day():
             p_time = datetime.fromtimestamp(float(day))
             requested_day = p_time.strftime("%A")
             day_from_db = my_user["availability"]["days"][requested_day+"s"]
-            print(day_from_db)
             if day_from_db:
                 time_min = str(datetime(
                     p_time.year, p_time.month, p_time.day, int(start_time[0:2]), int(start_time[3:]), 00).isoformat()) + "Z"

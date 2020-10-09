@@ -25,7 +25,7 @@ const DashBoard = (props) => {
     setCopiedText(true);
     setTimeout(() => {
       setCopiedText(false);
-    }, 1000);
+    }, 1500);
   };
 
   useEffect(() => {

@@ -98,7 +98,7 @@ const ProfileWidget = (props) => {
                           position="start"
                           className={classes.url_prefix}
                         >
-                          calendapp.com/{" "}
+                          book-appointment/{" "}
                           <Divider
                             className={classes.divider}
                             orientation="vertical"
@@ -133,7 +133,9 @@ const ProfileWidget = (props) => {
                                 TODO: This needs timezones as options. Probably just "UTC-12:00" to "UTC+14:00"
                                 */}
                     <MenuItem value={0}>
-                      <em>UTC Time (11:31)</em>
+                      <em>
+                        {new Date().toString().match(/([A-Z]+[\+-][0-9]+)/)[1]}
+                      </em>
                     </MenuItem>
                     <MenuItem value={+1}>Other</MenuItem>
                     <MenuItem value={+2}>Other</MenuItem>

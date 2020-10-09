@@ -17,13 +17,11 @@ class BaseModel(dict):
             collection_name = self.__class__.__name__
         try:
             collection = config.get_db()[collection_name]
-            if not hasattr(self, "_id"):
+            if not "_id" in self:
                 result = collection.insert_one(self)
             else:
-                result = collection.update(
-                    {"_id": ObjectId(self._id)}, self)
-            if config.is_dev_environment():
-                print(f'DEBUG: Saved obj to DB {result.inserted_id}')
+                result = collection.update_one(
+                    {"_id": ObjectId(self["_id"])}, {"$set": self}, upsert=True)
             return result
         except OperationFailure as e:
             print(f"Database operation failed: {e}")

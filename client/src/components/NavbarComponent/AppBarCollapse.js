@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   MenuItem,
   Avatar,
@@ -8,7 +8,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import ButtonAppBarCollapse from "./ButtonAppBarCollapse";
-
+import Context from "../../contexts/CalendStore";
+import { Link as RouterLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "absolute",
@@ -43,39 +44,66 @@ const useStyles = makeStyles((theme) => ({
 
 const AppBarCollapse = () => {
   const classes = useStyles();
-
+  const { user } = useContext(Context);
   return (
     <div className={classes.root}>
       <ButtonAppBarCollapse>
-        <MenuItem>Home</MenuItem>
-        <MenuItem>Integration</MenuItem>
-        <MenuItem>Update Account</MenuItem>
+        <MenuItem component={RouterLink} to={`/dashboard?user_id=${user._id}`}>
+          Home
+        </MenuItem>
+        <MenuItem
+          component={RouterLink}
+          to={`/upgrade?user_id=${user.user_id}`}
+        >
+          Integration
+        </MenuItem>
+        <MenuItem
+          component={RouterLink}
+          to={`/upgrade?user_id=${user.user_id}`}
+        >
+          Update Account
+        </MenuItem>
         <MenuItem>
           {" "}
           <Avatar
             className={classes.main_menu.avatar}
             alt="user 1"
-            src="/images/user.png"
+            src={user.picture}
           />{" "}
-          John Doe
+          {user.first_name + " " + user.last_name}
         </MenuItem>
       </ButtonAppBarCollapse>
       <Grid className={classes.buttonBar} id="appbar-collapse">
         <Grid container className={classes.main_menu}>
           <Box mr={20} mt={1}>
-            <Link href="home">Home</Link>
-            <Link href="intergration">integration</Link>
-            <Link href="upgrade" className={classes.main_menu.active}>
+            <Link
+              component={RouterLink}
+              variant="body2"
+              to={`/dashboard?user_id=${user._id}`}
+            >
+              Home
+            </Link>
+            <Link
+              component={RouterLink}
+              variant="body2"
+              to={`/upgrade?user_id=${user.user_id}`}
+            >
+              Integration
+            </Link>
+            <Link
+              component={RouterLink}
+              variant="body2"
+              to={`/upgrade?user_id=${user._id}`}
+            >
               Upgrade account
             </Link>
           </Box>
           <Avatar
             className={classes.main_menu.avatar}
             alt="user 1"
-            src="/images/user.png"
+            src={user.picture}
           />
-
-          <a href="home">John Doe</a>
+          <a href="home">{user.first_name + " " + user.last_name}</a>
         </Grid>
       </Grid>
     </div>

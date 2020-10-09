@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Calendar, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { Paper, Box, Typography, Button, Icon } from "@material-ui/core/";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "80%",
@@ -99,7 +100,7 @@ const SchedularWidget = (props) => {
                     disablePast
                     shouldDisableDate={props.disableWeekends}
                   />
-                  <Button>Coordinated Universal Time 00:00</Button>
+                  <Button>{props.currentTime}</Button>
                 </MuiPickersUtilsProvider>
               </Box>
             </Box>
@@ -125,7 +126,11 @@ const SchedularWidget = (props) => {
                           </Button>
                         </Box>
                         <Box>
-                          <Button variant="outlined" color="primary">
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => props.handleConfirm(curr)}
+                          >
                             Confirm
                           </Button>
                         </Box>

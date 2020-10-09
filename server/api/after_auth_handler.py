@@ -1,5 +1,7 @@
 from flask import jsonify, Blueprint, redirect, url_for, session, request, make_response
 from models.user import User
+from models.meeting import Meeting
+from bson import ObjectId
 import json
 
 
@@ -29,19 +31,30 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         Then db_user would be object containing
         property inserted_id
         """
-        db_user = User(g_user).save("users")
+        my_user = User(g_user)
+        db_user = my_user.save("users")
         session['profile'] = user_info
-        # User exists so db_user is dict
+        # User exists then db_user is dict
         if type(db_user) is dict:
             user_id = db_user["_id"]
+            query = {"_id": ObjectId(db_user["_id"])}
             resonse = make_response(
                 redirect("http://localhost:3000/dashboard?access_token=" +
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
         else:
             user_id = db_user.inserted_id
+            query = {"_id": db_user.inserted_id}
+            meeting = Meeting(
+                user_id, "First meeting", "one-to-one", "my meeting", 60)
+            saveMeeting = meeting.save("meeting")
+            if saveMeeting.inserted_id:
+                my_user.add_meeting_id(saveMeeting.inserted_id)
             resonse = make_response(
                 redirect("http://localhost:3000/profile_settings?access_token=" +
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
+
+        newValues = {"$set": {"access_token": token["access_token"]}}
+        result = User.update(query, newValues)
         session.permanent = True
         return resonse
     return after_auth_handler

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Grid,
@@ -14,7 +14,8 @@ import {
 import { grey, orange } from "@material-ui/core/colors";
 import shadows from "@material-ui/core/styles/shadows";
 import GettingStartedButton from "../GettingStartedButton/GettingStartedButton";
-
+import Context from "../../contexts/CalendStore";
+import Alert from "@material-ui/lab/Alert";
 const outerTheme = createMuiTheme({
   palette: {
     secondary: {
@@ -81,26 +82,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MeetingComponent = () => {
+const MeetingComponent = (props) => {
   const meeting = [
     { duration: 15, type: "One-on-One" },
     { duration: 30, type: "One-on-One" },
-    { duration: 45, type: "One-on-One" },
+    { duration: 60, type: "One-on-One" },
   ];
-
+  const { user, copiedText } = useContext(Context);
   const classes = useStyles();
   return (
     <ThemeProvider theme={outerTheme}>
       <Grid container m={15} className={classes.profile}>
         <Grid container item md={6} sm={6}>
           <Grid item>
-            <Avatar alt="user 1" src="/images/user.png" />
+            <Avatar alt="user 1" src={user.picture} />
           </Grid>
 
           <Grid item sm className={classes.profile_name}>
-            <Typography variant="h6">John Doe</Typography>
+            <Typography variant="h6">
+              {user.first_name + " " + user.last_name}
+            </Typography>
             <Typography variant="body2" color="primary">
-              calendapp.com/john-doe
+              {user.unique_url}
             </Typography>
           </Grid>
         </Grid>
@@ -151,7 +154,11 @@ const MeetingComponent = () => {
                     </Grid>
                     <Grid item xs>
                       <Grid className={classes.button}>
-                        <Button variant="outlined" color="secondary">
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => props.handleCopy(meeting.duration)}
+                        >
                           Copy link
                         </Button>
                       </Grid>
@@ -162,6 +169,7 @@ const MeetingComponent = () => {
             </Grid>
           );
         })}
+        {copiedText ? <Alert>Link Copied</Alert> : null}
       </Grid>
 
       {/* Meeting Box End */}

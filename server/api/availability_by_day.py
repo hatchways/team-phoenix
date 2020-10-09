@@ -31,7 +31,9 @@ def availability_by_day():
     status = 422
     day = request.args.get('day', default="", type=str)
     data = json.loads(request.data.decode('utf-8'))
-    token = data.get("access_token", None)
+    unique_url = data.get("unique_url", None)
+    my_user = User.fetch_user_by_url(unique_url)
+    token = my_user["access_token"]
     client_email = data.get("email", None)
     if day == "" or not token or not client_email:
         output["error"] = "Missing day or Access Token or Email"
@@ -40,24 +42,30 @@ def availability_by_day():
             start_time, end_time = User.get_user_start_end_time(
                 client_email)
             p_time = datetime.fromtimestamp(float(day))
-            time_min = str(datetime(
-                p_time.year, p_time.month, p_time.day, int(start_time[0:2]), int(start_time[3:]), 00).isoformat()) + "Z"
-            time_max = str(datetime(
-                p_time.year, p_time.month, p_time.day, int(end_time[0:2]), int(end_time[3:]), 59).isoformat()) + "Z"
-            credentials = client.AccessTokenCredentials(
-                token, 'my-user-agent')
-            service = build('calendar', 'v3', credentials=credentials)
+            requested_day = p_time.strftime("%A")
+            day_from_db = my_user["availability"]["days"][requested_day+"s"]
+            print(day_from_db)
+            if day_from_db:
+                time_min = str(datetime(
+                    p_time.year, p_time.month, p_time.day, int(start_time[0:2]), int(start_time[3:]), 00).isoformat()) + "Z"
+                time_max = str(datetime(
+                    p_time.year, p_time.month, p_time.day, int(end_time[0:2]), int(end_time[3:]), 59).isoformat()) + "Z"
+                credentials = client.AccessTokenCredentials(
+                    token, 'my-user-agent')
+                service = build('calendar', 'v3', credentials=credentials)
 
-            result = service.calendarList().list().execute()
-            calendar_id = result['items'][0]['id']
-            body = {"timeMin": (time_min),
-                    "items": [{"id": calendar_id}], "timeMax": time_max}
-            calendars_result = service.freebusy().query(body=body).execute()
-            free_slots_arr = find_slots(
-                calendars_result["calendars"].get(client_email).get("busy"), time_min, time_max)
-            free_slots_in_ts = convert_to_unix_time(free_slots_arr)
-            output["result"] = free_slots_in_ts
-            status = 200
+                result = service.calendarList().list().execute()
+                calendar_id = result['items'][0]['id']
+                body = {"timeMin": (time_min),
+                        "items": [{"id": calendar_id}], "timeMax": time_max}
+                calendars_result = service.freebusy().query(body=body).execute()
+                free_slots_arr = find_slots(
+                    calendars_result["calendars"].get(client_email).get("busy"), time_min, time_max)
+                free_slots_in_ts = convert_to_unix_time(free_slots_arr)
+                output["result"] = free_slots_in_ts
+                status = 200
+            else:
+                output["result"] = []
         except Exception as e:
             output['error'] = f'{e}'
             status = 500
@@ -86,7 +94,6 @@ def find_slots(busy_time_array, day_start, day_end):
                 {"start": busy_time_array[counter-1]["end"], "end": day_end})
     else:
         availabile_slots.append({"start": day_start, "end": day_end})
-    print(availabile_slots)
     return availabile_slots
 
 

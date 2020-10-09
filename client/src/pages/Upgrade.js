@@ -42,7 +42,6 @@ const Upgrade = () => {
       }
     };
     if (!user && userId) {
-      console.log("SSS");
       fetchUser();
     }
   });
@@ -65,6 +64,9 @@ const Upgrade = () => {
     const data = await result.json();
     if ((await data.result) === "canceled") {
       alert("Unsubscribed successfully");
+      window.location.reload();
+    } else {
+      console.log(data);
     }
   };
   return (

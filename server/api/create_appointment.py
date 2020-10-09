@@ -13,6 +13,24 @@ import datetime
 create_appointment_blueprint = Blueprint('create_appointment', __name__)
 
 
+def send_email_to_organizaer(to_email, start, summary, timezone):
+    convert_date = datetime.datetime.strptime(start[:19], '%Y-%m-%dT%H:%M:%S')
+    month = convert_date.strftime("%B")
+    day = convert_date.day
+    year = convert_date.year
+    print(to_email)
+    try:
+        message = Mail(from_email='teamphoenix1900@gmail.com', to_emails=To(to_email), subject='Calendar invite ' +
+                       summary, html_content=f'<strong>You have been scheduled an appointment on {month} {day}th, {year} {timezone} time</strong>')
+
+        sg = SendGridAPIClient(
+            "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")
+        response = sg.send(message)
+        print(response.status_code, response.body, response.headers)
+    except Exception as e:
+        print(e.body)
+
+
 @create_appointment_blueprint.route('/create-appointment', methods=["POST"])
 def create_appointment():
     output = dict()
@@ -45,20 +63,3 @@ def create_appointment():
     except Exception as e:
         output["error"] = f"{e}"
     return jsonify(output), status
-
-
-def send_email_to_organizaer(to_email, start, summary, timezone):
-    convert_date = datetime.datetime.strptime(start[:19], '%Y-%m-%dT%H:%M:%S')
-    month = convert_date.strftime("%B")
-    day = convert_date.day
-    year = convert_date.year
-    try:
-        message = Mail(from_email='teamphoenix1900@gmail.com', to_emails=To(to_email), subject='Calendar invite ' +
-                       summary, html_content=f'<strong>You have been scheduled an appointment on {month} {day}th, {year} {timezone} time</strong>')
-
-        key = environ['SENDGRID_API_KEY']
-        sg = SendGridAPIClient(key)
-        response = sg.send(message)
-        print(response.status_code, response.body, response.headers)
-    except Exception as e:
-        print(e.body)

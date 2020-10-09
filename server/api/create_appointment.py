@@ -23,8 +23,7 @@ def send_email_to_organizaer(to_email, start, summary, timezone):
         message = Mail(from_email='teamphoenix1900@gmail.com', to_emails=To(to_email), subject='Calendar invite ' +
                        summary, html_content=f'<strong>You have been scheduled an appointment on {month} {day}th, {year} {timezone} time</strong>')
 
-        sg = SendGridAPIClient(
-            "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")
+        sg = SendGridAPIClient(environ['SENDGRID_API_KEY'])
         response = sg.send(message)
         print(response.status_code, response.body, response.headers)
     except Exception as e:

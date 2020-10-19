@@ -1,13 +1,30 @@
-# Team Phoenix - Calendly App
+# Calend App
 
-## Starting the server:
-1. Open a terminal and go to the server folder. Make sure you have **pipenv** installed (`pip install pipenv`)
-2. Install the dependencies with `pipenv install`. This also createa a virtual environment, if there isn't one already
-3. Activate the virtual environment and start the app with `pipenv run flask run`
+Calend App is online appointment scheduling software. It is clone of calendly.com. User can book appointment with host by url just like calendly app.
 
-### API end points:
+### Contributors
 
-| End point | Description |
-| -------------------- | ---------------------- |
-| /meetings/<user_id> | Allows you to view all the meetings for the given user_id |
-| /meeting/<user_id>/ <int: duration> | Books a meeting of duration with the person user_id |
+[Simerpreet Jassal](https://github.com/jassalss), [Shema Landry](https://github.com/mugunga007), [Jonathan Hein](https://github.com/jonohein)
+
+## Tech/Framework
+
+Our Stack:
+
+- React.js/Material UI
+- Flask/Python
+- MongoDB
+- Stripe
+- Twilio SendGrid
+- Google OAuth 2.0
+- Google Calendar
+
+## Features
+- SignUp/Login With google
+- Setting up profile and availability
+- Easily connect your google calendar
+- See host's available time 
+- Book appointment with url
+- Emails for any calendar updates
+- Upgradation with stripe
+
+## Demo

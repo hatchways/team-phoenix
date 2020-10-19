@@ -41,6 +41,8 @@ def availability_by_day():
         try:
             start_time, end_time = User.get_user_start_end_time(
                 client_email)
+            if end_time == "00:00":
+                end_time = "23:59"
             p_time = datetime.fromtimestamp(float(day))
             requested_day = p_time.strftime("%A")
             day_from_db = my_user["availability"]["days"][requested_day+"s"]
@@ -52,10 +54,9 @@ def availability_by_day():
                 credentials = client.AccessTokenCredentials(
                     token, 'my-user-agent')
                 service = build('calendar', 'v3', credentials=credentials)
-
                 result = service.calendarList().list().execute()
                 calendar_id = result['items'][0]['id']
-                body = {"timeMin": (time_min),
+                body = {"timeMin": time_min,
                         "items": [{"id": calendar_id}], "timeMax": time_max}
                 calendars_result = service.freebusy().query(body=body).execute()
                 free_slots_arr = find_slots(

@@ -28,3 +28,4 @@ Our Stack:
 - Upgradation with stripe
 
 ## Demo
+<img src="https://www.dropbox.com/s/1boc5xx6szcrnv9/final.gif?raw=1" alt="demo" width="800" height="600">

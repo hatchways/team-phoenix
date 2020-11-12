@@ -89,14 +89,14 @@ const BookAppointment = (props) => {
     <Box className={classes.containerBox}>
       <Box className={classes.innerContainer}>
         <Paper className={classes.paper} elevation={3}>
-          <Box display="flex" flexDirection="row" height="100%">
+          <Box display="flex" flexDirection="row" height="100%" width="100%">
             <Box
               color="grey.300"
               borderColor="common.borderColor"
               borderRight={1}
-              width="40%"
+              width="50%"
             >
-              <Box ml={3} mt={4} color="black">
+              <Box ml={3} mt={4} color="black" width="100%">
                 <Typography
                   variant="body2"
                   className={classes.personName}
@@ -109,27 +109,34 @@ const BookAppointment = (props) => {
                 </Typography>
                 <Box display="flex">
                   <Icon>alarm</Icon>
-                  <Typography variant="h6">
-                    {`${props.meetingTime} min`}
-                  </Typography>
+                  <Box ml={1}>
+                    <Typography variant="h6">
+                      {`${props.meetingTime} min`}
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box display="flex" mt={2}>
+                <Box display="flex" mt={1}>
                   <EventAvailableIcon color="primary" />
-                  <Typography
-                    variant="h5"
-                    color="primary"
-                  >{`${timeObj.fromTime} - ${timeObj.toTime}`}</Typography>
+                  <Box ml={1}>
+                    <Typography
+                      variant="body1"
+                      color="primary"
+                    >{`${timeObj.fromTime} - ${timeObj.toTime}`}</Typography>
+                  </Box>
                 </Box>
                 <Box>
                   <Typography
-                    variant="h6"
+                    variant="body1"
                     color="primary"
                   >{`${timeObj.date}`}</Typography>
                 </Box>
-                <Box mt={2}>
-                  <Typography color="secondary" variant="body1">
-                    {"Time-Zone: " + timeZone}
-                  </Typography>
+                <Box mt={2} display="flex">
+                  <Icon>public</Icon>
+                  <Box ml={1}>
+                    <Typography color="secondary" variant="body1">
+                      {timeZone}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
             </Box>

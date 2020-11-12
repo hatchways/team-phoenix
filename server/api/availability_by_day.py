@@ -63,6 +63,7 @@ def availability_by_day():
                     calendars_result["calendars"].get(client_email).get("busy"), time_min, time_max)
                 free_slots_in_ts = convert_to_unix_time(free_slots_arr)
                 output["result"] = free_slots_in_ts
+                print(free_slots_in_ts,"SS")
                 status = 200
             else:
                 output["result"] = []

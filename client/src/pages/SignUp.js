@@ -25,11 +25,6 @@ const SignUp = (props) => {
     setPropsForAuthWidget(propsForAuthWidget);
   }, [setEmail, setPropsForAuthWidget]);
 
-  return (
-    <div>
-      <AuthWidget />
-    </div>
-  );
+  return <AuthWidget />;
 };
-
 export default SignUp;

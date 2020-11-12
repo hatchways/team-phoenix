@@ -6,8 +6,8 @@ import { Paper, Box, Typography, Button, Icon } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    width: "80%",
     height: "80%",
+    width: "70%",
   },
   containerBox: {
     width: "100%",
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+    width: "100%",
   },
   personName: {
     color: "#9e9e9e",
@@ -63,12 +64,12 @@ const SchedularWidget = (props) => {
     <Box className={classes.containerBox}>
       <Box className={classes.innerContainer}>
         <Paper className={classes.paper} elevation={3}>
-          <Box display="flex" flexDirection="row" height="100%">
+          <Box display="flex" flexDirection="row" height="100%" width="100%">
             <Box
               color="grey.300"
               borderColor="common.borderColor"
               borderRight={1}
-              width="30%"
+              width={props.showSlots ? "30%" : "50%"}
             >
               <Box ml={3} mt={4} color="black">
                 <Typography
@@ -100,46 +101,38 @@ const SchedularWidget = (props) => {
                     disablePast
                     shouldDisableDate={props.disableWeekends}
                   />
-                  <Button>{props.currentTime}</Button>
+                  <Button size="small">{props.currentTime}</Button>
                 </MuiPickersUtilsProvider>
               </Box>
             </Box>
-            <Box className={classes.freeSlots} mt={4} ml={4}>
-              <Box display="flex" flexDirection="column">
-                <Box mb={2}>
-                  <Typography>{`${days[value.getDay()]}, ${
-                    monthNames[value.getMonth()]
-                  } ${value.getDate()}`}</Typography>
-                </Box>
-                <Paper className={classes.scrollView}>
-                  {props.availableSlots.map((curr, index) => {
-                    return (
-                      <Box
-                        key={index}
-                        display="flex"
-                        flexDirection="row"
-                        mt={1}
-                      >
-                        <Box mr={1}>
-                          <Button variant="outlined" color="primary">
-                            {curr}
-                          </Button>
-                        </Box>
-                        <Box>
+            {props.showSlots ? (
+              <Box className={classes.freeSlots} mt={10} ml={4}>
+                <Box display="flex" flexDirection="column">
+                  <Box mb={2}>
+                    <Typography>{`${days[value.getDay()]}, ${
+                      monthNames[value.getMonth()]
+                    } ${value.getDate()}`}</Typography>
+                  </Box>
+                  <Paper className={classes.scrollView}>
+                    {props.availableSlots.map((curr, index) => {
+                      return (
+                        <Box key={index} mt={1}>
                           <Button
                             variant="outlined"
                             color="primary"
                             onClick={() => props.handleConfirm(curr)}
+                            fullWidth
+                            size="large"
                           >
-                            Confirm
+                            {curr}
                           </Button>
                         </Box>
-                      </Box>
-                    );
-                  })}
-                </Paper>
+                      );
+                    })}
+                  </Paper>
+                </Box>
               </Box>
-            </Box>
+            ) : null}
           </Box>
         </Paper>
       </Box>

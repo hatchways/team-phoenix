@@ -12,6 +12,7 @@ const SchedulerCalendar = (props) => {
   const unique_url = `book-appointment/${paths[2]}`;
   const { setUser, user, setUniqueUrl } = useContext(Context);
   const [slectedTime, setSelectedTime] = useState("");
+  const [showSlots, setShowSlots] = useState(false);
   const handleConfirm = (time) => {
     setShowForm(false);
     setSelectedTime(time);
@@ -31,9 +32,9 @@ const SchedulerCalendar = (props) => {
           }
           current.add(meetingTime, "minutes");
         }
-        if (freeSlotsArray.length > 0) {
-          availableSlots.pop();
-        }
+        // if (freeSlotsArray.length > 0) {
+        //   availableSlots.pop();
+        // }
       });
       return availableSlots;
     };
@@ -64,6 +65,7 @@ const SchedulerCalendar = (props) => {
   }, [meetingTime, dateSelected, user, unique_url]);
   const handleOnChangeCalendar = (date) => {
     setDateSelected(date);
+    setShowSlots(true);
   };
 
   useEffect(() => {
@@ -96,6 +98,7 @@ const SchedulerCalendar = (props) => {
           dateSelected={dateSelected}
           handleConfirm={handleConfirm}
           disableWeekends={disableWeekends}
+          showSlots={showSlots}
           currentTime={`Current time: ${moment().format(
             "YYYY-MM-DD h:mm:ss a"
           )}`}

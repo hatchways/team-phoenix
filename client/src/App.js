@@ -29,6 +29,9 @@ const theme = createMuiTheme({
       dark: green[900],
     },
   },
+  typography: {
+    fontFamily: `"Helvetica", "Arial", sans-serif`,
+  },
 });
 const Main = withRouter(() => {
   let location = window.location;

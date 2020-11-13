@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles, Button } from "@material-ui/core";
-import history from "../../history";
 const useStyles = makeStyles({
   root: {
     background: "linear-gradient(45deg, #f57c00 30%, #ff9800 90%)",
@@ -26,7 +25,7 @@ const GettingStartedButton = () => {
         label: classes.label, // class name, e.g. `classes-nesting-label-x`
       }}
       onClick={() => {
-        history.push("/schedule-calendar/60");
+        window.open("https://youtu.be/RYCGLSooIAo", "_blank");
       }}
     >
       Getting started guide

@@ -51,16 +51,10 @@ const AppBarCollapse = () => {
         <MenuItem component={RouterLink} to={`/dashboard?user_id=${user._id}`}>
           Home
         </MenuItem>
-        <MenuItem
-          component={RouterLink}
-          to={`/upgrade?user_id=${user.user_id}`}
-        >
+        <MenuItem component={RouterLink} to={`/dashboard?user_id=${user._id}`}>
           Integration
         </MenuItem>
-        <MenuItem
-          component={RouterLink}
-          to={`/upgrade?user_id=${user.user_id}`}
-        >
+        <MenuItem component={RouterLink} to={`/upgrade?user_id=${user._id}`}>
           Update Account
         </MenuItem>
         <MenuItem>
@@ -86,7 +80,7 @@ const AppBarCollapse = () => {
             <Link
               component={RouterLink}
               variant="body2"
-              to={`/upgrade?user_id=${user.user_id}`}
+              to={`/dashboard?user_id=${user._id}`}
             >
               Integration
             </Link>

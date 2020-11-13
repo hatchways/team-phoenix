@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   scrollView: {
-    maxHeight: "70%",
+    maxHeight: "80%",
     overflow: "auto",
   },
 }));
@@ -106,7 +106,7 @@ const SchedularWidget = (props) => {
               </Box>
             </Box>
             {props.showSlots ? (
-              <Box className={classes.freeSlots} mt={10} ml={4}>
+              <Box className={classes.freeSlots} mt={5} ml={4}>
                 <Box display="flex" flexDirection="column">
                   <Box mb={2}>
                     <Typography>{`${days[value.getDay()]}, ${

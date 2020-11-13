@@ -7,9 +7,7 @@ import {
   Typography,
   Icon,
   makeStyles,
-  TextField,
   Button,
-  TextareaAutosize,
 } from "@material-ui/core/";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +25,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     height: "100%",
   },
-  textArea: { width: "100%" },
+  bookingDetails: {
+    fontSize: ".7rem",
+    fontWeight: "700",
+  },
+  textArea: { width: "70%", height: "80%" },
+  formInput: {
+    width: "50%",
+    padding: ".7rem",
+  },
 }));
 
 const BookAppointment = (props) => {
@@ -121,14 +127,13 @@ const BookAppointment = (props) => {
                     <Typography
                       variant="body1"
                       color="primary"
-                    >{`${timeObj.fromTime} - ${timeObj.toTime}`}</Typography>
+                    >{`${timeObj.fromTime} - ${timeObj.toTime}, ${timeObj.date}`}</Typography>
                   </Box>
                 </Box>
                 <Box>
-                  <Typography
-                    variant="body1"
-                    color="primary"
-                  >{`${timeObj.date}`}</Typography>
+                  <Typography variant="body1" color="primary">
+                    {}
+                  </Typography>
                 </Box>
                 <Box mt={2} display="flex">
                   <Icon>public</Icon>
@@ -141,21 +146,22 @@ const BookAppointment = (props) => {
               </Box>
             </Box>
             <Box ml={4}></Box>
-            <Box className={classes.freeSlots} mt={4} ml={4} width="80%">
+            <Box className={classes.bookingDetails} mt={4} ml={4} width="80%">
               <form onSubmit={onSubmitHandler}>
                 <Box>
                   <Typography variant="h6" gutterBottom>
                     Enter Details
                   </Typography>
                 </Box>
-                <Box p={2}>
-                  <TextField
-                    label="Name"
-                    type="search"
-                    variant="standard"
-                    fullWidth
-                    align="center"
-                    name="name"
+                <Box p={1}>
+                  <label for="fname">
+                    Name<sup>*</sup>
+                  </label>
+                  <br /> <br />
+                  <input
+                    className={classes.formInput}
+                    name="fname"
+                    type="text"
                     onChange={(e) => {
                       setFormName(e.target.value);
                     }}
@@ -163,14 +169,15 @@ const BookAppointment = (props) => {
                     value={formName}
                   />
                 </Box>
-                <Box p={2}>
-                  <TextField
-                    label="Email"
+                <Box p={1}>
+                  <label for="email">
+                    Email<sup>*</sup>
+                  </label>
+                  <br /> <br />
+                  <input
                     value={formEmail}
-                    type="search"
-                    variant="standard"
-                    fullWidth
-                    align="center"
+                    className={classes.formInput}
+                    type="text"
                     name="email"
                     onChange={(e) => {
                       setSetEmail(e.target.value);
@@ -178,19 +185,22 @@ const BookAppointment = (props) => {
                     required
                   />
                 </Box>
-                <Box p={2}>
-                  <TextareaAutosize
+                <Box p={1}>
+                  <label for="email">
+                    Please share anything that will help prepare for our meeting
+                  </label>
+                  <br />
+                  <br />
+                  <textarea
                     className={classes.textArea}
-                    aria-label="minimum height"
-                    rowsMin={4}
                     value={textAreaContent}
+                    rows="4"
                     onChange={(e) => {
                       setTextAreaContent(e.target.value);
                     }}
-                    placeholder="Please share anything that will help prepare for our meeting."
                   />
                 </Box>
-                <Box align="center" my={5}>
+                <Box align="left" my={5}>
                   <Button
                     variant="contained"
                     color="primary"

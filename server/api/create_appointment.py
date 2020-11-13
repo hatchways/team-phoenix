@@ -18,7 +18,6 @@ def send_email_to_organizaer(to_email, start, summary, timezone):
     month = convert_date.strftime("%B")
     day = convert_date.day
     year = convert_date.year
-    print(to_email)
     try:
         message = Mail(from_email='teamphoenix1900@gmail.com', to_emails=To(to_email), subject='Calendar invite ' +
                        summary, html_content=f'<strong>You have been scheduled an appointment on {month} {day}th, {year} {timezone} time</strong>')

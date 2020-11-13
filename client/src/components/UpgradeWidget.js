@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     margin: theme.spacing(2),
-    width: theme.spacing(50),
-    height: theme.spacing(55),
+    width: theme.spacing(40),
+    height: theme.spacing(50),
   },
   headingColor: {
     color: "#673ab7",

@@ -2,18 +2,24 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Box, Typography, makeStyles, Paper, Button } from "@material-ui/core/";
 import UpgradeWidget from "../components/UpgradeWidget";
 import Context from "../contexts/CalendStore";
+import { grey } from "@material-ui/core/colors";
 import { getOnlyUserId } from "../utilities/SaveTokens";
 const useStyles = makeStyles((theme) => ({
   outerBox: {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
+    height: "100%",
+    background: grey[200],
   },
   headingColor: {
     color: "#673ab7",
   },
   greenColor: {
     color: "#2e7d32",
+  },
+  greyColor: {
+    color: grey[500],
   },
   paper: {
     width: "50%",
@@ -73,10 +79,15 @@ const Upgrade = () => {
     <Fragment>
       {!user.subscription_id ? (
         <Box className={classes.outerBox}>
-          <Box>
+          <Box mt={10}>
             <Typography variant="h4">Upgrade your account</Typography>
           </Box>
-          <Box display="flex" mt={5}>
+          <Box mt={1}>
+            <Typography variant="body1" className={classes.greyColor}>
+              You are on free basic plan
+            </Typography>
+          </Box>
+          <Box display="flex" mt={2}>
             <UpgradeWidget
               heading="Premium"
               handleOnclick={() => handleOnclick("premium")}

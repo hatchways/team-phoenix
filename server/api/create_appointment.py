@@ -1,8 +1,4 @@
-from models.appointment import Appointment
-from flask import jsonify, Blueprint, request
-from models.user import User
-from googleapiclient.discovery import build
-from oauth2client import file, client
+
 from os import environ
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, To

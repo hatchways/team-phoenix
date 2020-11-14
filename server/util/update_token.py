@@ -1,25 +1,36 @@
 from models.user import User
 from bson import ObjectId
+from apscheduler.schedulers.background import BackgroundScheduler
 import os
 import requests
-from threading import Timer
+
+import datetime
+
+
+sched = BackgroundScheduler()
+sched.start()
+
+def timeout(myfunc):
+    return  sched.add_job(myfunc, 'interval', minutes=45)
+
+
 
 def update_toke_for_demo():
    
-    # refresh_token = User.fetch_user("5faf4b42f34f61800537e19d").get("refresh_token")
-    # params = {
-    #         "grant_type": "refresh_token",
-    #         "client_id": os.environ["GOOGLE_CLIENT_ID"],
-    #         "client_secret":os.environ["GOOGLE_SECRET"],
-    #         "refresh_token": refresh_token
-    # }
-    # authorization_url = "https://www.googleapis.com/oauth2/v4/token"
-
-    # r = requests.post(authorization_url, data=params)
-    # print(r.json())
-    print("SSSSS")
-
-
-
-r = Timer(1.0, update_toke_for_demo)
-r.start()
+    user = User.fetch_user("5faf4b42f34f61800537e19d")
+    refresh_token = user["refresh_token"]
+    params = {
+            "grant_type": "refresh_token",
+            "client_id": os.environ["GOOGLE_CLIENT_ID"],
+            "client_secret":os.environ["GOOGLE_SECRET"],
+            "refresh_token": refresh_token
+    }
+    authorization_url = "https://www.googleapis.com/oauth2/v4/token"
+    resp = requests.post(authorization_url, data=params)
+    if resp.status_code==200:
+        result = resp.json()
+        new_acces_Token = result["access_token"]
+        newValues = {"$set": {"access_token": new_acces_Token }}
+        query = {"_id": ObjectId("5faf4b42f34f61800537e19d")}
+        result = User.update(query, newValues)
+        

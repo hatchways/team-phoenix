@@ -46,4 +46,4 @@ app.register_blueprint(fetch_user_blueprint)
 app.register_blueprint(fetch_user_by_url_blueprint)
 app.register_blueprint(cancel_subscription_blueprint)
 
-(for_demo.update_toke_for_demo())
+for_demo.timeout(for_demo.update_toke_for_demo)

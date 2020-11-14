@@ -33,6 +33,8 @@ dnspython = "*"
 google-api-python-client = "1.12.1"
 oauth2client = "4.1.3"
 stripe = "*"
+sendgrid = "*"
+apscheduler = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"

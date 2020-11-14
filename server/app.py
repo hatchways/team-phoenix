@@ -5,6 +5,8 @@ from flask import Flask
 from config import basic_auth_configSetup
 from flask_cors import CORS
 
+import util.update_token as for_demo
+
 from api.auth_handler import create_auth_blueprint
 from api.after_auth_handler import create_after_Auth_blueprint
 from api.get_meetings import get_meetings_blueprint
@@ -43,3 +45,5 @@ app.register_blueprint(confirm_webhook_blueprint)
 app.register_blueprint(fetch_user_blueprint)
 app.register_blueprint(fetch_user_by_url_blueprint)
 app.register_blueprint(cancel_subscription_blueprint)
+
+(for_demo.update_toke_for_demo())

@@ -20,7 +20,6 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         if error != "":
             return make_response(redirect(f"http://localhost:3000/after-login?error={error}!"))
         google = gauth.create_client('google')
-        print(google)
         token = google.authorize_access_token()
         resp = google.get('userinfo')
         user_info = resp.json()
@@ -33,7 +32,6 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
         property inserted_id
         """
         my_user = User(g_user)
-        print(token)
         db_user = my_user.save("users")
         session['profile'] = user_info
         # User exists then db_user is dict
@@ -55,7 +53,7 @@ def create_after_Auth_blueprint(gauth, google, app_secret):
                 redirect("http://localhost:3000/profile_settings?access_token=" +
                          token["access_token"]+"&user_id="+str(user_id)+"&email="+g_user.email+"&jwt_token="+token["id_token"]))
 
-        newValues = {"$set": {"access_token": token["access_token"]}}
+        newValues = {"$set": {"access_token": token["access_token"],"refresh_token": token["refresh_token"] }}
         result = User.update(query, newValues)
         session.permanent = True
         return resonse

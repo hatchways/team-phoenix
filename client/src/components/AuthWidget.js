@@ -86,6 +86,18 @@ const AuthHeader = (props) => {
               ) : null}
             </Typography>
           </Box>
+          <Box display="flex" justifyContent="center" mt={1}>
+            <Button
+              align="center"
+              component={RouterLink}
+              to={"/dashboard?user_id=5fad8d58691c53fb79e435bf"}
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Demo User
+            </Button>
+          </Box>
         </Box>
       </Paper>
     </Box>

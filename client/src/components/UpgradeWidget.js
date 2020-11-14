@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(2),
     width: theme.spacing(40),
-    height: theme.spacing(50),
+    height: theme.spacing(45),
   },
   headingColor: {
     color: "#673ab7",
@@ -54,16 +54,16 @@ const UpgradeWidget = (props) => {
             flexDirection="column"
             alignItems="center"
           >
-            <Box display="flex" mt={2}>
+            <Box display="flex" mt={1}>
               <CheckIcon color="primary" />
               <Typography variant="body1">Unlimited meetings </Typography>
             </Box>
-            <Box display="flex" mt={2}>
+            <Box display="flex" mt={1}>
               <CheckIcon color="primary" />
               <Typography variant="body1">Group meetings </Typography>
             </Box>
             {!bool ? (
-              <Box display="flex" mt={2}>
+              <Box display="flex" mt={1}>
                 <CheckIcon color="primary" />
                 <Typography variant="body1">Group meetings </Typography>
               </Box>

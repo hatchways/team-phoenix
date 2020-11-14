@@ -80,14 +80,14 @@ const Upgrade = () => {
       {!user.subscription_id ? (
         <Box className={classes.outerBox}>
           <Box mt={10}>
-            <Typography variant="h4">Upgrade your account</Typography>
+            <Typography variant="h6">Upgrade your account</Typography>
           </Box>
           <Box mt={1}>
             <Typography variant="body1" className={classes.greyColor}>
               You are on free basic plan
             </Typography>
           </Box>
-          <Box display="flex" mt={2}>
+          <Box display="flex" mt={1}>
             <UpgradeWidget
               heading="Premium"
               handleOnclick={() => handleOnclick("premium")}

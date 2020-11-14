@@ -146,7 +146,7 @@ const BookAppointment = (props) => {
               </Box>
             </Box>
             <Box ml={4}></Box>
-            <Box className={classes.bookingDetails} mt={4} ml={4} width="80%">
+            <Box className={classes.bookingDetails} mt={2} ml={4} width="80%">
               <form onSubmit={onSubmitHandler}>
                 <Box>
                   <Typography variant="h6" gutterBottom>
@@ -200,11 +200,11 @@ const BookAppointment = (props) => {
                     }}
                   />
                 </Box>
-                <Box align="left" my={5}>
+                <Box align="left" mt={2}>
                   <Button
                     variant="contained"
                     color="primary"
-                    size="large"
+                    size="medium"
                     type="submit"
                   >
                     Schedule Event

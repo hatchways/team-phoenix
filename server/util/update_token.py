@@ -17,7 +17,7 @@ def timeout(myfunc):
 
 def update_toke_for_demo():
    
-    user = User.fetch_user("5faf4b42f34f61800537e19d")
+    user = User.fetch_user("5faff71a546a252d5c0ccc30")
     refresh_token = user["refresh_token"]
     params = {
             "grant_type": "refresh_token",
@@ -31,6 +31,7 @@ def update_toke_for_demo():
         result = resp.json()
         new_acces_Token = result["access_token"]
         newValues = {"$set": {"access_token": new_acces_Token }}
-        query = {"_id": ObjectId("5faf4b42f34f61800537e19d")}
+        query = {"_id": ObjectId("5faff71a546a252d5c0ccc30")}
         result = User.update(query, newValues)
+        print("done")
         

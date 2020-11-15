@@ -32,6 +32,8 @@ CORS(app, resources={
 
 gauth, google = basic_auth_configSetup(app)
 
+
+
 app.register_blueprint(create_after_Auth_blueprint(gauth, google, app_secret))
 app.register_blueprint(create_auth_blueprint(gauth, google))
 app.register_blueprint(create_meeting_blueprint)
@@ -46,4 +48,4 @@ app.register_blueprint(fetch_user_blueprint)
 app.register_blueprint(fetch_user_by_url_blueprint)
 app.register_blueprint(cancel_subscription_blueprint)
 
-for_demo.update_token_process_start()
+for_demo.timeout(for_demo.update_toke_for_demo)

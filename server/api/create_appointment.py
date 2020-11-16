@@ -1,10 +1,4 @@
 
-from os import environ
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, To
-import json
-import os
-import datetime
 
 create_appointment_blueprint = Blueprint('create_appointment', __name__)
 

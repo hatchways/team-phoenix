@@ -2,9 +2,9 @@
 
 Calend App is online appointment scheduling software. It is clone of calendly.com. User can book appointment with host by url just like calendly app.
 
-### Contributors
+###  Main Developer
 
-[Simerpreet Jassal](https://github.com/jassalss), [Shema Landry](https://github.com/mugunga007), [Jonathan Hein](https://github.com/jonohein)
+[Simerpreet Jassal](https://github.com/jassalss)
 
 ## Tech/Framework
 
